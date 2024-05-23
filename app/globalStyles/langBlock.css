@@ -1,0 +1,18 @@
+.lang_container {
+    width: 80px;
+    display: flex;
+    height: 27px;
+    margin-top: 8px;
+    margin-bottom: 7px;
+    justify-content: space-around;
+    border-right: 1px solid var(--color-Dark-gray);
+    color: var(--color-Dark-gray);
+}
+
+.lang_btn.lang_active {
+    color: var(--color-Black);
+}
+
+.lang_btn:hover {
+    color: var(--color-Accent);
+}

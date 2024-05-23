@@ -1,0 +1,20 @@
+.product_slider {
+  display: flex;
+}
+
+.product_slider_swiper_img {
+  max-width: 100px;
+   max-height: 100px;
+}
+
+.product_slider_swiper {
+  width: 80%;
+}
+
+.swiper-scrollbar-horizontal {
+  bottom: -24px !important;
+}
+
+
+
+     

@@ -1,0 +1,35 @@
+.input_wrapper_search {
+      height: 32px;
+      background-color: var(--color-Light-gray);
+      border-radius: 4px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      color: var(--color-Dark-gray);
+      position: relative;
+      font-size: 12px;
+  }
+
+  .search_icon_mobile::before {
+    background-color: var(--color-Dark-gray);
+    content: '';
+    height: 12px;
+    width: 12px;
+    left: 10px;
+    position: absolute;
+    top: 10px;
+    -webkit-mask: url(../../public/img/icons/searchMobile.svg) no-repeat 50% 50%;
+    mask: url(../../public/img/icons/searchMobile.svg) no-repeat 50% 50%;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .input_search_mobile {
+    margin-left: 30px;
+  }
+
+
+@media (min-width: 801px) {
+    .searchBarMobile {
+      display: none;
+    }
+}

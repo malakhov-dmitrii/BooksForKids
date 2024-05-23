@@ -1,0 +1,343 @@
+{
+    "en": {
+        "header": {
+            "shop_link": "Shop",
+            "blog_link": "Blog",
+            "about_link": "About Us",
+            "search_books": "Search for books",
+            "search_info": "Book name, author",
+            "profile": "My Account",
+            "logout": "Logout"
+        },
+        "burger_menu": {
+            "home_link": "Home",
+            "shop_link": "Shop",
+            "about_link": "About",
+            "blog_link": "Blog",
+            "help_link": "Help",
+            "contact_link": "Contact",
+            "search_link": "Search"
+        },
+        "burger_menu_account": {
+            "my_account": "My account",
+            "logout": "Logout"
+        },
+        "help": {
+            "terms": "Terms of Service",
+            "shipping": "Shipping",
+            "privacy_policy": "Privacy Policy",
+            "return": "Return & Exchange",
+            "contact": "Contact"
+        },
+        "other": {
+            "shopping_cart": "Shopping bag",
+            "err_msg1": "This page not found;",
+            "err_msg2": "back to home and start again",
+            "homepage": "Homepage",
+            "shop_now": "Shop Now",
+            "cart_empty": "Your cart is empty",
+            "cart_empty_advice": "Let's find the book for your kids!",
+            "favorite_empty": "Your list of favorites is empty",
+            "favorite_empty_advice": "Let's find the book your kids might like!",
+            "to_home_page": "Homepage",
+            "subtotal": "Subtotal",
+            "view_cart": "View cart",
+            "place_order": "Proceed to checkout",
+            "items": "items",
+            "and": "and",
+            "view_all_link": "View all",
+            "qty": "QTY",
+            "add_to_cart": "Add to cart",
+            "cookie_text": "Books4Kids processes <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> for the correct operation of the site and personalization of services, incl. using metric programs and analytics systems. You can prevent the processing of <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> in your browser settings.",
+            "accept": "Accept"
+        },
+        "cart": {
+            "update_cart": "Update cart",
+            "apply_coupon": "Apply coupon",
+            "coupon_code": "Coupon code",
+            "cart_totals": "Cart totals",
+            "shipping": "Shipping",
+            "shipping_msg": "Shipping costs will be calculated once you have provided address.",
+            "calculate_shipping": "Calculate shipping",
+            "select_state": "Select a state",
+            "city": "City",
+            "zip": "Post code / zip",
+            "update_totals": "Update totals",
+            "total": "TOTAL",
+            "total_with_discount": "TOTAL (with discount)",
+            "proceed_to_checkout": "Proceed to checkout"
+        },
+        "checkout": {
+            "your_order": "Your order",
+            "checkout": "Checkout",
+            "with_coupon": "(with coupon)",
+            "card_payment": "Card payment",
+            "direct_payment": "Direct bank transfer",
+            "free_shipping": "Free shipping",
+            "card_payment_msg": "Make the card payment. Please use your Order ID as the payment reference. Your order will be shipped as soon as the funds are in our account",
+            "paypal_payment_msg": "Make the payment through PayPal. Please use your Order ID as the payment reference. Your order will be shipped as soon as the funds are in our account",
+            "direct_payment_msg": "Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account",
+            "place_order": "Place order",
+            "create_an_account": "Create an account?",
+            "ship_to_different": "Ship to a different address?",
+            "order_notes": "Order notes",
+            "billing_details": "Billing details",
+            "returning_customer": "Returning customer?",
+            "click_here_to_login": "Click here to login",
+            "have_a_coupon": "Have a coupon?",
+            "click_here_to_enter_code": "Click here to enter your code",
+            "if_you_have_code": "If you have a coupon code, please apply it below.",
+            "product": "Product"
+        },
+        "billing_form": {
+            "first_name": "First name *",
+            "last_name": "Last name *",
+            "company_name": "Company Name",
+            "state": "State *",
+            "street": "Street Address *",
+            "zip": "Postcode / ZIP *",
+            "city": "Town / City *",
+            "phone": "Phone *"
+        },
+        "wishlist": {
+            "wishlist": "Your wishlist",
+            "product_name": "Product name",
+            "price": "Price",
+            "stock_status": "Stock status",
+            "select_options": "Select options",
+            "to_cart": "Add to cart",
+            "quick_buy": "Quick buy"
+        },
+        "footer": {
+            "contact": "Contact",
+            "terms_of_service": "Terms of services",
+            "shipping": "Shipping and returns",
+            "terms_of_use": "Terms of use",
+            "privacy_policy": "Privacy policy",
+            "give_an_email": "Give an email, get the newsletter.",
+            "agreement_to_policy": "i agree to the website’s terms and conditions",
+            "follow_us": "Follow us"
+        },
+        "home": {
+            "title1": "Best Russian Books For Your Kids",
+            "title2": "Order Any Russian Book",
+            "btn_message1": "View Product",
+            "btn_message2": "Shop Now",
+            "btn_message3": "Order Book",
+            "shop_the_latest": "Shop the Latest",
+            "is_new": "New",
+            "is_bestseller": "Bestseller",
+            "out_of_stock": "Sold out" 
+        },
+        "card": {
+            "to_cart": "To cart",
+            "in_cart": "Added",
+            "add_to_cart": "Add to cart",
+            "quick_view": "Quick view",
+            "add_to_favorites": "Add to favorites"
+        },
+        "product": {
+            "more": "More info about the product",
+            "more_info": "More info"
+        },
+        "auth_popup": {
+            "my_account": "My account",
+            "sign_in": "Sign in",
+            "remember_me": "Remember me",
+            "forgot_password": "Have you Forgotten Your Password?",
+            "if_forgot": "If you've forgotten your password, enter your e-mail address and we'll send you an e-mail",
+            "reset_password": "Reset password",
+            "registration": "Register",
+            "registration_text": "Create",
+            "registration_description": "Create an account",
+            "registration_question": "Do you have an account?",
+            "login_question": "Don't have an account?",
+            "name": "Name",
+            "password": "Password",
+            "auth_google": "Sign in with Google account"
+        },
+        "validation": {
+          "invalid_value": "Invalid value",
+          "requiredName": "Enter your name",
+          "invalid_phone": "Invalid phone",
+          "required_email": "Enter your email",
+          "invalid_email": "Invalid email",
+          "min_2": "Min 2 characters",
+          "max_15": "Max 2 characters",
+          "required_password": "Enter your password",
+          "min_4": "Min 4 characters",
+          "max_20": "Max 20 characters"
+        }
+    },
+    "ru": {
+        "header": {
+            "shop_link": "Книги",
+            "blog_link": "Блог",
+            "about_link": "О Нас",
+            "search_books": "Поиск книги",
+            "search_info": "Название книги, автор",
+            "profile": "Мой Аккаунт",
+            "logout": "Выйти"  
+        },
+        "burger_menu": {
+            "home_link": "Главная",
+            "shop_link": "Книги",
+            "about_link": "О нас",
+            "blog_link": "Блог",
+            "help_link": "Помощь",
+            "contact_link": "Контакты",
+            "search_link": "Поиск"
+        },
+        "burger_menu_account": {
+            "my_account": "Мой аккаунт",
+            "logout": "Выйти из аккаунта"
+        },
+        "help": {
+            "terms": "Условия обслуживания",
+            "shipping": "Доставка",
+            "privacy_policy": "Политика конфеденциальности",
+            "return": "Возврат и обмен",
+            "contact": "Связаться с нами"
+        },
+        "other": {
+            "shopping_cart": "Корзина",
+            "wishlist": "Избранное",
+            "err_msg1": "Страница не найдена;",
+            "err_msg2": "вернуться на главную и продолжить покупки",
+            "homepage": "Главная",
+            "shop_now": "В каталог",
+            "cart_empty": "Ваша корзина пока пуста",
+            "cart_empty_advice": "Давайте найдем книги для ваших деток!",
+            "favorite_empty": "Ваш список избранного пока пуст",
+            "favorite_empty_advice": "Давайте найдем книги для ваших деток!",
+            "to_home_page": "Главная",
+            "subtotal": "Сумма заказа",
+            "view_cart": "Перейти в корзину",
+            "place_order": "Заказать",
+            "items": "шт.",
+            "and": "и",
+            "view_all_link": "Смотреть все",
+            "qty": "шт.",
+            "add_to_cart": "Добавить в корзину",
+            "cookie_text": "Books4Kids обрабатывает <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> для корректной работы сайта и персонализации сервисов, в т.ч. с использованием метрических программ и систем аналитик. Вы можете запретить обработку <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> в настройках браузера.",
+            "accept": "Принять"
+        },
+        "cart": {
+            "update_cart": "Обновить",
+            "apply_coupon": "Применить",
+            "coupon_code": "Промокод",
+            "cart_totals": "Сумма к оплате",
+            "shipping": "Доставка",
+            "shipping_msg": "Стоимость доставки будет рассчитана как только вы заполните адрес.",
+            "calculate_shipping": "Рассчитать стоимость доставки",
+            "select_state": "Выбрать штат",
+            "city": "Город",
+            "zip": "Почтовый код / zip",
+            "update_totals": "Сумма с доставкой",
+            "total": "ИТОГО",
+            "total_with_discount": "ИТОГО (со скидкой)",
+            "proceed_to_checkout": "Перейти к оплате"
+        },
+        "checkout": {
+            "your_order": "Ваш заказ",
+            "checkout": "Оформление заказа",
+            "with_coupon": "(с промокодом)",
+            "card_payment": "Оплата картой",
+            "direct_payment": "Перевод на счет в банке",
+            "free_shipping": "Бесплатно",
+            "card_payment_msg": "Оплата по карте. Пожалуйста, укажите номер заказа в комментарии к платежу. Товар будет отправлен сразу после поступления оплаты на наш счет.",
+            "paypal_payment_msg": "Make the payment through PayPal. Пожалуйста, укажите номер заказа в комментарии к платежу. Товар будет отправлен сразу после поступления оплаты на наш счет.",
+            "direct_payment_msg": "Оплата поступит на наш счет в банке. Пожалуйста, укажите номер заказа в комментарии к платежу. Товар будет отправлен сразу после поступления оплаты на наш счет.",
+            "place_order": "Заказать",
+            "create_an_account": "Создать аккаунт?",
+            "ship_to_different": "Отправить на другой адрес?",
+            "order_notes": "Комментарий к заказу",
+            "billing_details": "Детали платежа",
+            "returning_customer": "Уже есть аккаунт?",
+            "click_here_to_login": "Кликните тут, чтобы войти в аккаунт",
+            "have_a_coupon": "Есть промокод?",
+            "click_here_to_enter_code": "Кликните тут, чтобы ввечти промокод",
+            "if_you_have_code": "Если у вас есть промокодб введите его в строке ниже.",
+            "product": "Товар"
+        },
+        "billing_form": {
+            "first_name": "Имя *",
+            "last_name": "Фамилия *",
+            "company_name": "Название компании",
+            "state": "Штат *",
+            "street": "Улица, номер дома, номер квартиры *",
+            "zip": "Почтовый код/ZIP *",
+            "city": "Город*",
+            "phone": "Тел. *"
+        },
+        "wishlist": {
+            "wishlist": "Избранное",
+            "product_name": "Название",
+            "price": "Цена",
+            "stock_status": "В наличии",
+            "select_options": "Действия",
+            "to_cart": "Добавить в корзину",
+            "quick_buy": "Быстрая покупка"
+        },
+        "footer": {
+            "contact": "Контакты",
+            "terms_of_service": "Условия обслуживания",
+            "shipping": "Доставка и возврат",
+            "terms_of_use": "Политика обработки данных",
+            "privacy_policy": "Политика конфеденциальности",
+            "give_an_email": "Подписаться на акции",
+            "agreement_to_policy": "я принимаю условия пользовательского соглашения и даю согласие на обработку персональных данных",
+            "follow_us": "Мы в соцсетях"
+        },
+        "home": {
+            "title1": "Лучшие книги для детей на русском",
+            "title2": "Закажите любую книгу",
+            "btn_message1": "Посмотреть",
+            "btn_message2": "К покупкам",
+            "btn_message3": "Заказать",
+            "shop_the_latest": "Популярные",
+            "is_new": "Новинка",
+            "is_bestseller": "Бестселлер",
+            "out_of_stock": "Распродано" 
+        },
+        "card": {
+            "to_cart": "В корзину",
+            "in_cart": "Добавлено",
+            "add_to_cart": "Добавить в корзину",
+            "quick_view": "Быстрый просмотр",
+            "add_to_favorites": "Добавить в избранное"
+        },
+        "product": {
+            "more": "Больше информации о товаре",
+            "more_info": "Подробнее"
+        },
+        "auth_popup": {
+          "my_account": "Мой аккаунт",
+          "sign_in": "Войти",
+          "remember_me": "Запомнить меня",
+          "forgot_password": "Забыли пароль?",
+          "if_forgot": "Если вы забыли пароль, введите свой e-mail и мы пришлем вам ссылку для восстановления пароля",
+          "reset_password": "Сбросить пароль",
+          "registration": "Регистрация",
+          "registration_text": "Создать",
+          "registration_description": "Создать аккаунт",
+          "registration_question": "Уже есть аккаунт?",
+          "login_question": "Еще нет аккаунта?",
+          "name": "Имя",
+          "password": "Пароль",
+          "auth_google": "Войти через Google аккаунт"
+        },
+        "validation": {
+          "invalid_value": "Недопустимое значение",
+          "requiredName": "Введите имя",
+          "invalid_phone": "Нправильный телефон",
+          "required_email": "Введите email",
+          "invalid_email": "Неправильный Email",
+          "min_2": "Минимум 2 символа",
+          "max_15": "Не более 15 символов",
+          "required_password": "Введите пароль",
+          "min_4": "Минимум 4 символа",
+          "max_20": "Не более 20 символов"
+        }
+    }
+}
