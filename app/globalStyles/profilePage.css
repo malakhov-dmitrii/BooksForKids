@@ -5,30 +5,8 @@
   flex: 1 1 auto;
 }
 
-/* .auth-popup_close {
-    height: 15px;
-    width: 15px;
-    z-index: 1;
-    position: absolute;
-    right: 20px;
-    top: 20px;
-  }
-  
-  .auth-popup_close::before {
-    background-color: var(--color-Black);
-    content: '';
-    height: 100%;
-    width: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    transition: background-color 0.2s ease-in-out;
-    -webkit-mask: url(../../public/img/icons/close.svg) no-repeat 50% 50%;
-    mask: url(../../public/img/icons/close.svg) no-repeat 50% 50%;
-  } */
-  
   .profile_card {
-    padding-top: 128px;
+    padding-top: 96px;
     width: 500px;
     margin: 0;
     background-color: white;

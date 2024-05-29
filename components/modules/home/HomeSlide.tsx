@@ -22,7 +22,7 @@ const HomeSlide = ({ slide }: { slide: IAmSlide }) => {
                 <div className={styles.home_slide_title}>
                     <h1>{slide.title}</h1>
                 </div>
-                <div className={`price ${styles.home_slide_price}`}>
+                <div className={styles.home_slide_price}>
                     <h2 className={styles.price}>{slide.price}</h2>
                 </div>
                 <Link href='/catalog' className={styles.home_slide_btn_container}>

@@ -12,14 +12,14 @@ import { showQuickViewModal } from '@/context/modals'
 import AddToCartBtn from "@/components/elements/addToCart/AddToCartBtn";
 import { useCartAction } from "@/hooks/useCartAction";
 import { addItemToCart, addProductsToCart } from "@/lib/utils/cart";
-// import { useFavoritesAction } from "@/hooks/useFavoritesAction";
+import { useFavoritesAction } from "@/hooks/useFavoritesAction";
 import { useGoodsByAuth } from "@/hooks/useGoodsByAuth";
-// import { $favorites, $favoritesFromLS, setIsAddToFavorites } from "@/context/favorites";
+import { $favorites, $favoritesFromLS, setIsAddToFavorites } from "@/context/favorites";
 import styles from '@/styles/card/index.module.css';
 
 const Card = ({ item }: IAmCardProps) => {
     const { lang, translations } = useLang()
-    const isMedia800 = useMediaQuery(800)
+    const isMedia1280 = useMediaQuery(1280)
     const {currentCartByAuth,
       allCurrentCartItemCount,
       product,
@@ -30,16 +30,17 @@ const Card = ({ item }: IAmCardProps) => {
       existingItem,
     } = useCartAction()
     const isProductInCart = isItemInList(currentCartByAuth, item._id)
-    // const {
-    //   handleAddProductToFavorites,
-    //   isProductInFavorites,
-    // } = useFavoritesAction(item)
-    // // const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
-    // // const currentFavoriteItems = currentFavoritesByAuth.filter(
-    // //   (item) => item.productId === product._id)
+    const {
+      handleAddProductToFavorites,
+      isProductInFavorites,
+    } = useFavoritesAction(item)
+    const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
+    const currentFavoriteItems = currentFavoritesByAuth.filter(
+      (item) => item.productId === product._id)
 
     const handleShowQuickViewModal = (e:any) => {
       e.preventDefault()
+      // e.stopPropagation()
       addOverflowHiddenToBody()
       showQuickViewModal ()
       setCurrentProduct(item)
@@ -47,6 +48,7 @@ const Card = ({ item }: IAmCardProps) => {
 
     const addToCart = (e:any) => {
       e.preventDefault()
+      // e.stopPropagation()
       // if (existingItem || isProductInCart) {
       //   addItemToCart(product, count || 1)} else {
         addProductsToCart(item, 1)
@@ -60,6 +62,8 @@ const Card = ({ item }: IAmCardProps) => {
 
     const addAndGoToCartActionBtn = (e: any) => {
       e.preventDefault()
+      // e.stopPropagation()
+      setIsAddToFavorites(false)
       addProductsToCart(item, 1)
       document.location.href = '/cart';
     }
@@ -92,7 +96,7 @@ const Card = ({ item }: IAmCardProps) => {
             >
               <Image src={item.images[0]} alt={item.name} width={500} height={500} />
               {openActions &&
-              !isMedia800 &&
+              !isMedia1280 &&
               <div className={styles.card_actions_container}    
               >
               <div className={styles.card_actions}
@@ -110,39 +114,50 @@ const Card = ({ item }: IAmCardProps) => {
                 <CardActionBtn 
                 text={translations[lang].card.add_to_favorites} 
                 iconClass=
-                // {`${isProductInFavorites 
-                //   ? 'card_action_btn_add_to_favorites_checked' 
-                //   : 
-                  "card_action_btn_add_to_favorites"
-                // }`}
-                // callback={handleAddProductToFavorites}
+                {`${isProductInFavorites 
+                  ? 'card_action_btn_add_to_favorites_checked' 
+                  : "card_action_btn_add_to_favorites"
+                }`}
+                callback={handleAddProductToFavorites}
                 />
               </div>
               </div>}
-                {(open || isProductInCart) && 
-                !isMedia800 &&
-                <div className={styles.card_to_cart_btn_container}>
-                <AddToCartBtn
-                  text={isProductInCart ? (translations[lang].card.in_cart)
-                    : (translations[lang].card.to_cart)}
-                  className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : ''}`}
-                  handleAddToCart={addToCart}
-                  btnDisabled={
-                  allCurrentCartItemCount === +product.inStock
+                {!isMedia1280 
+                ? (open || isProductInCart) &&
+                  <div className={styles.card_to_cart_btn_container}>
+                    <AddToCartBtn
+                        text={isProductInCart ? (translations[lang].card.in_cart)
+                          : (translations[lang].card.to_cart)}
+                        className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : ''}`}
+                        handleAddToCart={addToCart}
+                        btnDisabled={
+                        allCurrentCartItemCount === +product.inStock
+                        }
+                    />
+                  </div>
+                  :                   
+                  <div className={styles.card_to_cart_btn_container}>
+                    <AddToCartBtn
+                        text={isProductInCart ? (translations[lang].card.in_cart)
+                          : (translations[lang].card.to_cart)}
+                        className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : ''}`}
+                        handleAddToCart={addToCart}
+                        btnDisabled={
+                        allCurrentCartItemCount === +product.inStock
+                        }
+                    />
+                </div>
                 }
-                />
-              </div>
-              }
             </div>
             <div className={styles.card_bottom_container}>
                 <h3>{item.name}</h3>
                 <div>
                   {item.isDiscount
                   ? <h4>
-                    <span className={`price line_through ${styles.card_price_discount}`}>{formatPrice(+item.price)}</span>
-                    <span className='price'>{`${formatPrice(+item.price * (1 - (+item.isDiscount)/100))}`}</span> 
+                    <span className={`line_through ${styles.card_price_discount}`}>{formatPrice(+item.price)}</span>
+                    <span>{`${formatPrice(+item.price * (1 - (+item.isDiscount)/100))}`}</span> 
                   </h4>
-                  : <h4 className='price ${styles.price}'>
+                  : <h4 className={styles.price}>
                   {formatPrice(+item.price)}
                   </h4>
                   }

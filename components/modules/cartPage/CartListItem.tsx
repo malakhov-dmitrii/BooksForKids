@@ -5,7 +5,7 @@ import { useCartItemAction } from '@/hooks/useCartItemAction'
 import { formatPrice } from '@/lib/utils/common'
 import { useLang } from "@/hooks/useLang";
 import styles from '@/styles/cartPage/index.module.css'
-import DeleteCartItemBtn from '@/components/elements/deleteCartItemBtn/DeleteCartItemBtn'
+import DeleteItemBtn from '@/components/elements/deleteItemBtn/DeleteItemBtn'
 import CartPopupItem from '../header/CartPopup/CartPopupItem'
 import Link from 'next/link'
 import ProductCounter from '../card/ProductCounter';
@@ -23,7 +23,7 @@ const CartListItem = ({ item }: { item: IAmCartItem }) => {
 
   return (
     <>
-      <DeleteCartItemBtn
+      <DeleteItemBtn
         btnDisabled={false} 
         className={styles.cart_list_item_delete}
         callback={handleDeleteCartItem}
@@ -40,10 +40,10 @@ const CartListItem = ({ item }: { item: IAmCartItem }) => {
             </Link>
             {item.isDiscount
               ? <h5>
-                <span className={`price line_through ${styles.cart_list_item_discount} ${styles.cart_list_item_price}`}>{formatPrice(+item.price)}</span>
-                <span className={`price ${styles.cart_list_item_price}`}>{`${formatPrice(+item.price * (1 - (+item.isDiscount)/100))}`}</span> 
+                <span className={`line_through ${styles.cart_list_item_discount} ${styles.cart_list_item_price}`}>{formatPrice(+item.price)}</span>
+                <span className={`${styles.cart_list_item_price}`}>{`${formatPrice(+item.price * (1 - (+item.isDiscount)/100))}`}</span> 
               </h5>
-              : <h5 className={`price ${styles.cart_list_item_price}`}>
+              : <h5 className={styles.cart_list_item_price}>
               {formatPrice(+item.price)}
               </h5>
             }
@@ -61,3 +61,4 @@ const CartListItem = ({ item }: { item: IAmCartItem }) => {
 }
 
 export default CartListItem
+

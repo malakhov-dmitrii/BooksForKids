@@ -18,7 +18,7 @@ export const useAuthForm = (
 
       // useEffect(() => {
       //     if (isConnected && user) {
-      //       console.log(user);
+    
       //       event({
       //         name: user.displayName,
       //         email: user.email,

@@ -60,7 +60,7 @@ const CartPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
                             count={countWholeCartItemsAmount(currentCartByAuth)} />
                         </div>
                         <ul className="cart_popup_list">
-                            {currentCartByAuth.length ? (
+                            {!!currentCartByAuth.length ? (
                                 currentCartByAuth.map((item) => (
                                     <li key={item._id || item.clientId}
                                     className='popup_cart_list_item'>
@@ -82,11 +82,11 @@ const CartPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
                             />)
                             </h5>
                             </div>
-                            <span className="price">{formatPrice(newTotalWithDiscount)}</span>
+                            <span>{formatPrice(newTotalWithDiscount)}</span>
                             </div>
                             {!currentCartByAuth.length
                             ?
-                            <Link href='/shop' className='cart_popup_footer_link body_large black_btn'>
+                            <Link href='/catalog' className='cart_popup_footer_link body_large black_btn'>
                                 {translations[lang].home.btn_message2}
                             </Link>
                             :

@@ -14,6 +14,7 @@ import './globalStyles/cookiePopup.css'
 import './globalStyles/applyCouponBlock.css'
 import './globalStyles/profilePage.css'
 import './globalStyles/headerProfile.css'
+import './globalStyles/shopPopup.css'
 
 export const metadata: Metadata = {
   title: "Books4Kids",

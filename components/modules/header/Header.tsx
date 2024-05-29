@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useUnit } from 'effector-react'
 import Burger from './Burger'
 import LangBlock from './LangBlock'
+import line from '@/public/img/icons/Line2.png'
 import { $isAuth } from '@/context/auth'
 import { openBurger, $searchModal, openSearchModal } from '@/context/modals'
 import { useLang } from "@/hooks/useLang";
@@ -13,15 +14,16 @@ import HeaderProfile from './HeaderProfile'
 import { useEffect } from 'react'
 import { $user } from '@/context/user'
 import { $cart, $cartFromLs, addProductsFromLSToCart, setCartFromLS, setShouldShowEmpty } from '@/context/cart'
-// import {
-//     $favorites,
-//     $favoritesFromLS,
-//     addProductsFromLSToFavorites,
-//     setFavoritesFromLS,
-//     setShouldShowEmptyFavorites,
-//   } from '@/context/favorites'
+import {
+    $favorites,
+    $favoritesFromLS,
+    addProductsFromLSToFavorites,
+    setFavoritesFromLS,
+    setShouldShowEmptyFavorites,
+  } from '@/context/favorites'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import { setLang } from '@/context/lang'
+import ShopPopup from './ShopPopup'
 
 
 
@@ -29,12 +31,11 @@ const Header = () => {
     const isAuth = useUnit($isAuth)
     const { lang, translations } = useLang();
     const isMedia800 = useMediaQuery(800)
+    const isMedia1280 = useMediaQuery(1280)
     const searchModal = useUnit($searchModal)
     const user = useUnit($user)
     const currentcartByAuth =  useGoodsByAuth($cart, $cartFromLs)
-    // const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
-
-    console.log(user);
+    const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
 
     const handleOpenBurger = () => {
         addOverflowHiddenToBody()
@@ -55,9 +56,9 @@ const Header = () => {
         const auth = JSON.parse(localStorage.getItem('auth') as string)
         const lang = JSON.parse(localStorage.getItem('lang') as string)
         const cart = JSON.parse(localStorage.getItem('cart') as string)
-    //     const favoritesFromLS = JSON.parse(
-    //       localStorage.getItem('favorites') as string
-    //     )
+        const favoritesFromLS = JSON.parse(
+          localStorage.getItem('favorites') as string
+        )
 
         if (lang) {
             if (lang === 'ru' || lang === 'en') {
@@ -66,6 +67,14 @@ const Header = () => {
           }
 
           triggerLoginCheck()
+
+          if (!favoritesFromLS || !favoritesFromLS?.length) {
+            setShouldShowEmptyFavorites(true)
+          }
+      
+          if (!cart || !cart?.length) {
+            setShouldShowEmpty(true)
+          }
 
           if (auth?.accessToken) {
             return
@@ -83,13 +92,13 @@ const Header = () => {
             }
         }
 
-    //     if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
-    //       if (!favoritesFromLS.length) {
-    //         setShouldShowEmptyFavorites(true)
-    //       } else {
-    //         setFavoritesFromLS(favoritesFromLS)
-    //       }
-    //     }
+        if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
+          if (!favoritesFromLS.length) {
+            setShouldShowEmptyFavorites(true)
+          } else {
+            setFavoritesFromLS(favoritesFromLS)
+          }
+        }
     
 
     }, [])
@@ -98,9 +107,9 @@ const Header = () => {
         if (isAuth) {
           const auth = JSON.parse(localStorage.getItem('auth') as string)
           const cartFromLS = JSON.parse(localStorage.getItem('cart') as string)
-    //       const favoritesFromLS = JSON.parse(
-    //         localStorage.getItem('favorites') as string
-    //       )
+          const favoritesFromLS = JSON.parse(
+            localStorage.getItem('favorites') as string
+          )
 
           if (cartFromLS && Array.isArray(cartFromLS)) {
             console.log('deghjfdshgfs')
@@ -110,12 +119,12 @@ const Header = () => {
             })
           }
     
-    //       if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
-    //         addProductsFromLSToFavorites ({
-    //           jwt: auth.accessToken,
-    //           favoriteItems: favoritesFromLS,
-    //         })
-    //       }
+          if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
+            addProductsFromLSToFavorites ({
+              jwt: auth.accessToken,
+              favoriteItems: favoritesFromLS,
+            })
+          }
         }
       }, [isAuth])
 
@@ -133,19 +142,18 @@ const Header = () => {
             <nav className="header_right">
                 <ul className="nav item_hidden">
                     <li>
-                        <h5>
-                            <Link className='link_nav' href='/shop'>{translations[lang].header.shop_link}
-                            </Link>
+                        <h5 className="nav_heading">
+                            <ShopPopup />
                         </h5>
                     </li>
                     <li>
-                        <h5>
+                        <h5 className="nav_heading">
                         <Link className='link_nav' href='/blog'>{translations[lang].header.blog_link}
                         </Link>
                     </h5>
                     </li>
                     <li>
-                        <h5>
+                        <h5 className="nav_heading">
                         <Link className='link_nav' href='/about'>{translations[lang].header.about_link}
                         </Link>
                     </h5>
@@ -164,11 +172,9 @@ const Header = () => {
                         <CartPopup />
                     </li>
                     <li className='header_icon_item item_hidden'>
-                      
                         {isAuth ? (
                             <HeaderProfile />
                         ) : (
-
                             <Link 
                             className='header_link_item header_link--profile' 
                             href='/login' />

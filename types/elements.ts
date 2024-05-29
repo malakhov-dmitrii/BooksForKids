@@ -8,3 +8,10 @@ export interface IAmCardActionBtnProps {
 export interface IAmItemsCountProps {
     count: number
 }
+
+export interface IAmNotifyOfDeliveryBtnProps {
+    text: string
+    className?: string
+    btnDisabled?: boolean
+    handleNotifyMe: (param: any) => void
+  }

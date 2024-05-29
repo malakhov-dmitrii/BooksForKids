@@ -41,7 +41,7 @@ const OrderInfoBlock = ({
                         }   
                     </h5>
                     {/* Subtotal and Total */}
-                    <h5 className={`price dark_gray`}>
+                    <h5 className='dark_gray'>
                         {isCorrectCouponCode 
                         ? (<span><span className='line_through'>{formatPrice(newTotal)}</span><span> $ {formatPrice(+priceWithCouponCode)}</span></span>)
                         : (formatPrice(newTotal))
@@ -55,7 +55,7 @@ const OrderInfoBlock = ({
                 </div>
                 <div className={styles.order_block_total}>
                     <p className='uppercase body_large'>{translations[lang].cart.total}</p>
-                    <p className={`price body_large`}>
+                    <p className='body_large'>
                         {isCorrectCouponCode 
                         ? (formatPrice(+priceWithCouponCode))
                         : (formatPrice(newTotalWithDiscount))

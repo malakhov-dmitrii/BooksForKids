@@ -12,7 +12,9 @@ import styles from '@/styles/quickViewModal/index.module.css';
 import ProductDescription from '@/components/elements/productDescription/ProductDescription';
 import { addItemToCart, addProductsToCart } from '@/lib/utils/cart';
 import { IAmCartItem } from '@/types/cart';
-// import { useFavoritesAction } from '@/hooks/useFavoritesAction';
+import { useFavoritesAction } from '@/hooks/useFavoritesAction';
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
+import { $favorites, $favoritesFromLS } from '@/context/favorites';
 
 const QuickViewModal = ( ) => {
   const { lang, translations } = useLang()
@@ -25,10 +27,13 @@ const QuickViewModal = ( ) => {
     count,
   } = useCartAction()
   const images = useProductImages(product)
-//   const {
-//     handleAddProductToFavorites,
-//     isProductInFavorites,
-//   } = useFavoritesAction(product)
+  const {
+    handleAddProductToFavorites,
+    isProductInFavorites,
+  } = useFavoritesAction(product)
+  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
+  const currentFavoriteItems = currentFavoritesByAuth.filter(
+    (product) => product.productId === product._id)
 
   const handleCloseModal = () => {
     removeOverflowHiddenFromBody()
@@ -57,7 +62,7 @@ const addToCart = () => handleAddToCart(count)
             </div>
             <div className={styles.modal_right}>
                 <h2 className={styles.modal_right_title}>{product.name}</h2>
-                <h4 className={`price ${styles.modal_right_price}`}>
+                <h4 className={styles.modal_right_price}>
                 {formatPrice(+product.price)}
                 </h4>
                 <div className={styles.modal_right_info}>
@@ -86,10 +91,10 @@ const addToCart = () => handleAddToCart(count)
                         </div>
                         <div className={styles.modal_right_icon_container}>
                             <button 
-                            // className={`${isProductInFavorites}
-                            // ? ${styles.modal_right_favorite_btn_checked}
-                            // : ${styles.modal_right_favorite_btn}`}
-                            // onClick={handleAddProductToFavorites}
+                            className={`${isProductInFavorites}
+                            ? ${styles.modal_right_favorite_btn_checked}
+                            : ${styles.modal_right_favorite_btn}`}
+                            onClick={handleAddProductToFavorites}
                             >
                                 <span className={styles.modal_right_favorite_icon}></span>
                             </button> 

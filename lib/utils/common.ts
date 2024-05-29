@@ -1,4 +1,5 @@
 import { setIsAuth } from '@/context/auth'
+import { setShouldShowEmptyFavorites } from '@/context/favorites'
 // import { setShouldShowEmpty } from '@/context/cart'
 import { closeSearchModal } from '@/context/modals'
 import { loginCheck } from '@/context/user'
@@ -46,7 +47,7 @@ export const shuffle = <T>(array: T[]) => {
   }
 
   export const formatPrice = (x: number) =>
-  x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+  x.toLocaleString("en-US", {style:"currency", currency:"USD"})
 
   export const idGenerator = () => {
     const S4 = () =>
@@ -139,6 +140,7 @@ export const isItemInList = (array: IAmCartItem[], productId: string) =>
   
     if (!updatedItems.length) {
       setShouldShowEmpty(true)
+      setShouldShowEmptyFavorites(true)
     }
   }
 

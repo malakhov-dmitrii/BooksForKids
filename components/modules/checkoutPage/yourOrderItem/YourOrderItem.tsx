@@ -23,7 +23,7 @@ const YourOrderItem = ({ item }: { item: IAmCartItem }) => {
             ? (<span> (x {count})</span>)
         : ""}
         </h5>
-        <h5 className={`price`}>
+        <h5>
           {item.isDiscount
           ? <span>{formatPrice(+item.price * +item.count * (1 - (+item.isDiscount)/100))}</span>
           : <span>{formatPrice(+item.price * +item.count)}</span>

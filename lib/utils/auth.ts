@@ -3,7 +3,7 @@ import { setIsAuth } from '@/context/auth'
 
 export const onAuthSuccess = <T>(message: string, data: T) => {
   localStorage.setItem('auth', JSON.stringify(data))
-//   document.location.href = '/my_account'
+  document.location.href = '/my-account/dashboard'
   toast.success(message)
   setIsAuth(true)
 }

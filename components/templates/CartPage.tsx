@@ -54,7 +54,7 @@ const CartPage = () => {
                                 <h5 className={`uppercase`}>
                                     {translations[lang].other.subtotal}
                                 </h5>
-                                <h5 className={`price ${styles.cart_subtotal_price}`}>
+                                <h5 className={styles.cart_subtotal_price}>
                                 {formatPrice(newTotal)}
                                 </h5>
                             </div>
@@ -76,7 +76,7 @@ const CartPage = () => {
                                         <p className={`body_large uppercase`}>
                                         {translations[lang].cart.total}
                                         </p>
-                                        <p className={`body_large price ${styles.cart_shipping_bottom_total_price}`}>{formatPrice(newTotal)}</p>
+                                        <p className={`body_large ${styles.cart_shipping_bottom_total_price}`}>{formatPrice(newTotal)}</p>
                                     </div>
                                     <Link href={`/checkout`} className={`uppercase body_large black_btn ${styles.cart_shipping_checkout_link} ${!currentCartByAuth.length ? styles.disabled : ''
                                     }`}

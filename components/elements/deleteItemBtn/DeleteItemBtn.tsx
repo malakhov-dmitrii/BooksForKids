@@ -1,6 +1,6 @@
 import { IAmDeleteCartItemBtnProps } from "@/types/cart";
 
-const DeleteCartItemBtn = ({
+const DeleteItemBtn = ({
     btnDisabled,
     callback,
     className,
@@ -14,4 +14,4 @@ const DeleteCartItemBtn = ({
     </button>
 )
 
-export default DeleteCartItemBtn;
+export default DeleteItemBtn;

@@ -34,9 +34,11 @@ const HeaderProfile = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
             <ul className='header_profile_block body_medium'
             >
               <li className='header_profile_item'>
-                <Link href='/my_account' className='header_profile_item_btn'>
-                  {translations[lang].header.profile}
-                </Link>
+                <button onClick={handleTogglePopup}>
+                  <Link href='/my-account/dashboard' className='header_profile_item_btn'>
+                    {translations[lang].header.profile}
+                  </Link>
+                </button>
               </li>
               <li className='header_profile_item'>
                 <button

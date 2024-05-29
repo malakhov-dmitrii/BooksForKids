@@ -5,7 +5,7 @@ export interface IAmSlide {
     _id?: number
     image: StaticImageData
     title: string
-    price?: number
+    price?: string
     product?: StaticImageData
     btn_message: string
 }

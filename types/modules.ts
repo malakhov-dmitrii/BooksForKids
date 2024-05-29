@@ -32,3 +32,11 @@ export interface IAmEmptyPageContentProps {
     description: string
     btnText: string
 }
+
+export interface IAmShopPopupLinkItemProps {
+    item: {
+      id: number
+      text: string
+      href: string
+    }
+  }

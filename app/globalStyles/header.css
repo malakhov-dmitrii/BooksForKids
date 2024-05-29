@@ -7,8 +7,8 @@
     display: flex;
     justify-content: space-between;
     margin-top: 64px;
-    height: 42px;
-    margin-bottom: 17px;
+    height: 59px;
+    padding-bottom: 17px;
 }
 
 .header_logo {
@@ -27,6 +27,7 @@
 
 .header_right {
     display: flex;
+    height: 59px;
 }
 
 .header_right ul {
@@ -35,12 +36,26 @@
 
 .nav {
     width: 318px;
-    height: 27px;
-    margin-top: 8px;
-    margin-bottom: 7px;
+    height: 59px;
+    padding-top: 8px;
     display: flex;
     justify-content: space-between;
-    border-right: 1px solid var(--color-Dark-gray);
+    /* border-right: 1px solid var(--color-Dark-gray); */
+    height: 100%;
+}
+
+.nav li {
+  height: 100%;
+}
+
+.nav_heading {
+  height: 100%;
+}
+
+.nav_heading:hover,
+.nav_heading:active {
+  border-bottom: 2px solid var(--color-Black);
+  transition: color .2s ease-in-out;
 }
 
 .link_nav {
@@ -50,7 +65,7 @@
 .header_icons {
     display: flex;
     align-items: center;
-    margin: 11px 0;
+    padding-bottom: 17px;
     position: relative;
 }
 
@@ -116,6 +131,7 @@
    .header_content {
     margin: 0;
     padding: 0;
+    height: 48px;
   }
 
   .header_logo {
@@ -133,7 +149,7 @@
     width: 20px;
     right: 3px;
     position: absolute;
-    top: 0;
+    bottom: 28px;
     -webkit-mask: url(../../public/img/icons/burger.svg) no-repeat 50% 50%;
     mask: url(../../public/img/icons/burger.svg) no-repeat 50% 50%;
     transition: background-color 0.2s ease-in-out;

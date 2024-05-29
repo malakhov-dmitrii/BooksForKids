@@ -50,7 +50,20 @@ export async function POST(req: Request) {
       category: productItem.category,
     }
 
+    // const existingItem = await db.collection('cart').findOne({
+    //   $and: [{}]
+    // })
+
     const { insertedId } = await db.collection('cart').insertOne(newCartItem)
+
+    //     await db.collection('cart').updateOne(
+    //   { _id: new ObjectId(id) },
+    //   {
+    //     $set: {
+    //       count,
+    //     },
+    //   }
+    // )
 
     return NextResponse.json({
       status: 201,

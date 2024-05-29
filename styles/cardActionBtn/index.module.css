@@ -35,48 +35,18 @@
         mask: url(../../public/img/icons/actions_quick_view.svg) no-repeat 50% 50%;
       } 
 
-.card_action_btn_add_to_favorites::before
-/* .card_action_btn_add_to_favorites_checked::before */
+.card_action_btn_add_to_favorites::before,
+.card_action_btn_add_to_favorites_checked::before
  {
         -webkit-mask: url(../../public/img/icons/actions_favorite.svg) no-repeat 50% 50%;
         mask: url(../../public/img/icons/actions_favorite.svg) no-repeat 50% 50%;
       }
 
 
-/* .card_action_btn_add_to_favorites_checked::before
+.card_action_btn_add_to_favorites_checked::before,
 .card_action_btn_add_to_favorites_checked:hover::before {
         background-color: var(--color-Errors);
-} */
-
-
-/*   
-      &_favorite_checked::before, &_comparison_checked::before {
-        position: absolute;
-        left: 7px;
-        top: 7px;
-        height: 18px;
-        width: 18px;
-      }
-  
-      &_favorite_checked::before {
-        background-color: #FF4747;
-        -webkit-mask: url(/img/checked-favorite.svg) no-repeat 50% 50%;
-        mask: url(/img/checked-favorite.svg) no-repeat 50% 50%;
-      } */
-  
-      /* &_quick_view::before {
-        -webkit-mask: url(/img/quick-view.svg) no-repeat 50% 50%;
-        mask: url(/img/quick-view.svg) no-repeat 50% 50%;
-      }
-  
-      &:hover::before {
         transition: background-color 0.2s ease-in-out;
-        background-color: #16D9A6;
-      }
-  
-      &.actions__btn_favorite_checked:hover::before {
-        transition: background-color 0.2s ease-in-out;
-        background-color: #FF4747;
-      }
-    } */
+}
+
   

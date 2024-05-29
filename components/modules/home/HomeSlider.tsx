@@ -26,7 +26,7 @@ const HomeSlider = () => {
             "image": img1,
             "title": `${translations[lang].home.title1}`,
             "product": product,
-            "price": 27.55,
+            "price": "$27.55",
             "btn_message": `${translations[lang].home.btn_message1}`
         },
         {
@@ -34,7 +34,7 @@ const HomeSlider = () => {
             "image": img2,
             "title": `${translations[lang].home.title1}`,
             "product": product,
-            "price": 0,
+            "price": "",
             "btn_message": `${translations[lang].home.btn_message2}`
         },
         {
@@ -42,7 +42,7 @@ const HomeSlider = () => {
             "image": img3,
             "title": `${translations[lang].home.title2}`,
             "product": product,
-            "price": 0,
+            "price": "",
             "btn_message": `${translations[lang].home.btn_message3}`
         },
     ]

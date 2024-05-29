@@ -22,6 +22,22 @@
             "my_account": "My account",
             "logout": "Logout"
         },
+        "my_account": {
+            "dashboard": "Dashboard",
+            "wishlist": "Wishlist",
+            "addresses": "Addresses",
+            "account_details": "Account details",
+            "hello": "Hello",
+            "not": "not",
+            "from_you_account": "From your account dashboard you can view your ",
+            "recent_orders": "recent orders",
+            "manage_your": ", manage your ",
+            "shipping_and_billing": "shipping and billing addresses",
+            "and_edit": ", and edit your ",
+            "password_and_account_details": "password and account details",
+            "log_out": "Log out",
+            "orders": "Orders"
+        },
         "help": {
             "terms": "Terms of Service",
             "shipping": "Shipping",
@@ -104,7 +120,10 @@
             "product_name": "Product name",
             "price": "Price",
             "stock_status": "Stock status",
-            "select_options": "Select options",
+            "in_stock": "In stock",
+            "out_of_stock": "Out of stock",
+            "only_1": "Only 1 left!",
+            "notify_of_delivery": "Notify when in stock",
             "to_cart": "Add to cart",
             "quick_buy": "Quick buy"
         },
@@ -156,6 +175,22 @@
             "password": "Password",
             "auth_google": "Sign in with Google account"
         },
+        "shop_popup": {
+            "shop_types": "Shop types",
+            "shop_full_width": "Shop full width",
+            "shop_with_sidebar": "Shop with sidebar",
+            "shop_carousel": "Shop carousel",
+            "masonry_grid": "Masonry grid",
+            "single_product": "Single product",
+            "bestseller": "Bestseller",
+            "on_sale": "On sale product",
+            "out_of_stock": "Out of stock product",
+            "new": "New! Product",
+            "shop_pages": "Shop pages",
+            "cart": "Cart",
+            "checkout": "Checkout",
+            "wishlist": "Wishlist"
+        },
         "validation": {
           "invalid_value": "Invalid value",
           "requiredName": "Enter your name",
@@ -191,6 +226,22 @@
         "burger_menu_account": {
             "my_account": "Мой аккаунт",
             "logout": "Выйти из аккаунта"
+        },
+        "my_account": {
+            "dashboard": "Навигация",
+            "wishlist": "Избранное",
+            "addresses": "Адреса",
+            "account_details": "Настройки",
+            "hello": "Привет",
+            "not": "не",
+            "from_you_account": "Здесь вы можете увидеть свои ",
+            "recent_orders": "заказы",
+            "manage_your": ", менять свои ",
+            "shipping_and_billing": "адреса доставки и выставления счета",
+            "and_edit": ", и редактировать свой ",
+            "password_and_account_details": "пароль и настройки аккаунта",
+            "log_out": "Выйти",
+            "orders": "Заказы"
         },
         "help": {
             "terms": "Условия обслуживания",
@@ -274,8 +325,11 @@
             "wishlist": "Избранное",
             "product_name": "Название",
             "price": "Цена",
-            "stock_status": "В наличии",
-            "select_options": "Действия",
+            "stock_status": "ННаличие",
+            "in_stock": "В наличии",
+            "out_of_stock": "Распродано",
+            "only_1": "1 шт. в наличии!",
+            "notify_of_delivery": "Сообщить о поступлении",
             "to_cart": "Добавить в корзину",
             "quick_buy": "Быстрая покупка"
         },
@@ -326,6 +380,22 @@
           "name": "Имя",
           "password": "Пароль",
           "auth_google": "Войти через Google аккаунт"
+        },
+        "shop_popup": {
+            "shop_types": "Вид каталога",
+            "shop_full_width": "Во всю ширину экрана",
+            "shop_with_sidebar": "С фильтрами",
+            "shop_carousel": "Карусель",
+            "masonry_grid": "Masonry grid",
+            "single_product": "Тип продукта",
+            "bestseller": "Бестселлер",
+            "on_sale": "Со скидкой",
+            "out_of_stock": "Распродано",
+            "new": "Новинка!",
+            "shop_pages": "Мои страницы",
+            "cart": "Корзина",
+            "checkout": "К оплате покупки",
+            "wishlist": "Избранное"
         },
         "validation": {
           "invalid_value": "Недопустимое значение",

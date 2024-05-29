@@ -220,7 +220,7 @@
 }
 
 .modal_right_favorite_btn::before {
-  background-color: var(--color-Dark-gray);
+  background-color: var(--color-Black);
   content: '';
   width: 25px;
   height: 18px;

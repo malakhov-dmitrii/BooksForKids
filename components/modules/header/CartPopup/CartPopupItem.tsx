@@ -1,4 +1,4 @@
-import DeleteCartItemBtn from '@/components/elements/deleteCartItemBtn/DeleteCartItemBtn';
+import DeleteItemBtn from '@/components/elements/deleteItemBtn/DeleteItemBtn';
 import { useCartItemAction } from '@/hooks/useCartItemAction';
 import { IAmCartItem } from '@/types/cart';
 import Image from 'next/image'
@@ -20,7 +20,7 @@ const CartPopupItem = ({item}: {item: IAmCartItem}) => {
     
     return (
         <>
-        <DeleteCartItemBtn 
+        <DeleteItemBtn 
         btnDisabled={false} 
         callback={handleDeleteCartItem} />
         <div className='card_cart_item_img'>
@@ -35,10 +35,10 @@ const CartPopupItem = ({item}: {item: IAmCartItem}) => {
             </Link>
             {item.isDiscount
               ? <h5>
-                <span className='price card_cart_item_price line_through card_cart_item_discount'>{formatPrice(+item.price)}</span>
-                <span className='price card_cart_item_price'>{`${formatPrice(+item.price * (1 - (+item.isDiscount)/100))}`}</span> 
+                <span className='card_cart_item_price line_through card_cart_item_discount'>{formatPrice(+item.price)}</span>
+                <span className='card_cart_item_price'>{`${formatPrice(+item.price * (1 - (+item.isDiscount)/100))}`}</span> 
               </h5>
-              : <h5 className='price card_cart_item_price'>
+              : <h5 className='card_cart_item_price'>
               {formatPrice(+item.price)}
               </h5>
             }

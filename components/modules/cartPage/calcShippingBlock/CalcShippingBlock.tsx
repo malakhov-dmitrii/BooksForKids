@@ -141,8 +141,6 @@ const states = [
         }
     ]
 
-console.log(states)
-
 export default function CalcShippingBlock() {
 const { lang, translations } = useLang();
 const [open, setOpen] = React.useState(false);
