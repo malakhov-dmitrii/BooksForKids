@@ -9,6 +9,7 @@ const AddToCartBtn = ( {
     <button 
     className={`body_large ${className}`}
     onClick={handleAddToCart}
+    disabled={btnDisabled}
     >
       {text}
     </button>

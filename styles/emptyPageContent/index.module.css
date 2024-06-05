@@ -37,11 +37,11 @@
     }
 }
 
-@media (max-width: 570px) {
+/* @media (max-width: 570px) {
     .empty_content_right h1{
         font-size: 16px;
     }
-}
+} */
 
 @media (max-width: 570px) {
     .empty_content_right h5{

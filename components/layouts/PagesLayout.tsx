@@ -8,6 +8,7 @@ import { $showQuickViewModal, closeQuickViewModal } from "@/context/modals"
 import Layout from "./Layout"
 import { removeOverflowHiddenFromBody } from "@/lib/utils/common"
 import CookieAlert from "../modules/cookieAlert/CookieAlert"
+// import { SessionProvider } from "next-auth/react"
 
 const PagesLayout = ({ children }: { children: React.ReactNode }) => {
 const showQuickViewModal = useUnit($showQuickViewModal)
@@ -34,6 +35,7 @@ useEffect(() => {
           <EarthoOneProvider 
           clientId={`${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`} domain='http://localhost:3000/'
           > */}
+      {/* <SessionProvider session={session}> */}
       <html lang='en>'>
       <body>
       <Next13ProgressBar height='4px' color='var(--color-Accent)' showOnShallow />
@@ -57,6 +59,7 @@ useEffect(() => {
           </body>
         </html>
       )} */}
+      {/* </SessionProvider> */}
       </>
      );
 };

@@ -22,6 +22,23 @@ body {
   flex-direction: column;
 }
 
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--color-Light-gray);
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-Gray);
+}
+
 .container {
   /* max-width: 100%; */
   max-width: 1248px;
@@ -41,6 +58,20 @@ h1 {
   font-size: 33px;
   line-height: 43px;
   font-weight: 500;
+}
+
+@media (max-width: 800px) {
+  h1 {
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 400;
+  }
+}
+
+@media (max-width: 570px) {
+  h1 {
+    font-size: 16px;
+  }
 }
 
 h2 {
@@ -82,10 +113,10 @@ p {
 .body_small {
   font-size: 12px;
 }
-
+/* 
 .price::before {
   content: "\0024  ";
-}
+} */
 
 .discount::before {
   content: "\002D";
@@ -468,4 +499,3 @@ a {
   transition: background-color 0.2s ease-in-out;
   background-color: var(--color-Black);
 }
-

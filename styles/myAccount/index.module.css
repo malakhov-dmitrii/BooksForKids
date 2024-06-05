@@ -1,16 +1,16 @@
 /* My Account - Dashboard */
 
-.dashboard_page_container {
-    width: 1248px;
-}
-
 .dashboard_page {
     display: flex;
     padding-top: 96px;
     width: 100%;
     justify-content: start;
-    /* align-items: center;
-    flex: 1 1 auto; */ 
+  }
+
+  @media (max-width: 900px) {
+    .dashboard_page {
+        padding-top: 39px;
+    }
   }
 
 .dashboard_page_content {
@@ -21,32 +21,67 @@
     text-align: center;
     margin-bottom: 64px;
 }
+
+@media (max-width: 900px) {
+    .dashboard_page h1 {
+        margin-bottom: 24px;
+    }
+  }
+
+  @media (max-width: 570px) {
+    .dashboard_page h1 {
+        font-size: 20px;
+    }
+  }
   
 .my_account_links_container {
-    display: flex;
+    /* display: flex; */
     border-bottom: 1px solid var(--color-Gray);
     height: 60px;
 }
 
+@media (max-width: 900px) {
+    .my_account_links_container {
+        height: 40px;
+    }
+  }
+
 .my_account_links_container h3 {
-    margin-right: 49px;
-    height: 100%;
+    /* margin-right: 49px !important; */
+    height: 60px;
 }
+
+@media (max-width: 900px) {
+    .my_account_links_container h3 {
+        font-size: 16px;
+        /* margin-right: 24px; */
+    }
+  }
 
 .my_account_links_container h3:hover {
     border-bottom: 1px solid var(--color-Black);
 }
 
+/* .my_account_links_container h3:active {
+    border-bottom: 1px solid var(--color-Black);
+} */
+
 .my_account_links {
     color: var(--color-Dark-gray);
 }
 
-.my_account_link_active {
+/* .my_account_link_active {
     border-bottom: 1px solid var(--color-Black);
-}
+} */
 
 .my_account_dashboard_content {
     margin-top: 39px;
+}
+
+@media (max-width: 800px) {
+    .my_account_dashboard_content {
+        font-size: 12px;
+    }
 }
 
 .my_account_dashboard_content_h {

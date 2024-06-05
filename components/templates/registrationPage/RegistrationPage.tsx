@@ -62,8 +62,9 @@ const RegistrationPage = () => {
                             </Link>
                             </div>
                         </form>
-                    {/* <AuthSocials handleSignupWithOAuth={handleSignupWithOAuth}
-                     /> */}
+                    {/* <AuthSocials handleSignupWithOAuth={handleSignupWithOAuth} */}
+                    <AuthSocials handleSignupWithOAuth={()=>{}}
+                     />
                 </div>
             </section>
         </main>

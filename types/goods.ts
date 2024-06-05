@@ -1,4 +1,5 @@
 import { IAmCartItem } from "./cart"
+import { IAmProduct } from "./common"
 
 export interface IAmLoadOneProductFx {
     productId: string
@@ -21,6 +22,23 @@ export interface IAmAddToCartBtnProps {
   btnDisabled?: boolean
   handleAddToCart: (param: any) => void
 }
+
+export interface IAmLoadProductsByFilterFx {
+  limit: number
+  offset: number
+  category: string
+  additionalParam?: string
+  isCatalog?: boolean
+}
+
+export interface IAmProducts {
+  count: number
+  items: IAmProduct[]
+}
+
+// export interface IAmLoadWatchedProductsFx {
+//   payload: { _id: string; category: string }[]
+// }
 
 
 

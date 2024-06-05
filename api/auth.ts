@@ -97,55 +97,6 @@ export const loginCheckFx = createEffect(async ({ jwt }: { jwt: string }) => {
   }
 })
 
-// export const signUpFx = createEffect(
-//     async ({ name, password, email, isOAuth }: IAmSignUpFx) => {
-//         if (isOAuth) {
-//             await oauthFx({
-//                 email,
-//                 password,
-//                 name,
-//             })
-//             return
-//         }
-
-//         const { data } = await api.post('/api/users/signup', {
-//             name,
-//             password,
-//             email,
-//         })
-
-//         if (data.warningMessage) {
-//             toast.error(data.warningMessage)
-//             return
-//         }
-
-//         onAuthSuccess('You are registered!', data)
-
-//         return data
-//     }
-// )
-
-// export const signInFx = createEffect(async ({ email, password, isOAuth }: IAmSignUpFx) => {
-//     if (isOAuth) {
-//         await oauthFx({
-//             email,
-//             password,
-//         })
-//         return
-//     }
-
-//     const { data } = await api.post('/api/users/login', { email, password })
-
-//     if (data.warningMessage) {
-//         toast.error(data.warningMessage)
-//         return
-//     }
-
-//     onAuthSuccess('You are logged in!', data)
-
-//     return data
-// })
-
 export const refreshTokenFx = createEffect(async ({ jwt }: { jwt: string }) => {
     const { data } = await api.post('/api/users/refresh', { jwt })
 

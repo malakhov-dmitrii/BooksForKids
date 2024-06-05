@@ -12,7 +12,7 @@
     background-color: white;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     .profile_card {
       padding-top: 24px;
     }
@@ -40,12 +40,10 @@
     color: var(--color-Black);
   }
 
-  @media (max-width: 750px) {
+  @media (max-width: 900px) {
     .page_registration h1,
     .page_sign_in h1 {
       margin-bottom: 24px;
-      font-size: 20px;
-      font-weight: 400;
     }
   }
 

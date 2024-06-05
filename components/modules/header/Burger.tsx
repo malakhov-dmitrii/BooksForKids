@@ -7,8 +7,10 @@ import { $burgerIsOpen, closeBurger } from '@/context/modals';
 import { removeOverflowHiddenFromBody } from '@/lib/utils/common';
 // import { useMediaQuery } from '@/hooks/useMediaQuery';
 import LangBlock from './LangBlock';
+import { $isAuth } from '@/context/auth';
 
 const Burger = () => {
+    const isAuth = useUnit($isAuth)
     // const [ShowCatalog] = useState(false)
     const burgerIsOpen = useUnit($burgerIsOpen)
     const { lang, translations } = useLang()
@@ -70,10 +72,18 @@ const Burger = () => {
             </div>
             <ul className="nav_burger_account">
             <li className="nav_burger_account_list_item">
-              <h3><Link className='burger_account_link' href='/profile'>
-                <span className='burger_icon_account'></span>
-                <span className="burger_account_span">{translations[lang].burger_menu_account.my_account}</span>
-                  </Link>
+              <h3>
+              {isAuth ? (
+                <Link className='burger_account_link' href='/my_account'>
+                  <span className='burger_icon_account'></span>
+                  <span className="burger_account_span">{translations[lang].burger_menu_account.my_account}</span>
+                </Link>
+                ) : (
+                <Link className='burger_account_link' href='/login'>
+                  <span className='burger_icon_account'></span>
+                  <span className="burger_account_span">{translations[lang].burger_menu_account.my_account}</span>
+                </Link>
+                )}
               </h3>
             </li>
             <li className="nav_burger_account_list_item">

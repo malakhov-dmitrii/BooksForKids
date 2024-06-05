@@ -1,6 +1,6 @@
 'use client'
 import { IAmProduct } from '@/types/common';
-import { IAmLoadOneProductFx } from '@/types/goods';
+import { IAmLoadOneProductFx, IAmLoadProductsByFilterFx, IAmProducts } from '@/types/goods';
 import { Effect, createDomain, createEffect, sample } from 'effector';
 import { Gate, createGate } from 'effector-react';
 import api from '../api/apiInstance'
@@ -8,22 +8,27 @@ import toast from 'react-hot-toast';
 import { getProductsFirstPageFx } from '@/api/homePage';
 import { loadOneProductFx } from '@/api/goods';
 
-// export const loadOneProductFx = createEffect(
-//   async ({ productId, category }: IAmLoadOneProductFx) => {
-//     console.log('dhgdsgh222')
-//       try{
-//           const { data } = await api.post('/api/goods/oneProduct', { productId, category })
+export const loadProductsByFilterFx = createEffect(
+  async ({
+    limit,
+    offset,
+    category,
+    isCatalog,
+    additionalParam,
+  }: IAmLoadProductsByFilterFx) => {
+    try {
+      const { data } = await api.get(
+        `/api/goods/filter?limit=${limit}&offset=${offset}&category=${category}&${additionalParam}${
+          isCatalog ? '&catalog=true' : ''
+        }`
+      )
 
-//           if (data?.message === 'Wrong product id') {
-//               return { productItem: { errorMessage: 'Wrong product id'}}
-//           }
-
-//           return data
-//       } catch (error) {
-//           toast.error((error as Error).message)
-//   }
-// }
-// )
+      return data
+    } catch (error) {
+      toast.error((error as Error).message)
+    }
+  }
+)
 
 const goods = createDomain()
 
@@ -31,6 +36,8 @@ export const HomePageGate = createGate()
 
 export const setCurrentProduct = goods.createEvent<IAmProduct>()
 export const loadOneProduct = goods.createEvent<IAmLoadOneProductFx>()
+export const loadProductsByFilter = goods.createEvent<IAmLoadProductsByFilterFx>()
+// export const loadWatchedProducts = goods.createEvent<IAmLoadWatchedProductsFx>()
 
 const goodsStoreInstance = (effect: Effect<void, [], Error>) =>
   goods
@@ -58,7 +65,28 @@ const goodsSampleInstance = (
   .on(setCurrentProduct, (_,product) => product)
   .on(loadOneProductFx.done, (_, {result}) => result.productItem)
 
+  export const $products = goods
+  .createStore<IAmProducts>({} as IAmProducts)
+  .on(loadProductsByFilterFx.done, (_, { result }) => result)
+
   sample({
     clock: loadOneProduct,
-    to: loadOneProductFx,
+    source: $currentProduct,
+    fn: (_, data) => data,
+    target: loadOneProductFx,
   })
+  
+  sample({
+    clock: loadProductsByFilter,
+    source: $products,
+    fn: (_, data) => data,
+    target: loadProductsByFilterFx,
+  })
+  
+  // sample({
+  //   clock: loadWatchedProducts,
+  //   source: $watchedProducts,
+  //   fn: (_, data) => data,
+  //   target: loadWatchedProductsFx,
+  // })
+  

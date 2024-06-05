@@ -48,11 +48,7 @@ const Card = ({ item }: IAmCardProps) => {
 
     const addToCart = (e:any) => {
       e.preventDefault()
-      // e.stopPropagation()
-      // if (existingItem || isProductInCart) {
-      //   addItemToCart(product, count || 1)} else {
         addProductsToCart(item, 1)
-      // }
     }
 
     // const addToCartActionBtn = () => {
@@ -78,93 +74,95 @@ const Card = ({ item }: IAmCardProps) => {
 
     return (
         <>
-        <li className={styles.list_item}
-            onMouseEnter={showToCartBtn}
-            onMouseLeave={hideToCartBtn}
-        >
-            <div className={styles.label_container}>
-              <CardLabel inStock={item.inStock} isNew={item.isNew} isBestSeller={item.isBestSeller} isDiscount ={item.isDiscount}/>
-            </div>
-            <Link
-            href={`/catalog/${item.category}/${item._id}`}
-            className={styles.card_top_link}
+        <div className={styles.list_item_container}>
+            <li className={styles.list_item}
+                onMouseEnter={showToCartBtn}
+                onMouseLeave={hideToCartBtn}
             >
-            <div 
-            className={styles.card_top_container}
-            onMouseEnter={showActions}
-            onMouseLeave={hideActions}
-            >
-              <Image src={item.images[0]} alt={item.name} width={500} height={500} />
-              {openActions &&
-              !isMedia1280 &&
-              <div className={styles.card_actions_container}    
-              >
-              <div className={styles.card_actions}
-            >
-                <CardActionBtn 
-                text={translations[lang].card.add_to_cart} 
-                iconClass="card_action_btn_add_to_cart"
-                callback={addAndGoToCartActionBtn}
-                />
-                <CardActionBtn 
-                text={translations[lang].card.quick_view} 
-                iconClass="card_action_btn_quick_view"
-                callback={handleShowQuickViewModal}
-                />
-                <CardActionBtn 
-                text={translations[lang].card.add_to_favorites} 
-                iconClass=
-                {`${isProductInFavorites 
-                  ? 'card_action_btn_add_to_favorites_checked' 
-                  : "card_action_btn_add_to_favorites"
-                }`}
-                callback={handleAddProductToFavorites}
-                />
-              </div>
-              </div>}
-                {!isMedia1280 
-                ? (open || isProductInCart) &&
-                  <div className={styles.card_to_cart_btn_container}>
-                    <AddToCartBtn
-                        text={isProductInCart ? (translations[lang].card.in_cart)
-                          : (translations[lang].card.to_cart)}
-                        className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : ''}`}
-                        handleAddToCart={addToCart}
-                        btnDisabled={
-                        allCurrentCartItemCount === +product.inStock
-                        }
+                <div className={styles.label_container}>
+                  <CardLabel inStock={item.inStock} isNew={item.isNew} isBestSeller={item.isBestSeller} isDiscount ={item.isDiscount}/>
+                </div>
+                <Link
+                href={`/catalog/${item.category}/${item._id}`}
+                className={styles.card_top_link}
+                >
+                <div 
+                className={styles.card_top_container}
+                onMouseEnter={showActions}
+                onMouseLeave={hideActions}
+                >
+                  <Image src={item.images[0]} alt={item.name} width={500} height={500} />
+                  {openActions &&
+                  !isMedia1280 &&
+                  <div className={styles.card_actions_container}    
+                  >
+                  <div className={styles.card_actions}
+                >
+                    <CardActionBtn 
+                    text={translations[lang].card.add_to_cart} 
+                    iconClass="card_action_btn_add_to_cart"
+                    callback={addAndGoToCartActionBtn}
+                    />
+                    <CardActionBtn 
+                    text={translations[lang].card.quick_view} 
+                    iconClass="card_action_btn_quick_view"
+                    callback={handleShowQuickViewModal}
+                    />
+                    <CardActionBtn 
+                    text={translations[lang].card.add_to_favorites} 
+                    iconClass=
+                    {`${isProductInFavorites 
+                      ? 'card_action_btn_add_to_favorites_checked' 
+                      : "card_action_btn_add_to_favorites"
+                    }`}
+                    callback={handleAddProductToFavorites}
                     />
                   </div>
-                  :                   
-                  <div className={styles.card_to_cart_btn_container}>
-                    <AddToCartBtn
-                        text={isProductInCart ? (translations[lang].card.in_cart)
-                          : (translations[lang].card.to_cart)}
-                        className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : ''}`}
-                        handleAddToCart={addToCart}
-                        btnDisabled={
-                        allCurrentCartItemCount === +product.inStock
-                        }
-                    />
+                  </div>}
+                    {!isMedia1280 
+                    ? (open || isProductInCart) &&
+                      <div className={styles.card_to_cart_btn_container}>
+                        <AddToCartBtn
+                            text={isProductInCart ? (translations[lang].card.in_cart)
+                              : (translations[lang].card.to_cart)}
+                              className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : (allCurrentCartItemCount === +product.inStock) ? 'disabled' : ''}`}
+                            handleAddToCart={addToCart}
+                            btnDisabled={
+                            allCurrentCartItemCount === +product.inStock
+                            }
+                        />
+                      </div>
+                      :                   
+                      <div className={styles.card_to_cart_btn_container}>
+                        <AddToCartBtn
+                            text={isProductInCart ? (translations[lang].card.in_cart)
+                              : (translations[lang].card.to_cart)}
+                            className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : (allCurrentCartItemCount === +product.inStock) ? 'disabled' : ''}`}
+                            handleAddToCart={addToCart}
+                            btnDisabled={
+                            allCurrentCartItemCount === +product.inStock
+                            }
+                        />
+                    </div>
+                    }
                 </div>
-                }
-            </div>
-            <div className={styles.card_bottom_container}>
-                <h3>{item.name}</h3>
-                <div>
-                  {item.isDiscount
-                  ? <h4>
-                    <span className={`line_through ${styles.card_price_discount}`}>{formatPrice(+item.price)}</span>
-                    <span>{`${formatPrice(+item.price * (1 - (+item.isDiscount)/100))}`}</span> 
-                  </h4>
-                  : <h4 className={styles.price}>
-                  {formatPrice(+item.price)}
-                  </h4>
-                  }
+                <div className={styles.card_bottom_container}>
+                    <h3>{item.name}</h3>
+                    <div>
+                      {item.isDiscount
+                      ? <h4>
+                        <span className={`line_through ${styles.card_price_discount}`}>{formatPrice(+item.price)}</span>
+                        <span>{`${formatPrice(+item.price * (1 - (+item.isDiscount)/100))}`}</span> 
+                      </h4>
+                      : <h4 className={styles.price}>
+                      {formatPrice(+item.price)}
+                      </h4>
+                      }
+                    </div>
                 </div>
-            </div>
-          </Link>
-        </li>
+              </Link>
+            </li>
+          </div>
         </>
      );
 }

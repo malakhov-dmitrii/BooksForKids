@@ -4,12 +4,18 @@ import { withClickOutside } from "@/components/hocs/withClickOutside";
 import { IAmWrappedComponentProps } from "@/types/hocs";
 import { useLang } from "@/hooks/useLang";
 import ShopPopupLinkItem from "./ShopPopupLinkItem";
+import { useGoodsByAuth } from "@/hooks/useGoodsByAuth";
+import { $favorites, $favoritesFromLS } from "@/context/favorites";
+import { $isAuth } from "@/context/auth";
+import { useUnit } from "effector-react";
 
 const ShopPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
     ({ open, setOpen }, ref) => {
         const { lang, translations } = useLang();
         const handleShowPopup = () => setOpen(true)
         const handleHidePopup = () => setOpen(false)
+        const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
+        const isAuth = useUnit($isAuth)
 
         const shopTypesLinks = [
             {
@@ -71,11 +77,13 @@ const ShopPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
             {
                 id: 40,
                 text: translations[lang].auth_popup.my_account,
-                href: '/my-account/dashboard',
+                href: `${isAuth ? '/my-account/dashboard' : '/login'}`,
             },
             {
                 id: 41,
-                text: translations[lang].shop_popup.wishlist,
+                text: `${translations[lang].my_account.wishlist} ${!!currentFavoritesByAuth.length && 
+                 <span> ({currentFavoritesByAuth.length})</span>
+                    }`,
                 href: '/wishlist',
             }
         ]
@@ -84,7 +92,7 @@ const ShopPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
             <div className="shop_popup" ref={ref}>
                 <Link 
                     className='link_nav'
-                    href='/catalog'
+                    href='/catalog/russianbooks?offset=0&type=bedTimeStories'
                     onMouseEnter={handleShowPopup}
                 >
                     {translations[lang].header.shop_link}

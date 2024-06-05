@@ -14,7 +14,7 @@ const Footer = () => {
                   <div className="footer_row1">
                     <ul className="footer_nav">
                         <li className="footer_nav_li"><h5><Link className='footer_nav_link' href='/contact'>{translations[lang].footer.contact}</Link></h5></li>
-                        <li className="footer_nav_li"><h5><Link className='footer_nav_link' href='/terms_of_services'>{translations[lang].footer.terms_of_service}</Link></h5></li>
+                        <li className="footer_nav_li"><h5><Link className='footer_nav_link' href='/terms_of_use'>{translations[lang].footer.terms_of_service}</Link></h5></li>
                         <li className="footer_nav_li"><h5><Link className='footer_nav_link' href='/shipping'>{translations[lang].footer.shipping}</Link></h5></li>
                     </ul>
                     {isMedia750 &&
@@ -37,7 +37,7 @@ const Footer = () => {
                     </div>
                     <div className="footer_row2">
                         <div className="terms_of_use">
-                            <h5>© 2024 KIDS4BOOKS. 
+                            <h5>© 2024 BOOKS4KIDS. 
                                 <Link className='footer_nav_link' href='/terms_of_use'><span> {translations[lang].footer.terms_of_use}</span></Link> {translations[lang].other.and} <Link className='footer_nav_link' href='/privacy_policy'><span className='privacy_policy'>{translations[lang].footer.privacy_policy}.</span></Link></h5>
                         </div>
                     <div className='social_media_mobile'>
