@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { productCategories } from '@/constants/product'
+import ProductsPage from '@/components/templates/productsPage/ProductsPage'
 
 export default function /*Product*/ Category({
   params,
@@ -11,5 +12,5 @@ export default function /*Product*/ Category({
   }
 
   // return <ProductPage productId={params.productId} category={params.category} />
-  return <h1>{params.category}</h1>
+  return <ProductsPage searchParams={params || {}} pageName='catalog' />
 }

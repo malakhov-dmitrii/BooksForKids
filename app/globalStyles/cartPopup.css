@@ -62,7 +62,7 @@
     overflow-y: scroll;
     scrollbar-color: var(--color-Light-gray) var(--color-White);
     scrollbar-width: thin;
-    max-height: 500px;
+    max-height: calc(100vh - 270px);
   }
   
   .cart_popup_list::-webkit-scrollbar {

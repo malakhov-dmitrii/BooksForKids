@@ -40,3 +40,11 @@ export interface IAmShopPopupLinkItemProps {
       href: string
     }
   }
+
+  export interface IAmBurgerLinkItemProps {
+    item: {
+      id: number
+      text: string
+      href: string
+    }
+  }

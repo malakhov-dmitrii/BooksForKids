@@ -179,28 +179,27 @@ export const updateSearchParam = (
   // urlParams.set(key, `${value}`)
   // const newPath = `${pathname}?${urlParams.toString()}`
   // window.history.pushState({ path: newPath }, '', newPath)
-  const paramsString = window.location.search
-  const urlParams = new URLSearchParams(paramsString)
+  const urlParams = getSearchParamsUrl()
   urlParams.set(key, `${value}`)
   const newPath = `${pathname}?${urlParams.toString()}`
-    window.history.pushState({ path: newPath }, '', newPath)
+  window.history.pushState({ path: newPath }, '', newPath)
 
 }
 
-// export const checkPriceParam = (price: number) =>
-//   price && !isNaN(price) && price >= 0 && price <= 10000
+export const checkPriceParam = (price: number) =>
+  price && !isNaN(price) && price >= 0 && price <= 200
 
-// export const getCheckedArrayParam = (param: string) => {
-//   try {
-//     const sizesArr = JSON.parse(decodeURIComponent(param))
+export const getCheckedArrayParam = (param: string) => {
+  try {
+    const typesArr = JSON.parse(decodeURIComponent(param))
 
-//     if (Array.isArray(sizesArr) && sizesArr.length) {
-//       return sizesArr
-//     }
-//   } catch (error) {
-//     return false
-//   }
-// }
+    if (Array.isArray(typesArr) && typesArr.length) {
+      return typesArr
+    }
+  } catch (error) {
+    return false
+  }
+}
 
 // export const capitalizeFirstLetter = (str: string) =>
 //   str.charAt(0).toUpperCase() + str.slice(1)

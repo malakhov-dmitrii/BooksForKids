@@ -54,42 +54,61 @@ export const useProductFilters = (
     setCurrentPage(+(searchParams.offset || 0))
   }, [])
 
-  // const handlePageChange = ({ selected }: { selected: number }) => {
-  //   const urlParams = getSearchParamsUrl()
+  const handlePageChange = ({ selected }: { selected: number }) => {
+    const urlParams = getSearchParamsUrl()
 
-  //   urlParams.delete('offset')
+    urlParams.delete('offset')
 
-  //   loadProductsByFilter({
-  //     limit: 6 * selected + 6,
-  //     offset: selected * 6,
-  //     additionalParam: urlParams.toString(),
-  //     isCatalog,
-  //     category,
-  //   })
+    loadProductsByFilter({
+      limit: 6 * selected + 6,
+      offset: selected * 6,
+      additionalParam: urlParams.toString(),
+      isCatalog,
+      category,
+    })
 
-  //   updateSearchParam('offset', selected, pathname)
-  //   setCurrentPage(selected)
-  // }
+    updateSearchParam('offset', selected, pathname)
+    setCurrentPage(selected)
+  }
 
   // const handleApplyFiltersWithCategory = (categoryType: string) => {
   //   updateSearchParam('type', categoryType, pathname)
   //   handlePageChange({ selected: 0 })
   // }
 
-  // const handleApplyFiltersWithPrice = (priceFrom: string, priceTo: string) => {
-  //   updateSearchParam('priceFrom', priceFrom, pathname)
-  //   updateSearchParam('priceTo', priceTo, pathname)
-  //   handlePageChange({ selected: 0 })
-  // }
+  const handleApplyFiltersWithPrice = (priceFrom: string, priceTo: string) => {
+    updateSearchParam('priceFrom', priceFrom, pathname)
+    updateSearchParam('priceTo', priceTo, pathname)
+    handlePageChange({ selected: 0 })
+  }
 
-  // const handleApplyFiltersWithSizes = (sizes: string[]) => {
-  //   updateSearchParam(
-  //     'sizes',
-  //     encodeURIComponent(JSON.stringify(sizes)),
-  //     pathname
-  //   )
-  //   handlePageChange({ selected: 0 })
-  // }
+  const handleApplyFiltersWithTypes = (types: string[]) => {
+    updateSearchParam(
+      'types',
+      encodeURIComponent(JSON.stringify(types)),
+      pathname
+    )
+    handlePageChange({ selected: 0 })
+  }
+
+  const handleApplyFilterOnSale = (isDiscount: string[]) => {
+    updateSearchParam(
+      'isDiscount',
+      encodeURIComponent(JSON.stringify(isDiscount)),
+      pathname
+    )
+    handlePageChange({ selected: 0 })
+  }
+
+  const  handleApplyFilterInStock = (isDiscount: string[]) => {
+    updateSearchParam(
+      'isDiscount',
+      encodeURIComponent(JSON.stringify(isDiscount)),
+      pathname
+    )
+    handlePageChange({ selected: 0 })
+  }
+ 
 
   // const handleApplyFiltersWithColors = (sizes: string[]) => {
   //   updateSearchParam(
@@ -100,24 +119,24 @@ export const useProductFilters = (
   //   handlePageChange({ selected: 0 })
   // }
 
-  // const handleApplyFiltersBySort = (sort: string) => {
-  //   const urlParams = getSearchParamsUrl()
-  //   const offset = urlParams.get('offset')
+  const handleApplyFiltersBySort = (sort: string) => {
+    const urlParams = getSearchParamsUrl()
+    const offset = urlParams.get('offset')
 
-  //   updateSearchParam('sort', sort, pathname)
-  //   handlePageChange({
-  //     selected: checkOffsetParam(offset as string) ? +(offset || 0) : 0,
-  //   })
-  // }
+    updateSearchParam('sort', sort, pathname)
+    handlePageChange({
+      selected: checkOffsetParam(offset as string) ? +(offset || 0) : 0,
+    })
+  }
 
   const paginationProps = {
-    containerClassName: `list-reset ${styles.catalog__bottom__list}`,
-    pageClassName: `catalog-pagination-item ${styles.catalog__bottom__list__item}`,
-    pageLinkClassName: styles.catalog__bottom__list__item__link,
-    previousClassName: `catalog-pagination-prev ${styles.catalog__bottom__list__prev}`,
-    nextClassName: `catalog-pagination-next ${styles.catalog__bottom__list__next}`,
-    breakClassName: styles.catalog__bottom__list__break,
-    breakLinkClassName: styles.catalog__bottom__list__break__link,
+    containerClassName: styles.catalog_bottom_list,
+    pageClassName: `catalog-pagination-item ${styles.catalog_bottom_list_item}`,
+    pageLinkClassName: styles.catalog_bottom_list_item_link,
+    previousClassName: `catalog-pagination-prev ${styles.catalog_bottom_list_prev}`,
+    nextClassName: `catalog-pagination-next ${styles.catalog_bottom_list_next}`,
+    breakClassName: styles.catalog_bottom_list_break,
+    breakLinkClassName: styles.catalog_bottom_list_break_link,
     breakLabe: '...',
     pageCount: pagesCount,
     forcePage: currentPage,
@@ -127,11 +146,13 @@ export const useProductFilters = (
     paginationProps,
     products,
     pagesCount,
-    // handlePageChange,
+    handlePageChange,
+    handleApplyFilterOnSale,
+    handleApplyFilterInStock,
     // handleApplyFiltersWithCategory,
-    // handleApplyFiltersWithPrice,
-    // handleApplyFiltersWithSizes,
+    handleApplyFiltersWithPrice,
+    handleApplyFiltersWithTypes,
     // handleApplyFiltersWithColors,
-    // handleApplyFiltersBySort,
+    handleApplyFiltersBySort,
   }
 }

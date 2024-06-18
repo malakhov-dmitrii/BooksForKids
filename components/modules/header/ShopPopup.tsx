@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { forwardRef, useState } from 'react';
+import { useUnit } from "effector-react";
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { withClickOutside } from "@/components/hocs/withClickOutside";
 import { IAmWrappedComponentProps } from "@/types/hocs";
 import { useLang } from "@/hooks/useLang";
@@ -7,7 +9,7 @@ import ShopPopupLinkItem from "./ShopPopupLinkItem";
 import { useGoodsByAuth } from "@/hooks/useGoodsByAuth";
 import { $favorites, $favoritesFromLS } from "@/context/favorites";
 import { $isAuth } from "@/context/auth";
-import { useUnit } from "effector-react";
+
 
 const ShopPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
     ({ open, setOpen }, ref) => {
@@ -16,6 +18,7 @@ const ShopPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
         const handleHidePopup = () => setOpen(false)
         const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
         const isAuth = useUnit($isAuth)
+        const isMedia1300 = useMediaQuery(1300)
 
         const shopTypesLinks = [
             {
@@ -81,8 +84,9 @@ const ShopPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
             },
             {
                 id: 41,
-                text: `${translations[lang].my_account.wishlist} ${!!currentFavoritesByAuth.length && 
-                 <span> ({currentFavoritesByAuth.length})</span>
+                text: `${translations[lang].my_account.wishlist} ${
+                      !!currentFavoritesByAuth.length ?
+                       currentFavoritesByAuth.length : ''
                     }`,
                 href: '/wishlist',
             }
@@ -92,12 +96,12 @@ const ShopPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
             <div className="shop_popup" ref={ref}>
                 <Link 
                     className='link_nav'
-                    href='/catalog/russianbooks?offset=0&type=bedTimeStories'
+                    href='/catalog'
                     onMouseEnter={handleShowPopup}
                 >
                     {translations[lang].header.shop_link}
                 </Link>
-                {open && (
+                {!isMedia1300 && open && (
                     <div className="shop_popup_wrapper"
                     onMouseLeave={handleHidePopup}
                     >

@@ -1,0 +1,201 @@
+
+.fullwidth_shop_container {
+    display: flex;
+    margin-top: 96px;
+    flex-direction: column;
+    background-color: yellow;
+    padding: 0 !important;
+}
+
+@media (max-width: 800px) {
+    .fullwidth_shop_container {
+        margin-top: 24px;
+    }
+}
+
+.fullwidth_filter_block {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items:center;
+    margin-bottom: 39px;
+}
+
+@media (max-width: 800px) {
+    .fullwidth_filter_block {
+        flex-direction: column;
+        align-items: start;
+        margin-bottom: 16px;
+    }
+}
+
+/* .fullwidth_shop_content {
+    display: flex;
+    justify-content: space-between;
+} */
+
+.fullwidth_shop_cards_list {
+    position: relative;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 16px;
+    row-gap: 70px;
+    margin: 0;
+    padding: 0;
+    justify-content: space-between;
+    justify-items: center;
+    background-color: blue;
+}
+
+@media (max-width: 1300px) {
+    .fullwidth_shop_cards_list {
+        row-gap: 50px;
+    }
+}
+
+@media (max-width: 920px) {
+    .fullwidth_shop_cards_list {
+        row-gap: 30px;
+        column-gap: 10px;
+  }
+}
+
+@media (max-width: 780px) {
+    .fullwidth_shop_cards_list {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 16px;
+  }
+}
+
+/* @media (max-width: 1300px) {
+    .home_section_list {
+        grid-template-columns: repeat(auto-fill, 300px);
+        column-gap: 40px;
+        row-gap: 65px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .home_section_list {
+        grid-template-columns: repeat(auto-fill, 260px);
+        column-gap: 30px;
+        row-gap: 50px;
+    }
+}
+
+@media (max-width: 910px) {
+    .home_section_list {
+        grid-template-columns: repeat(auto-fill, 200px);
+        column-gap: 30px;
+        row-gap: 50px;
+    }
+}
+
+@media (max-width: 730px) {
+    .home_section_list {
+        grid-template-columns: repeat(auto-fill, 170px);
+    }
+}
+
+@media (max-width: 640px) {
+    .home_section_list {
+        grid-template-columns: repeat(auto-fill, 136px);
+        column-gap: 16px;
+        row-gap: 24px;
+    }
+} */
+
+.page_pagination_container {
+    overflow-x: auto;
+    margin-top: 96px;
+    display: flex;
+    justify-content: end;
+}
+
+@media (max-width: 1220px) {
+    .page_pagination_container {
+        justify-content: start;
+  }
+}
+
+@media (max-width: 610px) {
+    .page_pagination_container {
+        margin-top: 24px;
+  }
+}
+
+.fullwidth_container {
+    width: 262px;
+}
+
+@media (max-width: 1300px) {
+    .fullwidth_container {
+        display: none;
+  }
+}
+
+/* Filters section */
+.catalog_filters_top_left {
+    display: grid;
+    max-width: 1060px;
+    background-color: green;
+    grid-template-areas: "TypesSelect PriceSelect OnSaleFilter"
+                         "SortSelect PriceSelect InStockFilter";
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    position: relative;
+
+}
+
+@media (max-width: 910px) {
+    .catalog_filters_top_left {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        height: 40px;
+        margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 730px) {
+    .catalog_filters_top_left {
+        flex-direction: column;
+        height: auto;
+  }
+}
+
+/* Filter Btn */
+
+.catalog_filter_btn {
+    color: var(--color-Accent);
+    width: 70px;
+    height: 40px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+@media (max-width: 800px) {
+    .catalog_filter_btn {
+        justify-content: start;
+        width: 60px;
+        padding-left: 26px;
+        height: 35px;
+        font-size: 12px;
+        position: relative;
+  }
+
+  .catalog_filter_btn::before {
+    content: '';
+    background-color: var(--color-Accent);
+    height: 100%;
+    width: 100%;
+    left: -20px;
+    position: absolute;
+    bottom: -8px;
+    transition: background-color .2s ease-in-out;
+    -webkit-mask: url(@/public/img/icons/filter_btn_mob.svg) no-repeat 50% 50%;
+    mask: url(@/public/img/icons/filter_btn_mob.svg) no-repeat 50% 50%;
+  }
+}
