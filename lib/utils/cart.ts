@@ -1,51 +1,59 @@
-import { IAmCartItem } from "@/types/cart"
-import { IAmProduct } from "@/types/common"
-import { idGenerator, isUserAuth } from "./common"
-import { addProductToCart, setCartFromLS, setShouldShowEmpty } from "@/context/cart"
-import toast from "react-hot-toast"
+import { IAmCartItem } from '@/types/cart'
+import { IAmProduct } from '@/types/common'
+import { idGenerator, isUserAuth } from './common'
+import {
+  addProductToCart,
+  setCartFromLS,
+  setShouldShowEmpty,
+} from '@/context/cart'
+import toast from 'react-hot-toast'
 
-export const addItemToCart = (
-    product: IAmProduct,
-    count: number,
-  ) => {
-    if (!isUserAuth()) {
-      addCartItemToLS(product, count)
-      return
-    }
+export const addItemToCart = (product: IAmProduct, count: number) => {
+  console.log('product.inStock', product.inStock)
+  console.log('count', count)
 
-    const auth = JSON.parse(localStorage.getItem('auth') as string)
+  if (+product.inStock < count) {
+    console.log('Not enough stock')
+    toast.success('Not enough stock')
+    return
+  }
 
-    const clientId = addCartItemToLS(product, count, false)
-    addProductToCart({
-      jwt: auth.accessToken,
-      productId: product._id,
-      category: product.category,
-      count,
-      clientId,
-    })
+  if (!isUserAuth()) {
+    addCartItemToLS(product, count)
+    return
+  }
+
+  const auth = JSON.parse(localStorage.getItem('auth') as string)
+
+  const clientId = addCartItemToLS(product, count, false)
+  addProductToCart({
+    jwt: auth.accessToken,
+    productId: product._id,
+    category: product.category,
+    count,
+    clientId,
+  })
 }
 
 export const addCartItemToLS = (
-    product: IAmProduct,
-    count: number,
-    withToast = true
-  ) => {
-    let cartFromLS: IAmCartItem[] = JSON.parse(
-      localStorage.getItem('cart') as string
-    )
-    const clientId = idGenerator()
+  product: IAmProduct,
+  count: number,
+  withToast = true
+) => {
+  let cartFromLS: IAmCartItem[] = JSON.parse(
+    localStorage.getItem('cart') as string
+  )
+  const clientId = idGenerator()
 
-    if (!cartFromLS) {
-        cartFromLS = []
-      }
-  
+  if (!cartFromLS) {
+    cartFromLS = []
+  }
+
   setShouldShowEmpty(false)
 
-    const existingItem = cartFromLS.find(
-    (item) => item.productId === product._id
-  )
+  const existingItem = cartFromLS.find((item) => item.productId === product._id)
 
-   if (existingItem) {
+  if (existingItem) {
     const updatedCount = +existingItem.count + 1
 
     // const updatedCount = (count > 1) ? (+existingItem.count = count) : (+existingItem.count + 1)
@@ -53,18 +61,18 @@ export const addCartItemToLS = (
     // const updatedCount = existingItem.count !== count ? count : +existingItem.count + 1
 
     const updatedCart = cartFromLS.map((item) =>
-    item.productId === existingItem.productId
-    ? { ...existingItem, count: updatedCount }
-    : item
+      item.productId === existingItem.productId
+        ? { ...existingItem, count: updatedCount }
+        : item
     )
 
     localStorage.setItem('cart', JSON.stringify(updatedCart))
     setCartFromLS(updatedCart)
     toast.success('Added to cart')
     return existingItem.clientId
-   }
+  }
 
-   const cart = [
+  const cart = [
     ...cartFromLS,
     {
       clientId,
@@ -76,7 +84,7 @@ export const addCartItemToLS = (
       inStock: product.inStock,
       isDiscount: product.isDiscount,
       category: product.category,
-      authors: product.authors
+      authors: product.authors,
     },
   ]
   localStorage.setItem('cart', JSON.stringify(cart))
@@ -86,12 +94,9 @@ export const addCartItemToLS = (
   return clientId
 }
 
-export const addProductsToCart = (
-  product: IAmProduct,
-  count: number,
-) => {
-    addItemToCart(product, count)
-    return
+export const addProductsToCart = (product: IAmProduct, count: number) => {
+  addItemToCart(product, count)
+  return
 }
 
 export const updateCartItemCountInLS = (cartItemId: string, count: number) => {
@@ -111,4 +116,3 @@ export const updateCartItemCountInLS = (cartItemId: string, count: number) => {
 
 export const countWholeCartItemsAmount = (cart: IAmCartItem[]) =>
   cart.reduce((defaultCount, item) => defaultCount + +item.count, 0)
-
