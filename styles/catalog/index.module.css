@@ -47,6 +47,13 @@
     transition: background-color .2s ease-in-out;
 }
 
+@media (max-width: 910px) {
+    .catalog_bottom_list_item_link {
+        width: 38px;
+        height: 38px;
+    }
+}
+
 .catalog_bottom_list_item_link:hover {
     color: var(--color-White);
     border-radius: 8px;

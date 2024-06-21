@@ -1,22 +1,30 @@
 import { useCartAction } from "@/hooks/useCartAction";
 import { useLang } from "@/hooks/useLang";
 import styles from '@/styles/productDescription/index.module.css';
+import React from "react";
 
 const ProductDescription = () => {
     const { lang, translations } = useLang()
+    const [open, setOpen] = React.useState(false);
+    const handleClick = () => {
+        setOpen(!open);
+    };
     const { product } = useCartAction()
 
-    if (product.description.length > 100) {
-        product.description = Array.from(product.description).slice(1, 100).join('') + ' ...'
-    } 
-
-    const showDescription = () => {
-        product.description = Array.from(product.description).slice(1, product.description.length).join('')
-    }
-
     return (
-    <div className={styles.more_info_description} >{product.description}
-    <span className={styles.more_info_description_span}><button onClick={showDescription} className={`body_small ${styles.more_info_description_btn} `}>{translations[lang].product.more_info}</button></span>
+    <div className={styles.more_info_description_container} onClick={handleClick}>
+        <div className={`${styles.more_info_description} ${open ? styles.more_info_description_open : styles.more_info_description_closed}`}>
+            {product.description}
+        </div>
+        <div className={styles.description_btn_container}>
+            <button className={`body_small ${styles.more_info_description_btn}`}>
+                {!open ? 
+                    <span>{translations[lang].product.more_info}</span> 
+                    :
+                    <span>{translations[lang].product.less_info}</span>
+                }
+            </button>
+        </div>
     </div>
     )
 }

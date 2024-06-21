@@ -2,17 +2,7 @@ import { useUnit } from 'effector-react'
 // import CategorySelect from './CategorySelect'
 import PriceSelect from './PriceSelect'
 import { IAmCatalogFiltersProps } from '@/types/catalog'
-// import SizesSelect from './SizesSelect'
-// import ColorsSelect from './ColorsSelect'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import {
-//   setColors,
-//   setColorsOptions,
-//   setFiltersPopup,
-  setTypes,
-} from '@/context/catalog'
-// import SelectInfoItem from './SelectInfoItem'
-// import FiltersPopup from './FiltersPopup/FiltersPopup'
 import { addOverflowHiddenToBody } from '@/lib/utils/common'
 import { $typesOptions } from '@/context/catalog'
 import styles from '@/styles/shopFullWidth/index.module.css'
@@ -26,11 +16,9 @@ const CatalogFiltersFullWidth = ({
      handleApplyFiltersWithTypes,
      handleApplyFilterOnSale,
      handleApplyFilterInStock,
-//   handleApplyFiltersWithColors,
   handleApplyFiltersBySort,
 }: IAmCatalogFiltersProps) => {
   const typesOptions = useUnit($typesOptions)
-//   const colorsOptions = useUnit($colorsOptions)
   const isMedia910 = useMediaQuery(910)
 
 //   const handleRemoveSizeOption = (id: number) => {
@@ -53,32 +41,8 @@ const CatalogFiltersFullWidth = ({
 //       item.id === id ? { ...item, checked: false } : item
 //     )
 
-//     setColorsOptions(updatedOptions)
-
-//     const updatedColorsByText = updatedOptions
-//       .filter((item) => item.checked)
-//       .map(({ colorText }) => colorText)
-
-//     const updatedColorsByCode = updatedOptions
-//       .filter((item) => item.checked)
-//       .map(({ colorCode }) => colorCode)
-
-//     setColors(updatedColorsByText)
-//     handleApplyFiltersWithColors(updatedColorsByCode)
-//   }
-
-//   const handleOpenPopup = () => {
-//     addOverflowHiddenToBody()
-//     setFiltersPopup(true)
-//   }
-
   return (
     <>
-      {/* <FiltersPopup
-        handleApplyFiltersWithPrice={handleApplyFiltersWithPrice}
-        handleApplyFiltersWithSizes={handleApplyFiltersWithSizes}
-        handleApplyFiltersWithColors={handleApplyFiltersWithColors}
-      /> */}
       <div className={styles.catalog_filters}>
         <div className={styles.catalog_filters_top}>
           {isMedia910 && (
@@ -87,8 +51,6 @@ const CatalogFiltersFullWidth = ({
                 <SortSelect 
                   handleApplyFiltersBySort={handleApplyFiltersBySort}
                 />
-              {/* </div>
-              <div className={styles.catalog_filters_bottom}> */}
                 <OnSaleFilter
                   handleApplyFilterOnSale={handleApplyFilterOnSale}
                 />
@@ -117,56 +79,9 @@ const CatalogFiltersFullWidth = ({
                     handleApplyFilterInStock={handleApplyFilterInStock}
                 />
               </div>
-              {/* {!isMedia910 && (
-                <SizesSelect
-                  handleApplyFiltersWithSizes={handleApplyFiltersWithSizes}
-                />
-              )}
-              <div className={styles.catalog__filters__top__right}>
-                <ColorsSelect
-                  handleApplyFiltersWithColors={handleApplyFiltersWithColors}
-                />
-
-              </div> */}
             </>
           )}
-          {/* {isMedia610 && (
-            <>
-              <SortSelect handleApplyFiltersBySort={handleApplyFiltersBySort} />
-              <button
-                className={`btn-reset ${styles.catalog__filters__top__filter_btn}`}
-                onClick={handleOpenPopup}
-              />
-            </>
-          )} */}
         </div>
-        {/* <div className={styles.catalog__filters__bottom}>
-          <motion.ul
-            className={`${styles.catalog__filters__bottom__list}`}
-            {...basePropsForMotion}
-          >
-            {sizesOptions
-              .filter((item) => item.checked)
-              .map((item) => (
-                <SelectInfoItem
-                  key={item.id}
-                  id={item.id}
-                  text={item.size}
-                  handleRemoveItem={handleRemoveSizeOption}
-                />
-              ))}
-            {colorsOptions
-              .filter((item) => item.checked)
-              .map((item) => (
-                <SelectInfoItem
-                  key={item.id}
-                  id={item.id}
-                  text={item.colorText}
-                  handleRemoveItem={handleRemoveColorOption}
-                />
-              ))}
-          </motion.ul>
-        </div> */}
       </div>
     </>
   )

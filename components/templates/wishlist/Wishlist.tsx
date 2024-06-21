@@ -28,7 +28,9 @@ const Wishlist = () => {
                         <div>
                             <h5 className='uppercase'>{translations[lang].wishlist.stock_status}</h5>
                         </div>
-                        <div></div>
+                        <div>
+                            <h5 className='uppercase'>{translations[lang].wishlist.actions}</h5>
+                        </div>
                     </div>
                     <div className={styles.wishlist_content_items}>
                         <ul className={styles.wishlist_list_items}>

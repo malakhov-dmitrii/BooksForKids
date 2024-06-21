@@ -17,8 +17,8 @@ export async function GET(req: Request) {
     const priceFromParam = url.searchParams.get('priceFrom')
     const priceToParam = url.searchParams.get('priceTo')
     const typesParam = url.searchParams.get('types')
-    // const colorsParam = url.searchParams.get('colors')
     // const collectionParam = url.searchParams.get('collection')
+    // const isDiscountParam = url.searchParams.get('isDiscount')
     const sortParam = url.searchParams.get('sort') || 'default'
     const isFullPriceRange =
       priceFromParam &&
@@ -26,9 +26,6 @@ export async function GET(req: Request) {
       checkPriceParam(+priceFromParam) &&
       checkPriceParam(+priceToParam)
     const typesArr = getCheckedArrayParam(typesParam as string)
-    // const colorsArr = getCheckedArrayParam(colorsParam as string)
-    // const isValidColors =
-    //   colorsArr && colorsArr.every((color) => allowedColors.includes(color))
     const isValidTypes =
       typesArr &&
       typesArr.every((type) => allowedTypes.includes(type.toLowerCase()))
@@ -42,18 +39,15 @@ export async function GET(req: Request) {
           [`types.${types.toLowerCase()}`]: true,
         })),
       }),
-    //   ...(isValidColors && {
-    //     $or: (colorsArr as string[]).map((color) => ({
-    //       ['characteristics.color']: color.toLowerCase(),
-    //     })),
-    //   }),
     //   ...(collectionParam && {
     //     ['characteristics.collection']: collectionParam,
     //   }),
     }
     const sort = {
       ...(sortParam.includes('cheap_first') && {
-        price: 1,
+        // (if (isDiscountParam) {
+        //   price = 1 - (+isDiscountParam/100)}) 
+          price: 1,
       }),
       ...(sortParam.includes('expensive_first') && {
         price: -1,

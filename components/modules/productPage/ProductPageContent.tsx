@@ -2,7 +2,7 @@ import Link from 'next/link';
 import ProductSlider from '@/components/elements/productSlider/ProductSlider';
 import { closeQuickViewModal } from '@/context/modals'
 import { useLang } from "@/hooks/useLang";
-import { useProductImages } from '@/hooks/useProductImages';
+// import { useProductImages } from '@/hooks/useProductImages';
 import { useCartAction } from '@/hooks/useCartAction';
 import { formatPrice, removeOverflowHiddenFromBody } from '@/lib/utils/common'
 import AddToCartBtn from '@/components/elements/addToCart/AddToCartBtn';
@@ -14,18 +14,20 @@ import { IAmCartItem } from '@/types/cart';
 import { useFavoritesAction } from '@/hooks/useFavoritesAction';
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
 import { $favorites, $favoritesFromLS } from '@/context/favorites';
+import { IAmFavoriteItem } from '@/types/favorites';
 
-const QuickViewModal = ( ) => {
+const ProductPageContent = () => {
   const { lang, translations } = useLang()
   const {
     product,
     handleAddToCart,
     allCurrentCartItemCount,
     setCount,
+    currentCartItems,
     existingItem,
     count,
   } = useCartAction()
-  const images = useProductImages(product)
+//   const images = useProductImages(product)
   const {
     handleAddProductToFavorites,
     isProductInFavorites,
@@ -33,20 +35,41 @@ const QuickViewModal = ( ) => {
   const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
   const currentFavoriteItems = currentFavoritesByAuth.filter(
     (product) => product.productId === product._id)
+    // const { watchedProducts } = useWatchedProducts(product._id)
 
-  const handleCloseModal = () => {
-    removeOverflowHiddenFromBody()
-    closeQuickViewModal()
-}
+    // useEffect(() => {
+    //   const watchedProducts = getWatchedProductFromLS()
+  
+    //   const isInWatched = watchedProducts.find((item) => item._id === product._id)
+  
+    //   if (isInWatched) {
+    //     return
+    //   }
+  
+    //   localStorage.setItem(
+    //     'watched',
+    //     JSON.stringify([
+    //       ...watchedProducts,
+    //       { category: product.category, _id: product._id },
+    //     ])
+    //   )
+    // }, [product._id, product.category])
+  
+    // const handleProductShare = () => {
+    //   addOverflowHiddenToBody()
+    //   openShareModal()
+    // }
 
 const addToCart = () => handleAddToCart(count)
 
     return (
-
-        <div className={styles.modal}>
-            <button className={styles.modal_close} onClick={handleCloseModal} />
+        <>
+        <div className={styles.product_top}>
+        <div className={styles.product_top_right}>
+            {/* <ProductImagesSlider /> */}
+        </div>
             <div className={styles.modal_left}>
-                <ProductSlider images={images} />
+                <h1>{product.name}</h1>
             </div>
             <div className={styles.modal_right}>
                 <h2 className={styles.modal_right_title}>{product.name}</h2>
@@ -104,7 +127,6 @@ const addToCart = () => handleAddToCart(count)
                             <Link
                                 href={`/catalog/${product.category}/${product._id}`}
                                 className={styles.modal_right_more_link}
-                                onClick={handleCloseModal}
                                 >
                                     <h6>{translations[lang].product.more}</h6>
                             </Link>
@@ -114,7 +136,8 @@ const addToCart = () => handleAddToCart(count)
                 </div>
             </div>
         </div>
+        </>
      );
 }
  
-export default QuickViewModal;
+export default ProductPageContent;

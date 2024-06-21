@@ -73,8 +73,8 @@
             "shop_now": "Shop Now",
             "cart_empty": "Your cart is empty",
             "cart_empty_advice": "Let's find the book for your kids!",
-            "favorite_empty": "Your list of favorites is empty",
-            "favorite_empty_advice": "Let's find the book your kids might like!",
+            "favorite_empty": "Your wishlist is empty",
+            "favorite_empty_advice": "Let's find the book your kids will like!",
             "to_home_page": "Homepage",
             "subtotal": "Subtotal",
             "view_cart": "View cart",
@@ -140,6 +140,7 @@
             "product_name": "Product name",
             "price": "Price",
             "stock_status": "Stock status",
+            "actions": "Actions",
             "in_stock": "In stock",
             "out_of_stock": "Out of stock",
             "only_1": "Only 1 left!",
@@ -177,7 +178,8 @@
         },
         "product": {
             "more": "More info about the product",
-            "more_info": "More info"
+            "more_info": "More info",
+            "less_info": "Less info"
         },
         "auth_popup": {
             "my_account": "My account",
@@ -365,7 +367,8 @@
             "wishlist": "Избранное",
             "product_name": "Название",
             "price": "Цена",
-            "stock_status": "ННаличие",
+            "stock_status": "Наличие",
+            "actions": "Действия",
             "in_stock": "В наличии",
             "out_of_stock": "Распродано",
             "only_1": "1 шт. в наличии!",
@@ -403,7 +406,8 @@
         },
         "product": {
             "more": "Больше информации о товаре",
-            "more_info": "Подробнее"
+            "more_info": "Подробнее",
+            "less_info": "Свернуть"
         },
         "auth_popup": {
           "my_account": "Мой аккаунт",

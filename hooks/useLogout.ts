@@ -11,7 +11,8 @@ export const useUserLogout = () => {
     // logout({ clientId: `${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}` })
     localStorage.removeItem('auth')
     setIsAuth(false)
-    router.push('/')
-    window.location.reload()
+    // router.push('/')
+    document.location.href = '/'
+    // window.location.reload()
   }
 }

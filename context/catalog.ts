@@ -17,7 +17,7 @@ export const updateTypesOptionByType = catalog.createEvent<string>()
 // export const setColors = catalog.createEvent<string[]>()
 export const setTypes = catalog.createEvent<string[]>()
 export const setIsDiscount = catalog.createEvent<string[]>()
-export const setFiltersPopup = catalog.createEvent<boolean>()
+// export const setFiltersPopup = catalog.createEvent<boolean>()
 
 export const $catalogCategoryOptions = catalog
   .createStore<IAmCatalogCategoryOptions>({})
@@ -36,30 +36,6 @@ export const $typesOptions = catalog
     )
   )
 
-// export const $colorsOptions = catalog
-//   .createStore<IColorOption[]>([
-//     { id: 1, colorCode: 'purpure', checked: false, colorText: '' },
-//     { id: 2, colorCode: 'yellow', checked: false, colorText: '' },
-//     { id: 3, colorCode: 'orange', checked: false, colorText: '' },
-//     { id: 4, colorCode: 'black', checked: false, colorText: '' },
-//     { id: 5, colorCode: 'white', checked: false, colorText: '' },
-//   ])
-//   .on(setColorsOptions, (_, options) => options)
-//   .on(updateColorsOptionByCode, (state, color) =>
-//     state.map((item) =>
-//       item.colorCode === color ? { ...item, checked: true } : item
-//     )
-//   )
-
 export const $types = catalog
   .createStore<string[]>([])
   .on(setTypes, (_, types) => types)
-
-// export const $colors = catalog
-//   .createStore<string[]>([])
-//   .on(setColors, (_, colors) => colors)
-
-export const $filtersPopup = catalog
-  .createStore(false)
-  .on(setFiltersPopup, (_, value) => value)
-

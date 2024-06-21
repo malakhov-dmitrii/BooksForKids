@@ -85,11 +85,6 @@ const CatalogFilters = ({
           {!isMedia610 && (
             <>
               <div className={styles.catalog_filters_top_left}>
-                {/* {isMedia910 && (
-                  <SizesSelect
-                    handleApplyFiltersWithSizes={handleApplyFiltersWithSizes}
-                  />
-                )} */}
                 <TypesSelect
                   handleApplyFiltersWithTypes={handleApplyFiltersWithTypes}
                 />
@@ -106,50 +101,9 @@ const CatalogFilters = ({
                     handleApplyFilterInStock={handleApplyFilterInStock}
                 />
               </div>
-              {/* {!isMedia715 && (
-                <SizesSelect
-                  handleApplyFiltersWithSizes={handleApplyFiltersWithSizes}
-                />
-              )} */}
             </>
           )}
-          {/* {isMedia610 && (
-            <>
-              <SortSelect handleApplyFiltersBySort={handleApplyFiltersBySort} />
-              <button
-                className={`btn-reset ${styles.catalog__filters__top__filter_btn}`}
-                onClick={handleOpenPopup}
-              />
-            </>
-          )} */}
         </div>
-        {/* <div className={styles.catalog__filters__bottom}>
-          <motion.ul
-            className={`${styles.catalog__filters__bottom__list}`}
-            {...basePropsForMotion}
-          >
-            {sizesOptions
-              .filter((item) => item.checked)
-              .map((item) => (
-                <SelectInfoItem
-                  key={item.id}
-                  id={item.id}
-                  text={item.size}
-                  handleRemoveItem={handleRemoveSizeOption}
-                />
-              ))}
-            {colorsOptions
-              .filter((item) => item.checked)
-              .map((item) => (
-                <SelectInfoItem
-                  key={item.id}
-                  id={item.id}
-                  text={item.colorText}
-                  handleRemoveItem={handleRemoveColorOption}
-                />
-              ))}
-          </motion.ul>
-        </div> */}
       </div>
     </>
   )

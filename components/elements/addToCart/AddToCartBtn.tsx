@@ -4,7 +4,7 @@ const AddToCartBtn = ( {
     text,
     className,
     handleAddToCart,
-    btnDisabled = false 
+    btnDisabled = false,
     }: IAmAddToCartBtnProps) => (
     <button 
     className={`body_large ${className}`}

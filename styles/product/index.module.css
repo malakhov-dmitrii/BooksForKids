@@ -260,12 +260,16 @@
 
 .socials {
   position: relative;
-  display: flex;
-  width: 106px;
+  width: 107px;
   transition: color .2s ease-in-out;
-  justify-content: space-between;
   margin-right: 18px;
   align-items: center;
+  display: block;
+
+}
+
+.social_media_icon:not(:last-child) {
+    margin-right: 29px;
 }
 
 .social_media_icon::before {
@@ -320,7 +324,6 @@
   background-repeat: no-repeat;
   background-position: center center;
 }
-
 
 
 

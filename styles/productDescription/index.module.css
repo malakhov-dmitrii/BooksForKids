@@ -1,9 +1,19 @@
-.more_info_description_span {
-    padding-left: 30px;
+.description_btn_container {
+    display: flex;
+    justify-content: end;
+    margin-top: 12px;
 }
 
 .more_info_description_btn {
     text-decoration: underline;
     color: var(--color-Accent);
 }
+
+.more_info_description_closed {
+    height: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 

@@ -20,6 +20,18 @@ export const useCartAction = () => {
 
 const [count, setCount] = useState(+(existingItem?.count as string) || 1)
 
+const getProductFromCart = (productId: string) => {
+  return currentCartByAuth.find((item) => item.productId === productId)
+}
+
+const getCanAddToCart = (productId: string) => {
+const product = getProductFromCart(productId)
+
+if (!product) return true
+
+return product.inStock > product.count
+}
+
 const isProductInCart = isItemInList(currentCartByAuth, product._id)
 const handleAddToCart = (countFromCounter?: number) => {
   if(existingItem) {
@@ -67,5 +79,7 @@ const handleAddToCart = (countFromCounter?: number) => {
         existingItem,
         currentCartByAuth,
         allCurrentCartItemCount,
+        getProductFromCart,
+        getCanAddToCart,
     }
 }

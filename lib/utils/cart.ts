@@ -8,6 +8,12 @@ export const addItemToCart = (
     product: IAmProduct,
     count: number,
   ) => {
+    if (+product.inStock < count) {
+      console.log('Not enough stock')
+      toast.success('Not enough stock')
+      return
+    }
+
     if (!isUserAuth()) {
       addCartItemToLS(product, count)
       return

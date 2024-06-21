@@ -20,7 +20,7 @@ const ProductsPage = ({ searchParams, pageName }: IAmProductsPage) => {
     // handleApplyFiltersWithCategory,
     handleApplyFiltersWithPrice,
     handleApplyFiltersWithTypes,
-    // handleApplyFiltersWithColors,
+    handleApplyFilterInStock,
     handleApplyFiltersBySort,
     handleApplyFilterOnSale,
   } = useProductFilters(searchParams, pageName, pageName === 'catalog')
@@ -51,6 +51,7 @@ const ProductsPage = ({ searchParams, pageName }: IAmProductsPage) => {
                         handleApplyFiltersWithTypes={handleApplyFiltersWithTypes}
                         handleApplyFiltersBySort={handleApplyFiltersBySort} 
                         handleApplyFilterOnSale={handleApplyFilterOnSale}
+                        handleApplyFilterInStock={handleApplyFilterInStock}
                         />
                 </div>
                 <div className={styles.sidebar_shop_right}>
