@@ -15,39 +15,35 @@ export const getCartItemsFx = createEffect(async ({ jwt }: { jwt: string }) => {
     const { data } = await api.get('/api/cart/all', {
       headers: { Authorization: `Bearer ${jwt}` },
     })
-
     if (data?.error) {
       const newData: IAmCartItem[] = await handleJWTError(data.error.name, {
         repeatRequestMethodName: 'getCartItemsFx',
       })
       return newData
     }
-
     return data
   } catch (error) {
     toast.error((error as Error).message)
   }
 })
-
 export const addProductToCartFx = createEffect(
   async ({ jwt, ...dataFields }: IAmAddProductToCartFx) => {
     try {
       const { data } = await api.post('/api/cart/add', dataFields, {
         headers: { Authorization: `Bearer ${jwt}` },
       })
-
       if (data?.error) {
         const newData: { newCartItem: IAmCartItem } = await handleJWTError(
           data.error.name,
           {
             repeatRequestMethodName: 'addProductToCartFx',
-            payload: { ...dataFields},
+            payload: { ...dataFields },
           }
         )
         return newData
       }
 
-      toast.success('Added to cart')
+      // toast.success('Added to cart')
       return data
     } catch (error) {
       toast.error((error as Error).message)
@@ -65,7 +61,7 @@ export const updateCartItemCountFx = createEffect(
           headers: { Authorization: `Bearer ${jwt}` },
         }
       )
-
+      
       if (data?.error) {
         const newData: { count: string; id: string } = await handleJWTError(
           data.error.name,
@@ -103,8 +99,6 @@ export const deleteCartItemFx = createEffect(
       return data
     } catch (error) {
       toast.error((error as Error).message)
-    } 
+    }
   }
 )
-
-

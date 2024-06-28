@@ -14,14 +14,24 @@ export const loadProductsByFilterFx = createEffect(
     offset,
     category,
     isCatalog,
+    types,
     additionalParam,
   }: IAmLoadProductsByFilterFx) => {
     try {
-      const { data } = await api.get(
-        `/api/goods/filter?limit=${limit}&offset=${offset}&category=${category}&${additionalParam}${
-          isCatalog ? '&catalog=true' : ''
-        }`
-      )
+      const url = `/api/goods/filter?limit=${limit}&offset=${offset}&category=${category}&${additionalParam}${isCatalog ? '&catalog=true' : ''}${types ? `&types=${types}` : ''}`
+
+      // const url = '/api/goods/filter'
+      // const params = new URLSearchParams()
+
+      // params.set('limit', limit.toString())
+      // params.set('offset', offset.toString())
+      // params.set('category', category)
+
+      // additionalParam && params.set('additionalParam', additionalParam)
+      // isCatalog && params.set('isCatalog', isCatalog.toString())
+      // types && params.set('types', types)
+
+      const { data } = await api.get(url)
 
       return data
     } catch (error) {

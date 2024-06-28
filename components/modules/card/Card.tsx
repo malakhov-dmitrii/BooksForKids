@@ -47,9 +47,7 @@ const Card = ({ item }: IAmCardProps) => {
   const addToCart = (e: any) => {
     if (getCanAddToCart(item._id)) {
       addProductsToCart(item, 1)
-    } else {
-      toast.error('Not enough stock')
-    }
+    } 
   }
 
   const addAndGoToCartActionBtn = (e: any) => {
@@ -150,29 +148,30 @@ const Card = ({ item }: IAmCardProps) => {
             </div>
           )}
           {!isMedia1100 && (
-            <div className={styles.card_actions_container}>
-              <div className={styles.card_actions}>
-                <CardActionBtn
-                  text={translations[lang].card.add_to_cart}
-                  iconClass='card_action_btn_add_to_cart'
-                  callback={addAndGoToCartActionBtn}
-                />
-                <CardActionBtn
-                  text={translations[lang].card.quick_view}
-                  iconClass='card_action_btn_quick_view'
-                  callback={handleShowQuickViewModal}
-                />
-                <CardActionBtn
-                  text={translations[lang].card.add_to_favorites}
-                  iconClass={`${
-                    isProductInFavorites
-                      ? 'card_action_btn_add_to_favorites_checked'
-                      : 'card_action_btn_add_to_favorites'
-                  }`}
-                  callback={handleAddProductToFavorites}
-                />
+            // <div className={styles.card_actions_container}>
+            // </div>
+            <div className={styles.card_actions}>
+              <CardActionBtn
+                text={translations[lang].card.add_to_cart}
+                iconClass='card_action_btn_add_to_cart'
+                callback={addAndGoToCartActionBtn}
+              />
+              <CardActionBtn
+                text={translations[lang].card.quick_view}
+                iconClass='card_action_btn_quick_view'
+                callback={handleShowQuickViewModal}
+              />
+              <CardActionBtn
+                text={translations[lang].card.add_to_favorites}
+                iconClass={`${
+                  isProductInFavorites
+                    ? 'card_action_btn_add_to_favorites_checked'
+                    : 'card_action_btn_add_to_favorites'
+                }`}
+                callback={handleAddProductToFavorites}
+              />
               </div>
-            </div>
+            // </div>
           )}
         </li>
       </div>

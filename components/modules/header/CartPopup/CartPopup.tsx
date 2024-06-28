@@ -69,7 +69,7 @@ const CartPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
                                 ))
                             ) : (
                             <li className="cart_popup_list_empty">
-                                <Image src={ghost} alt='empty cart' width={240} height={136} />
+                                <Image src={ghost} alt='empty cart' width={136} height={136} />
                             </li>
                         )}
                         </ul>

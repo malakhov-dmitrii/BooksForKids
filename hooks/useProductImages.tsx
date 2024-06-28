@@ -11,6 +11,10 @@ export const useProductImages = (product: IAmProduct) => {
         id: idGenerator(),
       }))
 
+    if (!product.images) {
+      console.log(product.images)
+    }
+
     if (product.images.length < 4) {
       const images = []
 

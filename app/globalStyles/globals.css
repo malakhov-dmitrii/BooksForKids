@@ -305,6 +305,7 @@ a {
 .white_btn {
   border: 1px solid var(--color-Black);
   background-color: var(--color-White);
+  transition: background-color .2s ease-in-out;
   color: var(--color-Black);
   display: flex;
   justify-content: center;

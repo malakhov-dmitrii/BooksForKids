@@ -13,7 +13,7 @@ const ProductDescription = () => {
 
     return (
     <div className={styles.more_info_description_container} onClick={handleClick}>
-        <div className={`${styles.more_info_description} ${open ? styles.more_info_description_open : styles.more_info_description_closed}`}>
+        <div className={`dark_gray ${styles.more_info_description} ${open ? styles.more_info_description_open : styles.more_info_description_closed}`}>
             {product.description}
         </div>
         <div className={styles.description_btn_container}>
@@ -23,6 +23,7 @@ const ProductDescription = () => {
                     :
                     <span>{translations[lang].product.less_info}</span>
                 }
+                <span className={styles.description_btn_container_arrow}></span>
             </button>
         </div>
     </div>

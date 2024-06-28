@@ -1,5 +1,5 @@
 import { useUnit } from 'effector-react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
   setTypesOptions,
   setTypes,
@@ -8,35 +8,61 @@ import {
 import { useLang } from './useLang'
 import { getCheckedArrayParam, getSearchParamsUrl } from '@/lib/utils/common'
 import { allowedTypes } from '@/constants/product'
-import { $typesOptions, $types } from '@/context/catalog'
+// import { $typesOptions, $types } from '@/context/catalog'
 
 export const useTypeFilter = (
   handleApplyFiltersWithTypes: (arg0: string[]) => void
 ) => {
-  const { lang } = useLang()
-  const typesOptions = useUnit($typesOptions)
-  const types = useUnit($types)
+  const { lang, translations } = useLang()
+  const [types, setTypes] = useState<string[]>([])
+  const [typesOptions, setTypesOptions] = useState([
+    {
+      value: 'learnLetters',
+      title: translations[lang].catalog.learnLetters,
+      checked: false,
+    },
+    {
+      value: 'readMyself',
+      title: translations[lang].catalog.readMyself,
+      checked: false,
+    },
+    {
+      value: 'bedTimeStories',
+      title: translations[lang].catalog.bedTimeStories,
+      checked: false,
+    },
+  ])
+  // const types = useUnit($types)
+
+  const updateTypesOptionByType = (type: string) => {
+    setTypesOptions(
+      typesOptions.map((item) => ({
+        ...item,
+        checked: item.value === type,
+      }))
+    )
+  }
 
   const applyTypes = (types: string[]) => {
     handleApplyFiltersWithTypes(types)
     setTypes(types)
   }
 
-  const handleSelectType = (id: number) => {
+  const handleSelectType = (value: string) => {
     const updatedOptions = typesOptions.map((item) =>
-      item.id === id ? { ...item, checked: !item.checked } : item
+      item.value === value ? { ...item, checked: !item.checked } : item
     )
 
     setTypesOptions(updatedOptions)
 
-    const currentOption = updatedOptions.find((item) => item.id === id)
+    const currentOption = updatedOptions.find((item) => item.value === value)
 
     if (currentOption && currentOption.checked) {
-      applyTypes([...types, currentOption.type])
+      applyTypes([...types, currentOption.value])
       return
     }
 
-    applyTypes(types.filter((type) => type !== currentOption?.type))
+    applyTypes(types.filter((type) => type !== currentOption?.value))
   }
 
   useEffect(() => {

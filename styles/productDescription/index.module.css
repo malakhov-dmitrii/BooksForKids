@@ -1,12 +1,25 @@
 .description_btn_container {
     display: flex;
-    justify-content: end;
-    margin-top: 12px;
+    justify-content: start;
+    margin-top: 6px;
 }
 
 .more_info_description_btn {
-    text-decoration: underline;
     color: var(--color-Accent);
+    position: relative;
+    display: flex;
+    width: 80px;
+}
+
+.description_btn_container_arrow {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 25px;
+    height: 20px;
+    background-image: url(../../public/img/icons/arrow_small.png);
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .more_info_description_closed {
@@ -15,5 +28,3 @@
     white-space: nowrap;
     overflow: hidden;
 }
-
-

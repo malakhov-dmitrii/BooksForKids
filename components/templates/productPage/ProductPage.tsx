@@ -26,7 +26,7 @@ const ProductPage = ({ productId, category }: IAmProductPageProps) => {
   }
 
   return (
-    <div className={styles.product}>
+    <div className={`${styles.product}`}>
         <ProductPageContent />
     </div>
   )

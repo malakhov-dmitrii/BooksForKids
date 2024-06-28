@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { IAmProductImagesItemProps } from '@/types/product'
-import styles from '@/styles/product/index.module.scss'
+import styles from '@/styles/product/index.module.css'
 
 const ProductImagesItem = ({ image, imgSize }: IAmProductImagesItemProps) => {
 
@@ -13,7 +13,7 @@ const ProductImagesItem = ({ image, imgSize }: IAmProductImagesItemProps) => {
         alt={image.alt}
         width={imgSize}
         height={imgSize}
-        className='transition-opacity opacity-0 duration'
+        // className='transition-opacity opacity-0 duration'
         // onLoad={handleLoadingImageComplete}
       />
     </li>

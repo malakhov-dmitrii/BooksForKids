@@ -59,10 +59,14 @@
             "on_sale": "On sale",
             "sort": "Sort By",
             "done": "Filter",
+            "clear": "Clear",
             "filter": "Filter",
             "price": "Price",
             "from": "From",
-            "to": "To"
+            "to": "To",
+            "learnLetters": "Learn letters",
+            "readMyself": "Read myself",
+            "bedTimeStories": "Bed time stories"
         },
         "other": {
             "shopping_cart": "Shopping bag",
@@ -178,8 +182,23 @@
         },
         "product": {
             "more": "More info about the product",
-            "more_info": "More info",
-            "less_info": "Less info"
+            "more_info": "View more",
+            "less_info": "View less",
+            "description": "Description",
+            "additional_info": "Additional information",
+            "reviews": "Reviews",
+            "similar_items": "Similar Items",
+            "sku": "SKU",
+            "type": "Type",
+            "year": "Year of publication",
+            "authors": "Authors",
+            "publishing": "Publishing",
+            "age": "Age restrictions",
+            "size": "Size, mm.",
+            "number_of_pages": "Number of pages",
+            "weight": "Weight, g.",
+            "cover": "Cover",
+            "features": "Features"
         },
         "auth_popup": {
             "my_account": "My account",
@@ -286,10 +305,14 @@
             "on_sale": "Со скидкой",
             "sort": "Сортировать",
             "done": "Готово",
+            "clear": "Сбросить",
             "filter": "Фильтры",
             "price": "Цена",
             "from": "От",
-            "to": "До"
+            "to": "До",
+            "learnLetters": "Учим буквы",
+            "readMyself": "Читаем сами",
+            "bedTimeStories": "Сказки на ночь"
         },
         "other": {
             "shopping_cart": "Корзина",
@@ -407,7 +430,23 @@
         "product": {
             "more": "Больше информации о товаре",
             "more_info": "Подробнее",
-            "less_info": "Свернуть"
+            "less_info": "Свернуть",
+            "description": "Описание",
+            "additional_info": "Характеристики",
+            "reviews": "Отзывы",
+            "similar_items": "Похожие товары",
+            "sku": "Артикул",
+            "type": "Тип",
+            "year": "Год выпуска",
+            "authors": "Автор",
+            "publishing": "Издательство",
+            "age": "Возрастные ограничения",
+            "size": "Размеры, мм",
+            "number_of_pages": "Количество страниц",
+            "weight": "Вес товара, г.",
+            "cover": "Тип обложки",
+            "features": "Особенности"
+
         },
         "auth_popup": {
           "my_account": "Мой аккаунт",

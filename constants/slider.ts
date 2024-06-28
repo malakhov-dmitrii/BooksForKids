@@ -1,4 +1,4 @@
-export const baseSliderSettings = {
+export const baseSliderMobileSettings = {
   dots: true,
   infinite: true,
   slidesToScroll: 1,

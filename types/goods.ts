@@ -1,10 +1,10 @@
-import { IAmCartItem } from "./cart"
-import { IAmProduct } from "./common"
+import { IAmCartItem } from './cart'
+import { IAmProduct } from './common'
 
 export interface IAmLoadOneProductFx {
-    productId: string
-    category: string
-  }
+  productId: string
+  category: string
+}
 
 export interface IAmProductCounterProps {
   className: string
@@ -29,6 +29,7 @@ export interface IAmLoadProductsByFilterFx {
   category: string
   additionalParam?: string
   isCatalog?: boolean
+  types?: string
 }
 
 export interface IAmProducts {

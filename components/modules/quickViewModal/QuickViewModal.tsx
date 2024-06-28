@@ -70,7 +70,7 @@ const addToCart = () => handleAddToCart(count)
                                 updateCountAsync={false}
                                 />
                             <AddToCartBtn text={translations[lang].other.add_to_cart}
-                            className={styles.product_to_cart_btn}
+                            className={`white_btn ${styles.product_to_cart_btn}`}
                             handleAddToCart={addToCart}
                             btnDisabled={
                               allCurrentCartItemCount === +product.inStock

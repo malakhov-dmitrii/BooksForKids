@@ -21,25 +21,7 @@ const CatalogFiltersFullWidth = ({
   const typesOptions = useUnit($typesOptions)
   const isMedia910 = useMediaQuery(910)
 
-//   const handleRemoveSizeOption = (id: number) => {
-//     const updatedOptions = sizesOptions.map((item) =>
-//       item.id === id ? { ...item, checked: false } : item
-//     )
-
     // setTypesOptions(updatedOptions)
-
-//     const updatedSizes = updatedOptions
-//       .filter((item) => item.checked)
-//       .map((item) => item.size)
-
-//     setSizes(updatedSizes)
-//     handleApplyFiltersWithSizes(updatedSizes)
-//   }
-
-//   const handleRemoveColorOption = (id: number) => {
-//     const updatedOptions = colorsOptions.map((item) =>
-//       item.id === id ? { ...item, checked: false } : item
-//     )
 
   return (
     <>

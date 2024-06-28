@@ -60,10 +60,10 @@ export interface IAmTypeOption {
 }
 
 export interface IAmCheckboxSelectItemProps {
-  callback: (arg0: number) => void
+  callback: (arg0: string) => void
   item: {
-    id: number
-    type?: string
+    value: string
+    title?: string
     checked: boolean
   }
   mobileClassName?: string

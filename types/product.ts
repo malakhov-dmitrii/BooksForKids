@@ -11,3 +11,15 @@ export interface IAmProductImagesItemProps {
     }
     imgSize: number
   }
+
+export interface IAmProductInfoAccordionProps {
+  children: React.ReactNode
+  title: string
+}
+
+export interface IAmAccordionProps {
+  children: React.ReactNode
+  title: string | JSX.Element
+  titleClass: string
+  rotateIconClass?: string
+}

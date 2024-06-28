@@ -9,7 +9,7 @@ import {
 } from '@/lib/utils/common'
 import { SearchParams } from '@/types/catalog'
 import styles from '@/styles/catalog/index.module.css'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 export const useProductFilters = (
   searchParams: SearchParams,
@@ -36,6 +36,7 @@ export const useProductFilters = (
         additionalParam: urlParams.toString(),
         isCatalog,
         category,
+        types: urlParams.get('types') ?? '',
       })
 
       updateSearchParam('offset', 0, pathname)

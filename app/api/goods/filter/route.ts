@@ -27,27 +27,31 @@ export async function GET(req: Request) {
       checkPriceParam(+priceToParam)
     const typesArr = getCheckedArrayParam(typesParam as string)
     const isValidTypes =
-      typesArr &&
-      typesArr.every((type) => allowedTypes.includes(type.toLowerCase()))
+      typesArr.length > 0 &&
+      typesArr.every((type) => allowedTypes.includes(type))
+
     const filter = {
       ...(typeParam && { type: typeParam }),
-      ...(isFullPriceRange && {
-        price: { $gt: +priceFromParam, $lt: +priceToParam },
+      // ...(isFullPriceRange && {
+      //   price: { $gt: +priceFromParam, $lt: +priceToParam },
+      // }),
+
+      ...(typesArr.length > 0 && {
+        type: { $in: typesArr },
       }),
-      ...(isValidTypes && {
-        $and: (typesArr as string[]).map((types) => ({
-          [`types.${types.toLowerCase()}`]: true,
-        })),
-      }),
-    //   ...(collectionParam && {
-    //     ['characteristics.collection']: collectionParam,
-    //   }),
+
+      //   ...(collectionParam && {
+      //     ['characteristics.collection']: collectionParam,
+      //   }),
     }
+
+    console.log('filter', filter, { isValidTypes, typesArr })
+
     const sort = {
       ...(sortParam.includes('cheap_first') && {
         // (if (isDiscountParam) {
-        //   price = 1 - (+isDiscountParam/100)}) 
-          price: 1,
+        //   price = 1 - (+isDiscountParam/100)})
+        price: 1,
       }),
       ...(sortParam.includes('expensive_first') && {
         price: -1,
@@ -65,7 +69,11 @@ export async function GET(req: Request) {
 
     if (isCatalogParam) {
       const getFilteredCollection = async (collection: string) => {
-        const goods = await db.collection(collection).find(filter).sort(sort as Sort).toArray()
+        const goods = await db
+          .collection(collection)
+          .find(filter)
+          .sort(sort as Sort)
+          .toArray()
 
         return goods
       }
@@ -74,37 +82,44 @@ export async function GET(req: Request) {
         getFilteredCollection('russianbooks'),
       ])
 
-      if (
-        russianbooks.status !== 'fulfilled' 
-      ) {
+      if (russianbooks.status !== 'fulfilled') {
         return NextResponse.json({
           count: 0,
           items: [],
         })
       }
 
-      const allGoods = [
-        ...russianbooks.value,
-      ]
-    // .sort((a, b) => {
-    //     if (sortParam.includes('cheap_first')) {
-    //       return +a.price - +b.price
-    //     }
+      const allGoods = [...russianbooks.value].filter((i) => {
+        // if at least one is set, continue
+        if (priceFromParam || priceToParam) {
+          const realPrice = i.isDiscount ? +i.price - +i.isDiscount : +i.price
+          return (
+            +realPrice >= +(priceFromParam ?? 0) &&
+            +realPrice <= +(priceToParam ?? Infinity)
+          )
+        }
 
-    //     if (sortParam.includes('expensive_first')) {
-    //       return +b.price - +a.price
-    //     }
+        return true
+      })
+      // .sort((a, b) => {
+      //     if (sortParam.includes('cheap_first')) {
+      //       return +a.price - +b.price
+      //     }
 
-    //     if (sortParam.includes('new')) {
-    //       return Number(b.isNew) - Number(a.isNew)
-    //     }
+      //     if (sortParam.includes('expensive_first')) {
+      //       return +b.price - +a.price
+      //     }
 
-    //     if (sortParam.includes('popular')) {
-    //       return +b.popularity - +a.popularity
-    //     }
+      //     if (sortParam.includes('new')) {
+      //       return Number(b.isNew) - Number(a.isNew)
+      //     }
 
-    //     return 0
-    //   })
+      //     if (sortParam.includes('popular')) {
+      //       return +b.popularity - +a.popularity
+      //     }
+
+      //     return 0
+      //   })
 
       return NextResponse.json({
         count: allGoods.length,

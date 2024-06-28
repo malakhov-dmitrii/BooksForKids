@@ -160,7 +160,7 @@
     
    .btn_get_email::before {
     -webkit-mask: url(../../public/img/icons/arrow_email.svg) no-repeat 50% 50%;
-    mask: url(../../public/img/icons/arrow_email.svg) no-repeat 100% 100%;
+    mask: url(../../public/img/icons/arrow_email.svg) no-repeat 50% 50%;
   }
 
   .fB::before {

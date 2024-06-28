@@ -2,17 +2,11 @@ import { useUnit } from 'effector-react'
 // import CategorySelect from './CategorySelect'
 import PriceSelect from './PriceSelect'
 import { IAmCatalogFiltersProps } from '@/types/catalog'
-// import SizesSelect from './SizesSelect'
-// import ColorsSelect from './ColorsSelect'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import {
-//   setColors,
-//   setColorsOptions,
-//   setFiltersPopup,
   setTypes,
 } from '@/context/catalog'
 // import SelectInfoItem from './SelectInfoItem'
-// import FiltersPopup from './FiltersPopup/FiltersPopup'
 import { addOverflowHiddenToBody } from '@/lib/utils/common'
 import { $typesOptions } from '@/context/catalog'
 import styles from '@/styles/catalog/index.module.css'
@@ -26,60 +20,16 @@ const CatalogFilters = ({
      handleApplyFiltersWithTypes,
      handleApplyFilterOnSale,
      handleApplyFilterInStock,
-//   handleApplyFiltersWithColors,
   handleApplyFiltersBySort,
 }: IAmCatalogFiltersProps) => {
   const typesOptions = useUnit($typesOptions)
-//   const colorsOptions = useUnit($colorsOptions)
   const isMedia715 = useMediaQuery(715)
   const isMedia610 = useMediaQuery(610)
 
-//   const handleRemoveSizeOption = (id: number) => {
-//     const updatedOptions = sizesOptions.map((item) =>
-//       item.id === id ? { ...item, checked: false } : item
-//     )
-
     // setTypesOptions(updatedOptions)
-
-//     const updatedSizes = updatedOptions
-//       .filter((item) => item.checked)
-//       .map((item) => item.size)
-
-//     setSizes(updatedSizes)
-//     handleApplyFiltersWithSizes(updatedSizes)
-//   }
-
-//   const handleRemoveColorOption = (id: number) => {
-//     const updatedOptions = colorsOptions.map((item) =>
-//       item.id === id ? { ...item, checked: false } : item
-//     )
-
-//     setColorsOptions(updatedOptions)
-
-//     const updatedColorsByText = updatedOptions
-//       .filter((item) => item.checked)
-//       .map(({ colorText }) => colorText)
-
-//     const updatedColorsByCode = updatedOptions
-//       .filter((item) => item.checked)
-//       .map(({ colorCode }) => colorCode)
-
-//     setColors(updatedColorsByText)
-//     handleApplyFiltersWithColors(updatedColorsByCode)
-//   }
-
-//   const handleOpenPopup = () => {
-//     addOverflowHiddenToBody()
-//     setFiltersPopup(true)
-//   }
 
   return (
     <>
-      {/* <FiltersPopup
-        handleApplyFiltersWithPrice={handleApplyFiltersWithPrice}
-        handleApplyFiltersWithSizes={handleApplyFiltersWithSizes}
-        handleApplyFiltersWithColors={handleApplyFiltersWithColors}
-      /> */}
       <div className={styles.catalog_filters}>
         <div className={styles.catalog_filters_top}>
           {!isMedia610 && (

@@ -30,10 +30,6 @@ const PriceSelect = ({
     handleChangePriceTo,
   } = usePriceFilter()
 
-  // const [minPrice setMinPrice] = useState('');
-  // const [maxPrice setMaxPrice] = useState('');
-  // const goods = useUnit($homePageGoods)
-
   const handleSelectPrice = () => {
     const validPriceFrom = getCheckedPriceFrom(+priceFrom) as string
     const validPriceTo = getCheckedPriceTo(+priceTo) as string
@@ -47,15 +43,13 @@ const PriceSelect = ({
     handleApplyFiltersWithPrice(validPriceFrom, validPriceTo)
   }
 
-//  useEffect(( => {
-//   if (goods) {
-//     const newGoods = goods.map(({price}) => price)
-//     setMinPrice(Math.min(...goods.map(({price}) => price)
-//     ));
-//     setMaxPrice(Math.max(...goods.map(({price}) => price)
-//     ));
-//   }
-//  }), [goods])
+  const handleClearPrice = () => {
+    setPriceFrom('')
+    setPriceTo('')
+    setPriceInfo('')
+    setOpen(false)
+    handleApplyFiltersWithPrice('', '')
+  }
 
   return (
     <div className={`body_medium ${styles.catalog_filters_select}`} ref={ref}>
@@ -72,38 +66,44 @@ const PriceSelect = ({
             <li
               className={`${styles.catalog_filters_list_item} ${styles.catalog_filters_list_item_price}`}
             >
-              <div className={styles.catalog_filters_list_item_inputs}>
-                <label>
-                  <span>{translations[lang].catalog.from}</span>
-                  <input
-                    type='text'
-                    placeholder={formatPrice(10)}
-                    value={priceFrom}
-                    onChange={handleChangePriceFrom}
-                    className={styles.catalog_filters_list_item_price_input}
-                  />
-                </label>
-                <label>
-                  <span>{translations[lang].catalog.to}</span>
-                  <input
-                    type='text'
-                    placeholder={formatPrice(200)}
-                    value={priceTo}
-                    onChange={handleChangePriceTo}
-                    className={styles.catalog_filters_list_item_price_input}
-                  />
-                </label>
-              </div>
-              <button
-                className={`white_btn ${styles.catalog_filters_list_item_done}`}
-                disabled={!priceFrom || !priceTo}
-                onClick={handleSelectPrice}
-              >
-                {translations[lang].catalog.done}
-              </button>
-            </li>
-          </ul>
-        )}
+ <div className={styles.catalog_filters_list_item_inputs}>
+              <label>
+                <span>{translations[lang].catalog.from}</span>
+                <input
+                  type='text'
+                  placeholder={formatPrice(10)}
+                  value={priceFrom}
+                  onChange={handleChangePriceFrom}
+                  className={styles.catalog_filters_list_item_price_input}
+                />
+              </label>
+              <label>
+                <span>{translations[lang].catalog.to}</span>
+                <input
+                  type='text'
+                  placeholder={formatPrice(200)}
+                  value={priceTo}
+                  onChange={handleChangePriceTo}
+                  className={styles.catalog_filters_list_item_price_input}
+                />
+              </label>
+            </div>
+            <button
+              className={`white_btn ${styles.catalog_filters_list_item_done}`}
+              disabled={!priceFrom && !priceTo}
+              onClick={handleSelectPrice}
+            >
+              {translations[lang].catalog.done}
+            </button>
+            <button
+              className={`white_btn ${styles.catalog_filters_list_item_done}`}
+              onClick={handleClearPrice}
+            >
+              {translations[lang].catalog.clear}
+            </button>
+          </li>
+        </ul>
+      )}
     </div>
   )
 }

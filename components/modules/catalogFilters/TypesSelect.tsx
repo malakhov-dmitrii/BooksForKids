@@ -12,7 +12,7 @@ const TypesSelect = ({
 }) => {
   const { lang, translations } = useLang()
   const { open, ref, toggle } = useClickOutside()
-  const { handleSelectType, types, typesOptions } = useTypeFilter(
+  const { handleSelectType, typesOptions } = useTypeFilter(
     handleApplyFiltersWithTypes
   )
 
@@ -25,15 +25,16 @@ const TypesSelect = ({
         open={open}
         toggle={toggle}
         defaultText={translations[lang].catalog.shop_by_type}
-        dynamicText={types.join(', ')}
+        dynamicText={typesOptions
+          .filter((item) => item.checked)
+          .map((item) => item.title)
+          .join(', ')}
       />
       {open && (
-        <ul
-          className={`${styles.catalog_filters_list}`}
-        >
+        <ul className={`${styles.catalog_filters_list}`}>
           {typesOptions.map((item) => (
             <CheckboxSelectItem
-              key={item.id}
+              key={item.value}
               item={item}
               callback={handleSelectType}
             />

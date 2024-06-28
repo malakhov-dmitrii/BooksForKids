@@ -6,7 +6,7 @@ const CheckboxSelectItem = ({
   callback,
   mobileClassName,
 }: IAmCheckboxSelectItemProps) => {
-  const handleChangeOption = () => callback(item.id)
+  const handleChangeOption = () => callback(item.value)
 
   return (
     <li
@@ -14,22 +14,19 @@ const CheckboxSelectItem = ({
         item.checked ? styles.option_active : ''
       } ${mobileClassName}`}
     >
-      <label
-        className={`${styles.catalog_filters_list_item_btn}`}
-      >
+      <label className={`${styles.catalog_filters_list_item_btn}`}>
         <input
           type='checkbox'
           checked={item.checked}
           onChange={handleChangeOption}
           className={styles.catalog_filters_list_item_btn_input}
         />
-        <span
-          className={styles.catalog_filters_list_item_btn_checkbox_text}
-        >
-          {item?.type /*|| item?.author*/}
+        <span className={styles.catalog_filters_list_item_btn_checkbox_text}>
+          {item?.title}
         </span>
       </label>
     </li>
+
   )
 }
 
