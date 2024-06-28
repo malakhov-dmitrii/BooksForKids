@@ -9,7 +9,6 @@ import { useLang } from '@/hooks/useLang'
 import ProductPageContent from '@/components/modules/productPage/ProductPageContent'
 import styles from '@/styles/product/index.module.css'
 
-
 const ProductPage = ({ productId, category }: IAmProductPageProps) => {
   const product = useUnit($currentProduct)
   const { lang, translations } = useLang()
@@ -27,10 +26,9 @@ const ProductPage = ({ productId, category }: IAmProductPageProps) => {
 
   return (
     <div className={`${styles.product}`}>
-        <ProductPageContent />
+      <ProductPageContent />
     </div>
   )
 }
 
 export default ProductPage
-

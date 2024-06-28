@@ -1,12 +1,16 @@
 'use client'
-import { IAmProduct } from '@/types/common';
-import { IAmLoadOneProductFx, IAmLoadProductsByFilterFx, IAmProducts } from '@/types/goods';
-import { Effect, createDomain, createEffect, sample } from 'effector';
-import { Gate, createGate } from 'effector-react';
+import { IAmProduct } from '@/types/common'
+import {
+  IAmLoadOneProductFx,
+  IAmLoadProductsByFilterFx,
+  IAmProducts,
+} from '@/types/goods'
+import { Effect, createDomain, createEffect, sample } from 'effector'
+import { Gate, createGate } from 'effector-react'
 import api from '../api/apiInstance'
-import toast from 'react-hot-toast';
-import { getProductsFirstPageFx } from '@/api/homePage';
-import { loadOneProductFx } from '@/api/goods';
+import toast from 'react-hot-toast'
+import { getProductsFirstPageFx } from '@/api/homePage'
+import { loadOneProductFx } from '@/api/goods'
 
 export const loadProductsByFilterFx = createEffect(
   async ({
@@ -46,7 +50,8 @@ export const HomePageGate = createGate()
 
 export const setCurrentProduct = goods.createEvent<IAmProduct>()
 export const loadOneProduct = goods.createEvent<IAmLoadOneProductFx>()
-export const loadProductsByFilter = goods.createEvent<IAmLoadProductsByFilterFx>()
+export const loadProductsByFilter =
+  goods.createEvent<IAmLoadProductsByFilterFx>()
 // export const loadWatchedProducts = goods.createEvent<IAmLoadWatchedProductsFx>()
 
 const goodsStoreInstance = (effect: Effect<void, [], Error>) =>
@@ -66,37 +71,36 @@ const goodsSampleInstance = (
     target: effect,
   })
 
-  export const $homePageGoods = goodsStoreInstance(getProductsFirstPageFx)
+export const $homePageGoods = goodsStoreInstance(getProductsFirstPageFx)
 
-  goodsSampleInstance(getProductsFirstPageFx, HomePageGate)
+goodsSampleInstance(getProductsFirstPageFx, HomePageGate)
 
-  export const $currentProduct = goods
+export const $currentProduct = goods
   .createStore<IAmProduct>({} as IAmProduct)
-  .on(setCurrentProduct, (_,product) => product)
-  .on(loadOneProductFx.done, (_, {result}) => result.productItem)
+  .on(setCurrentProduct, (_, product) => product)
+  .on(loadOneProductFx.done, (_, { result }) => result.productItem)
 
-  export const $products = goods
+export const $products = goods
   .createStore<IAmProducts>({} as IAmProducts)
   .on(loadProductsByFilterFx.done, (_, { result }) => result)
 
-  sample({
-    clock: loadOneProduct,
-    source: $currentProduct,
-    fn: (_, data) => data,
-    target: loadOneProductFx,
-  })
-  
-  sample({
-    clock: loadProductsByFilter,
-    source: $products,
-    fn: (_, data) => data,
-    target: loadProductsByFilterFx,
-  })
-  
-  // sample({
-  //   clock: loadWatchedProducts,
-  //   source: $watchedProducts,
-  //   fn: (_, data) => data,
-  //   target: loadWatchedProductsFx,
-  // })
-  
+sample({
+  clock: loadOneProduct,
+  source: $currentProduct,
+  fn: (_, data) => data,
+  target: loadOneProductFx,
+})
+
+sample({
+  clock: loadProductsByFilter,
+  source: $products,
+  fn: (_, data) => data,
+  target: loadProductsByFilterFx,
+})
+
+// sample({
+//   clock: loadWatchedProducts,
+//   source: $watchedProducts,
+//   fn: (_, data) => data,
+//   target: loadWatchedProductsFx,
+// })

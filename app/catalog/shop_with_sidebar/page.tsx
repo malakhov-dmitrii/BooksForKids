@@ -6,5 +6,10 @@ export default function ShopWithSidebar({
 }: {
   searchParams?: SearchParams
 }) {
-  return <ProductsPageShopWithSidebar searchParams={searchParams || {}} pageName='catalog/shop_with_sidebar' />
+  return (
+    <ProductsPageShopWithSidebar
+      searchParams={searchParams || {}}
+      pageName='catalog/shop_with_sidebar'
+    />
+  )
 }

@@ -1,7 +1,10 @@
-
 import { useUnit } from 'effector-react'
 import { useEffect, useState } from 'react'
-import { $products, loadProductsByFilter, loadProductsByFilterFx } from '@/context/goods'
+import {
+  $products,
+  loadProductsByFilter,
+  loadProductsByFilterFx,
+} from '@/context/goods'
 import {
   checkOffsetParam,
   getSearchParamsUrl,
@@ -93,6 +96,8 @@ export const useProductFilters = (
   }
 
   const handleApplyFilterOnSale = (isDiscount: string[]) => {
+    console.log('isDiscount', isDiscount)
+
     updateSearchParam(
       'isDiscount',
       encodeURIComponent(JSON.stringify(isDiscount)),
@@ -101,15 +106,14 @@ export const useProductFilters = (
     handlePageChange({ selected: 0 })
   }
 
-  const  handleApplyFilterInStock = (isDiscount: string[]) => {
+  const handleApplyFilterInStock = (isInStock: string[]) => {
     updateSearchParam(
-      'isDiscount',
-      encodeURIComponent(JSON.stringify(isDiscount)),
+      'isInStock',
+      encodeURIComponent(JSON.stringify(isInStock)),
       pathname
     )
     handlePageChange({ selected: 0 })
   }
- 
 
   // const handleApplyFiltersWithColors = (sizes: string[]) => {
   //   updateSearchParam(

@@ -6,21 +6,22 @@ import CheckFilterBtn from './CheckFilterBtn'
 const OnSaleFilter = ({
   handleApplyFilterOnSale,
 }: {
-    handleApplyFilterOnSale: (types: string[]) => void
+  handleApplyFilterOnSale: (types: string[]) => void
 }) => {
   const { lang, translations } = useLang()
-//   const { handleSelectType, types, typesOptions } = useTypeFilter(
-//     handleApplyFiltersWithTypes
-//   )
+  //   const { handleSelectType, types, typesOptions } = useTypeFilter(
+  //     handleApplyFiltersWithTypes
+  //   )
 
   return (
     <div
       className={`body_medium ${styles.catalog_filters_check} ${styles.catalog_filters_check_on_sale}`}
     >
-        <CheckFilterBtn
+      <CheckFilterBtn
         className={``}
-        callback={()=>{}}
-        btnText={translations[lang].catalog.on_sale} />
+        callback={handleApplyFilterOnSale}
+        btnText={translations[lang].catalog.on_sale}
+      />
       {/* <SelectBtn
         open={open}
         toggle={toggle}

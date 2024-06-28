@@ -3,6 +3,8 @@ import { idGenerator } from '@/lib/utils/common'
 import { IAmProduct } from '@/types/common'
 
 export const useProductImages = (product: IAmProduct) => {
+  console.log(product)
+
   const images = useMemo(() => {
     const makeImagesObjects = (imagesArray: string[]) =>
       imagesArray.map((item) => ({
@@ -11,11 +13,9 @@ export const useProductImages = (product: IAmProduct) => {
         id: idGenerator(),
       }))
 
-    if (!product.images) {
-      console.log(product.images)
-    }
+    if (!product.images) return []
 
-    if (product.images.length < 4) {
+    if (product.images?.length < 4) {
       const images = []
 
       for (let i = 0; i < 4; i++) {

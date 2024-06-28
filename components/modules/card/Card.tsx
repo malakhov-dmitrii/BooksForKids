@@ -47,7 +47,7 @@ const Card = ({ item }: IAmCardProps) => {
   const addToCart = (e: any) => {
     if (getCanAddToCart(item._id)) {
       addProductsToCart(item, 1)
-    } 
+    }
   }
 
   const addAndGoToCartActionBtn = (e: any) => {
@@ -59,9 +59,7 @@ const Card = ({ item }: IAmCardProps) => {
   return (
     <>
       <div className={styles.list_item_container}>
-        <li
-          className={styles.list_item}
-        >
+        <li className={styles.list_item}>
           <div className={styles.label_container}>
             <CardLabel
               inStock={item.inStock}
@@ -74,9 +72,7 @@ const Card = ({ item }: IAmCardProps) => {
             href={`/catalog/${item.category}/${item._id}`}
             className={styles.card_top_link}
           >
-            <div
-              className={styles.card_top_container}
-            >
+            <div className={styles.card_top_container}>
               <Image
                 src={item.images[0]}
                 alt={item.name}
@@ -102,9 +98,8 @@ const Card = ({ item }: IAmCardProps) => {
               </div>
             </div>
           </Link>
-          {!isMedia1100 ?  (
-            isProductInCart ?
-            (
+          {!isMedia1100 ? (
+            isProductInCart ? (
               <div className={styles.card_to_cart_btn_container_added}>
                 <AddToCartBtn
                   text={
@@ -117,9 +112,7 @@ const Card = ({ item }: IAmCardProps) => {
                   btnDisabled={!getCanAddToCart(item._id)}
                 />
               </div>
-            )
-            :
-            (
+            ) : (
               <div className={styles.card_to_cart_btn_container}>
                 <AddToCartBtn
                   text={
@@ -161,6 +154,7 @@ const Card = ({ item }: IAmCardProps) => {
                 iconClass='card_action_btn_quick_view'
                 callback={handleShowQuickViewModal}
               />
+
               <CardActionBtn
                 text={translations[lang].card.add_to_favorites}
                 iconClass={`${
@@ -170,7 +164,7 @@ const Card = ({ item }: IAmCardProps) => {
                 }`}
                 callback={handleAddProductToFavorites}
               />
-              </div>
+            </div>
             // </div>
           )}
         </li>
