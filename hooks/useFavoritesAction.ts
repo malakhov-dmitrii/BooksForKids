@@ -1,10 +1,7 @@
 import toast from 'react-hot-toast'
 import { IAmProduct } from '@/types/common'
 import { useGoodsByAuth } from './useGoodsByAuth'
-import {
-  addProductToFavorites,
-  setIsAddToFavorites,
-} from '@/context/favorites'
+import { addProductToFavorites, setIsAddToFavorites } from '@/context/favorites'
 import { isUserAuth } from '@/lib/utils/common'
 import { addFavoriteItemToLS } from '@/lib/utils/favorites'
 import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
@@ -15,7 +12,7 @@ export const useFavoritesAction = (product: IAmProduct) => {
     (item) => item.productId === product._id
   )
 
-  const handleAddProductToFavorites = (e:any) => {
+  const handleAddProductToFavorites = (e: any) => {
     e.preventDefault()
     if (existingItem) {
       toast.success('Added to wishlist')
@@ -30,11 +27,14 @@ export const useFavoritesAction = (product: IAmProduct) => {
     const auth = JSON.parse(localStorage.getItem('auth') as string)
     const clientId = addFavoriteItemToLS(product, false)
 
+    console.log(product)
+
     addProductToFavorites({
       jwt: auth.accessToken,
       productId: product._id,
       category: product.category,
       clientId,
+      inStock: product.inStock,
     })
     return
 

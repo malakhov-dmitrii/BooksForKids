@@ -17,5 +17,25 @@ export const useViewedItems = (excludedProductId?: string) => {
     })
   }, [excludedProductId])
 
-  return { viewedItems }
+  const markAsViewed = ({
+    category,
+    _id,
+  }: {
+    category: string
+    _id: string
+  }) => {
+    const viewedItems = getViewedItemsFromLS()
+    const isInWatched = viewedItems.find((item) => item._id === _id)
+
+    if (isInWatched) {
+      return
+    }
+
+    localStorage.setItem(
+      'viewed',
+      JSON.stringify([...viewedItems, { category, _id }])
+    )
+  }
+
+  return { viewedItems, markAsViewed }
 }

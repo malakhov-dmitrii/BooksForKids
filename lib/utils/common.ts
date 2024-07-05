@@ -195,7 +195,7 @@ export const getCheckedArrayParam = (param: string): string[] => {
 
 export const getViewedItemsFromLS = () => {
   let viewedItems: IAmProduct[] = JSON.parse(
-    localStorage.getItem('watched') as string
+    localStorage.getItem('viewed') as string
   )
 
   if (!viewedItems || !Array.isArray(viewedItems)) {

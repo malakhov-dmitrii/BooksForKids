@@ -30,18 +30,14 @@ export async function POST(req: Request) {
       getViewedItems('russianbooks'),
     ])
 
-    if (
-      russianbooks.status !== 'fulfilled'
-    ) {
+    if (russianbooks.status !== 'fulfilled') {
       return NextResponse.json({
         count: 0,
         items: [],
       })
     }
 
-    const allGoods = [
-      ...russianbooks.value,
-    ]
+    const allGoods = [...russianbooks.value]
 
     return NextResponse.json({
       count: allGoods.length,

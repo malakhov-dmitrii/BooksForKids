@@ -106,18 +106,33 @@ export async function GET(req: Request) {
         })
       }
 
-      const allGoods = [...russianbooks.value].filter((i) => {
-        // if at least one is set, continue
-        if (priceFromParam || priceToParam) {
+      let allGoods = [...russianbooks.value]
+        .map((i) => {
           const realPrice = i.isDiscount ? +i.price - +i.isDiscount : +i.price
-          return (
-            +realPrice >= +(priceFromParam ?? 0) &&
-            +realPrice <= +(priceToParam ?? Infinity)
-          )
-        }
 
-        return true
-      })
+          return {
+            ...i,
+            realPrice,
+          }
+        })
+        .filter((i) => {
+          // if at least one is set, continue
+          if (priceFromParam || priceToParam) {
+            return (
+              +i.realPrice >= +(priceFromParam ?? 0) &&
+              +i.realPrice <= +(priceToParam ?? Infinity)
+            )
+          }
+
+          return true
+        })
+
+      if (sortParam.includes('cheap_first')) {
+        allGoods = allGoods.sort((a, b) => a.realPrice - b.realPrice)
+      }
+      if (sortParam.includes('expensive_first')) {
+        allGoods = allGoods.sort((a, b) => b.realPrice - a.realPrice)
+      }
 
       return NextResponse.json({
         count: allGoods.length,

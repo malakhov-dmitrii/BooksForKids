@@ -12,30 +12,29 @@ import {
 import { $favorites } from './state'
 
 sample({
-    clock: addProductToFavorites,
-    source: $favorites,
-    fn: (_, data) => data,
-    target: addProductToFavoriteFx,
-  })
-  
-  sample({
-    clock: loadFavoriteItems,
-    source: $favorites,
-    fn: (_, data) => data,
-    target: getFavoriteItemsFx,
-  })
-  
-  sample({
-    clock: addProductsFromLSToFavorites,
-    source: $favorites,
-    fn: (_, data) => data,
-    target: addProductsFromLSToFavoritesFx,
-  })
-  
-  sample({
-    clock: deleteProductFromFavorites,
-    source: $favorites,
-    fn: (_, data) => data,
-    target: deleteFavoriteItemFx,
-  })
-  
+  clock: addProductToFavorites,
+  source: $favorites,
+  fn: (_, data) => data,
+  target: addProductToFavoriteFx,
+})
+
+sample({
+  clock: loadFavoriteItems,
+  source: $favorites,
+  fn: (_, data) => data,
+  target: getFavoriteItemsFx,
+})
+
+sample({
+  clock: addProductsFromLSToFavorites,
+  source: $favorites,
+  fn: (_, data) => data,
+  target: addProductsFromLSToFavoritesFx,
+})
+
+sample({
+  clock: deleteProductFromFavorites,
+  source: $favorites,
+  fn: (_, data) => data,
+  target: deleteFavoriteItemFx,
+})

@@ -59,25 +59,11 @@ const ProductPageContent = () => {
 
   const isMedia520 = useMediaQuery(520)
 
-  const { viewedItems } = useViewedItems(product._id)
+  const { viewedItems, markAsViewed } = useViewedItems(product._id)
 
   useEffect(() => {
-    const viewedItems = getViewedItemsFromLS()
-
-    const isInWatched = viewedItems.find((item) => item._id === product._id)
-
-    if (isInWatched) {
-      return
-    }
-
-    localStorage.setItem(
-      'watched',
-      JSON.stringify([
-        ...viewedItems,
-        { category: product.category, _id: product._id },
-      ])
-    )
-  }, [product._id, product.category])
+    markAsViewed({ category: product.category, _id: product._id })
+  }, [product._id, product.category, markAsViewed])
 
   const handleProductShare = () => {
     addOverflowHiddenToBody()
@@ -94,14 +80,14 @@ const ProductPageContent = () => {
         <div className={styles.product_top}>
           {existingItem ? <ItemAdded /> : ''}
           <div className={styles.product_top_left}>
-          <div className={styles.label_container}>
-            <CardLabel
-              inStock={product.inStock}
-              isNew={product.isNew}
-              isBestSeller={product.isBestSeller}
-              isDiscount={product.isDiscount}
-            />
-          </div>
+            <div className={styles.label_container}>
+              <CardLabel
+                inStock={product.inStock}
+                isNew={product.isNew}
+                isBestSeller={product.isBestSeller}
+                isDiscount={product.isDiscount}
+              />
+            </div>
             {/* <ProductImagesSlider /> */}
           </div>
           <div className={styles.product_top_right}>
@@ -197,14 +183,41 @@ const ProductPageContent = () => {
       {!isMedia520 && (
         <div className={styles.product_middle}>
           <div className={styles.product_middle_headings}>
-            <button onClick={() => setActiveTab('description')} className={styles.product_middle_headings_btn}>
-              <h3 className={activeTab === 'description' ? styles.product_middle_headings_active : ''}>{translations[lang].product.description}</h3>
+            <button
+              onClick={() => setActiveTab('description')}
+              className={styles.product_middle_headings_btn}
+            >
+              <h3
+                className={
+                  activeTab === 'description'
+                    ? styles.product_middle_headings_active
+                    : ''
+                }
+              >
+                {translations[lang].product.description}
+              </h3>
             </button>
             <button onClick={() => setActiveTab('additionalInfo')}>
-              <h3 className={activeTab === 'additionalInfo' ? styles.product_middle_headings_active : ''}>{translations[lang].product.additional_info}</h3>
+              <h3
+                className={
+                  activeTab === 'additionalInfo'
+                    ? styles.product_middle_headings_active
+                    : ''
+                }
+              >
+                {translations[lang].product.additional_info}
+              </h3>
             </button>
             <button onClick={() => setActiveTab('reviews')}>
-              <h3 className={activeTab === 'reviews' ? styles.product_middle_headings_active : ''}>{translations[lang].product.reviews}</h3>
+              <h3
+                className={
+                  activeTab === 'reviews'
+                    ? styles.product_middle_headings_active
+                    : ''
+                }
+              >
+                {translations[lang].product.reviews}
+              </h3>
             </button>
           </div>
           <div className={styles.product_middle_info}>
@@ -233,7 +246,7 @@ const ProductPageContent = () => {
             title={translations[lang].product.additional_info}
           >
             <p className={styles.product_middle_mobile_text}>
-                <AddInfoList product={product} />
+              <AddInfoList product={product} />
             </p>
           </ProductInfoAccordion>
           <ProductInfoAccordion title={translations[lang].product.reviews}>
@@ -245,14 +258,12 @@ const ProductPageContent = () => {
       )}
       {!isMedia520 && (
         <div className={styles.product_bottom}>
-          {product.type && 
-            (<SimilarItems type={product.type}/>)
-          } 
+          {product.type && (
+            <SimilarItems type={product.type} category={product.category} />
+          )}
         </div>
       )}
-      {!!viewedItems.items?.length && (
-        <ViewedItems viewedItems={viewedItems} />
-      )}
+      {!!viewedItems.items?.length && <ViewedItems viewedItems={viewedItems} />}
     </>
   )
 }

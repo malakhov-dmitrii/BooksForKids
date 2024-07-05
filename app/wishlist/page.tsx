@@ -1,7 +1,7 @@
-import Wishlist from "@/components/templates/wishlist/Wishlist";
+// 'use client'
+
+import Wishlist from '@/components/templates/wishlist/Wishlist'
 
 export default function WishlistPage() {
-    return (
-      <Wishlist />
-    );
-  }
+  return <Wishlist />
+}
