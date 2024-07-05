@@ -3,12 +3,13 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useLang } from '@/hooks/useLang';
 import { useUnit } from 'effector-react';
-import { $burgerIsOpen, closeBurger } from '@/context/modals';
+import { closeBurger } from '@/context/modals';
 import { removeOverflowHiddenFromBody } from '@/lib/utils/common';
 // import { useMediaQuery } from '@/hooks/useMediaQuery';
 import LangBlock from './LangBlock';
-import { $isAuth } from '@/context/auth';
 import BurgerLinkItem from './BurgerLinkItem';
+import { $isAuth } from '@/context/auth/state';
+import { $burgerIsOpen } from '@/context/modals/state';
 
 const Burger = () => {
     const isAuth = useUnit($isAuth)

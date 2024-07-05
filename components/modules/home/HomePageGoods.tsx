@@ -1,6 +1,7 @@
+'use client'
 import { useUnit } from "effector-react";
 import HomePageSection from "./HomePageSection";
-import { $homePageGoods } from "@/context/goods";
+import { $homePageGoods } from "@/context/goods/state";
 
 const HomePageGoods = () => {
     const goods = useUnit($homePageGoods)

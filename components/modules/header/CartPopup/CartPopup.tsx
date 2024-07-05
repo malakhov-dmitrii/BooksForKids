@@ -11,8 +11,8 @@ import { formatPrice, showCountMessage } from "@/lib/utils/common";
 import { countWholeCartItemsAmount } from "@/lib/utils/cart";
 import ItemsCount from "@/components/elements/ItemsCount/ItemsCount";
 import { useGoodsByAuth } from "@/hooks/useGoodsByAuth";
-import { $cart, $cartFromLs } from "@/context/cart";
 import { useTotalPriceWithDiscount } from "@/hooks/useTotalPriceWithDiscount";
+import { $cart, $cartFromLs } from "@/context/cart/state";
 
 const CartPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
     ({ open, setOpen }, ref) => {

@@ -7,7 +7,7 @@ const ProductInfoAccordion = ({
   title,
 }: IAmProductInfoAccordionProps) => (
   <Accordion
-    title={`${title}:`}
+    title={`${title}`}
     titleClass={styles.product_middle_description_btn}
     rotateIconClass={styles.expanded}
   >

@@ -4,12 +4,12 @@ import PriceSelect from './PriceSelect'
 import { IAmCatalogFiltersProps } from '@/types/catalog'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { addOverflowHiddenToBody } from '@/lib/utils/common'
-import { $typesOptions } from '@/context/catalog'
 import styles from '@/styles/shopFullWidth/index.module.css'
 import TypesSelect from './TypesSelect'
 import SortSelect from './SortSelect'
 import OnSaleFilter from './OnSaleFilter'
 import InStockFilter from './InStockFilter'
+import { $typesOptions } from '@/context/catalog/state'
 
 const CatalogFiltersFullWidth = ({
   handleApplyFiltersWithPrice,

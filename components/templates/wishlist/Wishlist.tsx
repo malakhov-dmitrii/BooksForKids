@@ -4,8 +4,8 @@ import styles from '@/styles/myAccount/index.module.css'
 import EmptyPageContent from '@/components/modules/emptyPageContent/EmptyPageContent';
 import { useUnit } from 'effector-react';
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
-import { $favorites, $favoritesFromLS, $shouldShowEmptyFavorites } from '@/context/favorites';
 import WishlistList from '@/components/modules/wishlist/WishlistList';
+import { $favorites, $favoritesFromLS, $shouldShowEmptyFavorites } from '@/context/favorites/state';
 
 const Wishlist = () => {
     const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)

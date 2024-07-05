@@ -78,7 +78,7 @@
 {
     display: none;
     float: left;
-
+    margin-right: 49px;
     height: 100%;
     min-height: 1px;
 }
@@ -117,6 +117,12 @@
 .slick-arrow.slick-hidden {
     display: none;
 }
+
+@media (max-width: 550px) {
+    .slick-slide {
+      margin-right: 24px;
+    }
+  }
 
 
 

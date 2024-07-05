@@ -1,8 +1,9 @@
 
-import { $cart, $cartFromLs } from '@/context/cart'
+import {} from '@/context/cart'
 import styles from '@/styles/cartPage/index.module.css'
 import CartListItem from './CartListItem'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
+import { $cart, $cartFromLs } from '@/context/cart/state'
 
 const CartList = () => {
   const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs)

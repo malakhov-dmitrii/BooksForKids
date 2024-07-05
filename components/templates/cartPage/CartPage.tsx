@@ -5,7 +5,6 @@ import CartList from '@/components/modules/cartPage/CartList';
 import ProceedToCheckoutBtn from '@/components/modules/cartPage/proceedToCheckout/ProceedToCheckoutBtn';
 import UpdateTotalsBtn from '@/components/modules/cartPage/updateTotalsBtn/UpdateTotalsBtn';
 import ApplyCouponBlock from '@/components/elements/applyCouponBlock/ApplyCouponBlock';
-import { $cart, $cartFromLs, $shouldShowEmpty } from '@/context/cart';
 import { useLang } from '@/hooks/useLang';
 import { useTotalPrice } from '@/hooks/useTotalPrice';
 import { formatPrice } from '@/lib/utils/common';
@@ -16,6 +15,7 @@ import { useUnit } from 'effector-react';
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
 import { useTotalPriceWithDiscount } from '@/hooks/useTotalPriceWithDiscount';
 import { useState } from 'react';
+import { $cart, $cartFromLs, $shouldShowEmpty } from '@/context/cart/state';
 
 const CartPage = () => {
     const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs);

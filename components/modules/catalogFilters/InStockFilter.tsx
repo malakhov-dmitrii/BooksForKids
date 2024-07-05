@@ -1,5 +1,4 @@
 import { useLang } from '@/hooks/useLang'
-import { useTypeFilter } from '@/hooks/useTypeFilter'
 import styles from '@/styles/filters/index.module.css'
 import CheckFilterBtn from './CheckFilterBtn'
 
@@ -9,18 +8,16 @@ const InStockFilter = ({
   handleApplyFilterInStock: (types: string[]) => void
 }) => {
   const { lang, translations } = useLang()
-//   const { handleSelectType, types, typesOptions } = useTypeFilter(
-//     handleApplyFiltersWithTypes
-//   )
 
   return (
     <div
       className={`body_medium ${styles.catalog_filters_check} ${styles.catalog_filters_check_on_sale}`}
     >
-        <CheckFilterBtn
+      <CheckFilterBtn
         className={``}
-        callback={()=>{}}
-        btnText={translations[lang].catalog.in_stock} />
+        callback={handleApplyFilterInStock}
+        btnText={translations[lang].catalog.in_stock}
+      />
       {/* <SelectBtn
         open={open}
         toggle={toggle}

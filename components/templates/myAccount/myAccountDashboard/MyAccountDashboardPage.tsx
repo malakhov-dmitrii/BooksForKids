@@ -3,12 +3,12 @@ import Link from "next/link";
 import { useUnit } from 'effector-react'
 import { useLang } from "@/hooks/useLang";
 import { useUserLogout } from "@/hooks/useLogout";
-import { $user } from '@/context/user'
 import styles from '@/styles/myAccount/index.module.css'
 import MyAccountNavigationLinks from "../myAccountNavigationLinks/MyAccountNavigationLinks";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import MyAccountMobileSlider from "../myAccountMobileSlider/MyAccountMobileSlider";
-// import { $isAuth } from "@/context/auth";
+import { $user } from "@/context/user/state";
+// import { $isAuth } from "@/context/auth/state";
 
 const MyAccountDashboardPage = () => {
     const { lang, translations } = useLang();

@@ -4,7 +4,7 @@ import styles from '@/styles/orderInfoBlock/index.module.css'
 
 import YourOrderItem from '../yourOrderItem/YourOrderItem'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { $cart, $cartFromLs } from '@/context/cart'
+import { $cart, $cartFromLs } from '@/context/cart/state'
 
 const YourOrderList = () => {
   const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs)

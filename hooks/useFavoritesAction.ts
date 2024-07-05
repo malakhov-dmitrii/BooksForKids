@@ -2,13 +2,12 @@ import toast from 'react-hot-toast'
 import { IAmProduct } from '@/types/common'
 import { useGoodsByAuth } from './useGoodsByAuth'
 import {
-  $favorites,
-  $favoritesFromLS,
   addProductToFavorites,
   setIsAddToFavorites,
 } from '@/context/favorites'
 import { isUserAuth } from '@/lib/utils/common'
 import { addFavoriteItemToLS } from '@/lib/utils/favorites'
+import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
 
 export const useFavoritesAction = (product: IAmProduct) => {
   const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)

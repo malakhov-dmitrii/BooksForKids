@@ -6,7 +6,6 @@ import { usePriceFilter } from '@/hooks/usePriceFilter'
 import SelectBtn from './SelectBtn'
 import styles from '@/styles/filters/index.module.css'
 import { IAmHomePageSectionProps } from '@/types/homePage';
-import { $homePageGoods } from '@/context/goods'
 import { formatPrice } from '@/lib/utils/common';
 import { getCheckedPriceFrom, getCheckedPriceTo } from '@/lib/utils/catalog'
 

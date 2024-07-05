@@ -1,123 +1,72 @@
-import { useLang } from "@/hooks/useLang";
-import styles from '@/styles/product/index.module.css';
-import { IAmProduct } from '@/types/common';
+import { useLang } from '@/hooks/useLang'
+import styles from '@/styles/product/index.module.css'
+import { IAmProduct } from '@/types/common'
 
 const AddInfoList = ({ product }: { product: IAmProduct }) => {
-
-    const additionalInfoHeadings = [
-        {
-            id: 1,
-            text: translations[lang].product.sku,
-        },
-        {
-            id: 2,
-            text: translations[lang].product.type,
-        },
-        {
-            id: 3,
-            text: translations[lang].product.year,
-        },
-        {
-            id: 4,
-            text: translations[lang].product.authors,
-        },
-        {
-            id: 5,
-            text: translations[lang].product.publishing,
-        },
-        {
-            id: 6,
-            text: translations[lang].product.age,
-        },
-        {
-            id: 7,
-            text: translations[lang].product.size,
-        },
-        {
-            id: 8,
-            text: translations[lang].product.number_of_pages,
-        },
-        {
-            id: 9,
-            text: translations[lang].product.weight,
-        },
-        {
-            id: 10,
-            text: translations[lang].product.cover,
-        }
-      ];
-    
-      const additionalInfoContent = [
-        {
-            id: 1,
-            text: product.vendorCode,
-        },
-        {
-            id: 2,
-            text: product.type,
-        },
-        {
-            id: 3,
-            text: product.characteristics.year,
-        },
-        {
-            id: 4,
-            text: product.authors,
-        },
-        {
-            id: 5,
-            text: product.characteristics.publishing,
-        },
-        {
-            id: 6,
-            text: product.characteristics.age,
-        },
-        {
-            id: 7,
-            text: product.characteristics.size,
-        },
-        {
-            id: 8,
-            text: product.characteristics.number_of_pages,
-        },
-        {
-            id: 9,
-            text: product.characteristics.weight,
-        },
-        {
-            id: 10,
-            text: product.characteristics.cover,
-        },
-        {
-            id: 11,
-            text: product.characteristics.features,
-        },
-      ]
+  const { lang, translations } = useLang()
+  const additionalInfo = [
+    {
+      id: 1,
+      title: translations[lang].product.sku,
+      text: product.vendorCode,
+    },
+    {
+      id: 2,
+      title: translations[lang].product.type,
+      text: product.type,
+    },
+    {
+      id: 3,
+      title: translations[lang].product.year,
+      text: product.characteristics.year,
+    },
+    {
+      id: 4,
+      title: translations[lang].product.authors,
+      text: product.characteristics.author,
+    },
+    {
+      id: 5,
+      title: translations[lang].product.publishing,
+      text: product.characteristics.publishing,
+    },
+    {
+      id: 6,
+      title: translations[lang].product.age,
+      text: product.characteristics.age,
+    },
+    {
+      id: 7,
+      title: translations[lang].product.size,
+      text: product.characteristics.size,
+    },
+    {
+      id: 8,
+      title: translations[lang].product.number_of_pages,
+      text: product.characteristics.number_of_pages,
+    },
+    {
+      id: 9,
+      title: translations[lang].product.weight,
+      text: product.characteristics.weight,
+    },
+    {
+      id: 10,
+      title: translations[lang].product.cover,
+      text: product.characteristics.cover,
+    },
+  ]
 
   return (
     <>
-        {additionalInfoHeadings.map((item) => (
-          <li
-            key={item.id}
-            className={styles.djhgdfjh}
-          >
-            <dl>
-            {additionalInfoHeadings.map((item) => (
-                <dt
-                key={item.id}
-                className={styles.djhgdfjh}>
-
-            </dt>
-        ))}
-            {additionalInfoContent.map((item) => (
-                <dd
-                key={item.id}
-                className={styles.djhgdfjh}>
-            </dd>
-        ))}
-            </dl>
-          </li>
-        ))}
+      {additionalInfo.map((item) => (
+        <li key={item.id} className='list-reset'>
+          <dl key={item.id} className={styles.additional_info_row}>
+            <dt className={styles.additional_info_heading}>{item.title}:</dt>
+            <dd className={styles.additional_info_content}>{item.text}</dd>
+          </dl>
+        </li>
+      ))}
     </>
   )
 }

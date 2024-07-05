@@ -1,5 +1,4 @@
 'use client'
-import { $isAuth } from "@/context/auth";
 import { useLang } from "@/hooks/useLang";
 import { useUnit } from "effector-react";
 import Link from "next/link";
@@ -7,6 +6,7 @@ import styles from '@/styles/checkoutPage/index.module.css';
 import ApplyCouponBlock from "@/components/elements/applyCouponBlock/ApplyCouponBlock";
 import OrderInfoBlock from "@/components/modules/orderInfoBlock/OrderInfoBlock";
 import { MutableRefObject, useRef, useState } from "react";
+import { $isAuth } from "@/context/auth/state";
 
 const CheckoutPage = ({
 

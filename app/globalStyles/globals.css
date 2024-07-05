@@ -146,8 +146,7 @@ p {
 }
 
 .header_search_overlay,
-.quick_view_modal_overlay,
-.auth_overlay {
+.quick_view_modal_overlay {
   background: var(--color-White);
   height: 100%;
   width: 100%;
@@ -160,7 +159,6 @@ p {
 }
 
 .header_search_overlay.overlay_active,
-.overlay_active,
 .overlay_active {
   opacity: 0.6;
   visibility: visible;
@@ -192,11 +190,11 @@ a {
   color: var(--color-Black);
 }
 
-/* .list-reset {
+.list-reset {
   margin: 0;
   padding: 0;
   list-style-type: none;
-} */
+}
 
 @media (max-width: 700px) {
   .not_empty {

@@ -37,9 +37,9 @@ export interface IAmProducts {
   items: IAmProduct[]
 }
 
-// export interface IAmLoadWatchedProductsFx {
-//   payload: { _id: string; category: string }[]
-// }
+export interface IAmLoadViewedItemsFx {
+  payload: { _id: string; category: string }[]
+}
 
 
 

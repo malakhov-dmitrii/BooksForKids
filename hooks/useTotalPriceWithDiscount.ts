@@ -1,7 +1,7 @@
-import { $cart, $cartFromLs, $totalPrice, setTotalPrice } from "@/context/cart"
 import { useUnit } from "effector-react"
 import { useEffect } from "react"
 import { useGoodsByAuth } from "./useGoodsByAuth"
+import { $cart, $cartFromLs, $totalPrice } from "@/context/cart/state"
 
 export const useTotalPriceWithDiscount = () => {
     const totalPriceWithDiscount = useUnit($totalPrice)

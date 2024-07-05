@@ -4,10 +4,18 @@ import { Toaster } from "react-hot-toast"
 import { useUnit } from "effector-react"
 import { EarthoOneProvider } from '@eartho/one-client-react'
 import { Next13ProgressBar } from 'next13-progressbar'
-import { $showQuickViewModal, closeQuickViewModal } from "@/context/modals"
+import { closeQuickViewModal } from "@/context/modals"
 import Layout from "./Layout"
 import { removeOverflowHiddenFromBody } from "@/lib/utils/common"
 import CookieAlert from "../modules/cookieAlert/CookieAlert"
+import { $showQuickViewModal } from "@/context/modals/state"
+import '@/context/goods/init'
+import '@/context/auth/init'
+import '@/context/cart/init'
+import '@/context/favorites/init'
+import '@/context/user/init'
+
+
 
 const PagesLayout = ({ children }: { children: React.ReactNode }) => {
 const showQuickViewModal = useUnit($showQuickViewModal)

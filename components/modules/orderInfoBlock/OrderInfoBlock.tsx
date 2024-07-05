@@ -6,8 +6,8 @@ import { IAmOrderInfoBlock } from '@/types/modules';
 import { useState } from 'react';
 import YourOrderList from '../checkoutPage/yourOrderList/YourOrderList';
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
-import { $cart, $cartFromLs } from '@/context/cart';
 import { useTotalPriceWithDiscount } from '@/hooks/useTotalPriceWithDiscount';
+import { $cart, $cartFromLs } from '@/context/cart/state';
 
 const OrderInfoBlock = ({
     isCorrectCouponCode,

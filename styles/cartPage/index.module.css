@@ -321,7 +321,7 @@ color: var(--color-Dark-gray);
 
 @media (max-width: 570px) {
     .shopping_cart_updateCart_btn {
-        width: 288px;
+        width: 100%;
         height: 32px;
     }
 }
@@ -477,7 +477,7 @@ color: var(--color-Dark-gray);
 
   @media (max-width: 570px) {
     .cart_shipping_checkout_link {
-        width: 288px;
+        width: 100%;
         height: 32px;
     }
 }

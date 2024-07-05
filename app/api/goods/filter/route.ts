@@ -18,7 +18,12 @@ export async function GET(req: Request) {
     const priceToParam = url.searchParams.get('priceTo')
     const typesParam = url.searchParams.get('types')
     // const collectionParam = url.searchParams.get('collection')
-    // const isDiscountParam = url.searchParams.get('isDiscount')
+    const isDiscountParam = JSON.parse(
+      url.searchParams.get('isDiscount') as string
+    )
+    const isInStockParam = JSON.parse(
+      url.searchParams.get('isInStock') as string
+    )
     const sortParam = url.searchParams.get('sort') || 'default'
     const isFullPriceRange =
       priceFromParam &&
@@ -30,8 +35,20 @@ export async function GET(req: Request) {
       typesArr.length > 0 &&
       typesArr.every((type) => allowedTypes.includes(type))
 
+    console.log('------------ FILTERS -----------', {
+      isDiscountParam,
+      isInStockParam,
+    })
+
     const filter = {
       ...(typeParam && { type: typeParam }),
+      ...(Boolean(isInStockParam) && {
+        inStock: { $ne: '' },
+      }),
+      ...(Boolean(isDiscountParam) && {
+        // not empty string
+        isDiscount: { $ne: '' },
+      }),
       // ...(isFullPriceRange && {
       //   price: { $gt: +priceFromParam, $lt: +priceToParam },
       // }),
@@ -101,25 +118,6 @@ export async function GET(req: Request) {
 
         return true
       })
-      // .sort((a, b) => {
-      //     if (sortParam.includes('cheap_first')) {
-      //       return +a.price - +b.price
-      //     }
-
-      //     if (sortParam.includes('expensive_first')) {
-      //       return +b.price - +a.price
-      //     }
-
-      //     if (sortParam.includes('new')) {
-      //       return Number(b.isNew) - Number(a.isNew)
-      //     }
-
-      //     if (sortParam.includes('popular')) {
-      //       return +b.popularity - +a.popularity
-      //     }
-
-      //     return 0
-      //   })
 
       return NextResponse.json({
         count: allGoods.length,

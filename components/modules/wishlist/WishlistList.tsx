@@ -1,7 +1,7 @@
 import styles from '@/styles/myAccount/index.module.css'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { $favorites, $favoritesFromLS } from '@/context/favorites'
 import WishlistItem from './WishlistItem'
+import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
 
 
 const WishlistList = () => {

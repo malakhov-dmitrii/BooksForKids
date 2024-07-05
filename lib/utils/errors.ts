@@ -1,12 +1,6 @@
-import {
-  addProductToCartFx,
-  deleteCartItemFx,
-  getCartItemsFx,
-} from '@/api/cart'
-import { loginCheckFx } from '@/api/auth'
 import { JWTError } from '@/constants/jwt'
 import { refreshTokenFx } from '@/context/auth'
-import { addProductsFromLSToCartFx } from '@/context/cart'
+import { addProductToCartFx, addProductsFromLSToCartFx, deleteCartItemFx, getCartItemsFx } from '@/context/cart'
 import { IAmAddProductToCartFx, IAmAddProductsFromLSToCartFx, IAmDeleteCartItemsFx } from '@/types/cart'
 
 import {
@@ -20,6 +14,7 @@ import {
   IAmAddProductsFromLSToFavoriteFx,
   IAmDeleteFavoriteItemsFx,
 } from '@/types/favorites'
+import { loginCheckFx } from '@/context/user'
 
 export const handleJWTError = async (
   errorName: string,

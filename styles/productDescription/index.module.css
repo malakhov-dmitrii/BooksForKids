@@ -13,13 +13,20 @@
 
 .description_btn_container_arrow {
     position: absolute;
-    top: 0px;
+    top: -2px;
     right: 0px;
     width: 25px;
     height: 20px;
     background-image: url(../../public/img/icons/arrow_small.png);
     background-repeat: no-repeat;
     background-position: center center;
+    transition: transform .2s ease-in-out;
+
+}
+
+.description_btn_container_arrow_open {
+    transition: transform .2s ease-in-out;
+    transform: rotate(180deg);
 }
 
 .more_info_description_closed {

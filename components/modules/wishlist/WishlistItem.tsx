@@ -9,13 +9,14 @@ import DeleteItemBtn from '@/components/elements/deleteItemBtn/DeleteItemBtn'
 import { useFavoritesAction } from '@/hooks/useFavoritesAction';
 import { IAmFavoriteItem } from '@/types/favorites';
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
-import { $cart, $cartFromLs, addProductToCart } from '@/context/cart';
+import { addProductToCart } from '@/context/cart';
 import AddToCartBtn from '@/components/elements/addToCart/AddToCartBtn';
 import NotifyOfDeliveryBtn from '@/components/elements/notifyOfDelivery/NotifyOfDeliveryBtn';
 import { addCartItemToLS } from '@/lib/utils/cart';
 import { IAmProduct } from '@/types/common';
 import { deleteProductFromFavorites, setFavoritesFromLS, setShouldShowEmptyFavorites } from '@/context/favorites';
 import { useProductDelete } from '@/hooks/useProductDelete';
+import { $cart, $cartFromLs } from '@/context/cart/state';
 
 const WishlistItem = ({ item }: { item: IAmFavoriteItem }) => {
   const { lang, translations } = useLang();

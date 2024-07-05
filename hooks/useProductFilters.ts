@@ -1,7 +1,5 @@
-
 import { useUnit } from 'effector-react'
 import { useEffect, useState } from 'react'
-import { $products, loadProductsByFilter, loadProductsByFilterFx } from '@/context/goods'
 import {
   checkOffsetParam,
   getSearchParamsUrl,
@@ -10,6 +8,8 @@ import {
 import { SearchParams } from '@/types/catalog'
 import styles from '@/styles/catalog/index.module.css'
 import { usePathname, useRouter } from 'next/navigation'
+import { $products } from '@/context/goods/state'
+import { loadProductsByFilter } from '@/context/goods'
 
 export const useProductFilters = (
   searchParams: SearchParams,
@@ -93,6 +93,8 @@ export const useProductFilters = (
   }
 
   const handleApplyFilterOnSale = (isDiscount: string[]) => {
+    console.log('isDiscount', isDiscount)
+
     updateSearchParam(
       'isDiscount',
       encodeURIComponent(JSON.stringify(isDiscount)),
@@ -101,15 +103,14 @@ export const useProductFilters = (
     handlePageChange({ selected: 0 })
   }
 
-  const  handleApplyFilterInStock = (isDiscount: string[]) => {
+  const handleApplyFilterInStock = (isInStock: string[]) => {
     updateSearchParam(
-      'isDiscount',
-      encodeURIComponent(JSON.stringify(isDiscount)),
+      'isInStock',
+      encodeURIComponent(JSON.stringify(isInStock)),
       pathname
     )
     handlePageChange({ selected: 0 })
   }
- 
 
   // const handleApplyFiltersWithColors = (sizes: string[]) => {
   //   updateSearchParam(

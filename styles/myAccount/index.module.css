@@ -7,7 +7,7 @@
     justify-content: start;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 925px) {
     .dashboard_page {
         padding-top: 39px;
     }
@@ -22,7 +22,7 @@
     margin-bottom: 64px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 925px) {
     .dashboard_page h1 {
         margin-bottom: 24px;
     }
@@ -40,7 +40,7 @@
     height: 60px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 925px) {
     .my_account_links_container {
         height: 40px;
     }
@@ -51,7 +51,7 @@
     height: 60px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 925px) {
     .my_account_links_container h3 {
         font-size: 16px;
         /* margin-right: 24px; */

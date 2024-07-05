@@ -34,7 +34,7 @@ const ProductSlider = ({
         //   "--swiper-scrollbar-size": "2px",
         //   "--swiper-pagination-bullet-horizontal-gap": "13.71px"
         // }as CSSProperties}
-        spaceBetween={20}
+        spaceBetween={10}
         slideToClickedSlide={true}
         watchOverflow={true}
         autoHeight={true}
@@ -59,8 +59,9 @@ const ProductSlider = ({
         className={`${styles.slider_swiper} ${styles.product_slider_swiper}`}
         watchOverflow={true}
         // watchSlidesVisibility={true}
-        watchSlidesProgress={true}
-        preventInteractionOnTransition={true}
+        // watchSlidesProgress={true}
+        // preventInteractionOnTransition={true}
+        spaceBetween={10}
         scrollbar={{
             draggable: true,
           }}

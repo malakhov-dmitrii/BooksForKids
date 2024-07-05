@@ -3,30 +3,28 @@ import { useUnit } from 'effector-react'
 import PriceSelect from './PriceSelect'
 import { IAmCatalogFiltersProps } from '@/types/catalog'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import {
-  setTypes,
-} from '@/context/catalog'
+import { setTypes } from '@/context/catalog'
 // import SelectInfoItem from './SelectInfoItem'
 import { addOverflowHiddenToBody } from '@/lib/utils/common'
-import { $typesOptions } from '@/context/catalog'
 import styles from '@/styles/catalog/index.module.css'
 import TypesSelect from './TypesSelect'
 import SortSelect from './SortSelect'
 import OnSaleFilter from './OnSaleFilter'
 import InStockFilter from './InStockFilter'
+import { $typesOptions } from '@/context/catalog/state'
 
 const CatalogFilters = ({
   handleApplyFiltersWithPrice,
-     handleApplyFiltersWithTypes,
-     handleApplyFilterOnSale,
-     handleApplyFilterInStock,
+  handleApplyFiltersWithTypes,
+  handleApplyFilterOnSale,
+  handleApplyFilterInStock,
   handleApplyFiltersBySort,
 }: IAmCatalogFiltersProps) => {
   const typesOptions = useUnit($typesOptions)
   const isMedia715 = useMediaQuery(715)
   const isMedia610 = useMediaQuery(610)
 
-    // setTypesOptions(updatedOptions)
+  // setTypesOptions(updatedOptions)
 
   return (
     <>
@@ -38,7 +36,7 @@ const CatalogFilters = ({
                 <TypesSelect
                   handleApplyFiltersWithTypes={handleApplyFiltersWithTypes}
                 />
-                <SortSelect 
+                <SortSelect
                   handleApplyFiltersBySort={handleApplyFiltersBySort}
                 />
                 <PriceSelect
@@ -48,7 +46,7 @@ const CatalogFilters = ({
                   handleApplyFilterOnSale={handleApplyFilterOnSale}
                 />
                 <InStockFilter
-                    handleApplyFilterInStock={handleApplyFilterInStock}
+                  handleApplyFilterInStock={handleApplyFilterInStock}
                 />
               </div>
             </>

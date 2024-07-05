@@ -1,7 +1,9 @@
 'use client'
-import { setLang } from '@/context/lang'
+
+import { AllowedLangs } from "@/constants/lang";
+import { setLang } from "@/context/lang";
 import { useLang } from "@/hooks/useLang";
-import { AllowedLangs } from '@/constants/lang';
+
 
 const LangBlock= () => {
     const { lang, translations } = useLang();

@@ -15,3 +15,8 @@ export interface IAmNotifyOfDeliveryBtnProps {
     btnDisabled?: boolean
     handleNotifyMe: (param: any) => void
   }
+
+  export interface IAmViewAllLinkProps {
+    href: string
+  }
+  

@@ -4,6 +4,7 @@ import { setShouldShowEmptyFavorites } from '@/context/favorites'
 import { closeSearchModal } from '@/context/modals'
 import { loginCheck } from '@/context/user'
 import { IAmCartItem } from '@/types/cart'
+import { IAmProduct } from '@/types/common'
 import { IAmFavoriteItem } from '@/types/favorites'
 import { EventCallable } from 'effector'
 import toast from 'react-hot-toast'
@@ -191,3 +192,20 @@ export const getCheckedArrayParam = (param: string): string[] => {
     return []
   }
 }
+
+export const getViewedItemsFromLS = () => {
+  let viewedItems: IAmProduct[] = JSON.parse(
+    localStorage.getItem('watched') as string
+  )
+
+  if (!viewedItems || !Array.isArray(viewedItems)) {
+    viewedItems = []
+  }
+
+  return viewedItems
+}
+
+// export const handleCloseShareModal = () => {
+//   removeOverflowHiddenFromBody()
+//   closeShareModal()
+// }

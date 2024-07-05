@@ -1,6 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useUnit } from 'effector-react'
-import { loadProductsByFilterFx } from '@/context/goods'
 import { IAmSelectItemProps } from '@/types/catalog'
 import styles from '@/styles/filters/index.module.css'
 
@@ -10,7 +7,6 @@ const SelectItem = ({
   item,
   setOption,
 }: IAmSelectItemProps) => {
-  const spinner = useUnit(loadProductsByFilterFx.pending)
 
   const handleSelectOption = () => {
     if (isActive) {

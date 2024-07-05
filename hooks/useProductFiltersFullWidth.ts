@@ -1,7 +1,7 @@
 
 import { useUnit } from 'effector-react'
 import { useEffect, useState } from 'react'
-import { $products, loadProductsByFilter, loadProductsByFilterFx } from '@/context/goods'
+
 import {
   checkOffsetParam,
   getSearchParamsUrl,
@@ -10,6 +10,8 @@ import {
 import { SearchParams } from '@/types/catalog'
 import styles from '@/styles/catalog/index.module.css'
 import { usePathname } from 'next/navigation'
+import { $products } from '@/context/goods/state'
+import { loadProductsByFilter } from '@/context/goods'
 
 export const useProductFiltersFullWidth = (
   searchParams: SearchParams,

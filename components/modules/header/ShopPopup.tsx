@@ -7,9 +7,8 @@ import { IAmWrappedComponentProps } from "@/types/hocs";
 import { useLang } from "@/hooks/useLang";
 import ShopPopupLinkItem from "./ShopPopupLinkItem";
 import { useGoodsByAuth } from "@/hooks/useGoodsByAuth";
-import { $favorites, $favoritesFromLS } from "@/context/favorites";
-import { $isAuth } from "@/context/auth";
-
+import { $isAuth } from "@/context/auth/state";
+import { $favorites, $favoritesFromLS } from "@/context/favorites/state";
 
 const ShopPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
     ({ open, setOpen }, ref) => {
@@ -52,7 +51,7 @@ const ShopPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
             {
                 id: 35,
                 text: translations[lang].shop_popup.on_sale,
-                href: '/catalog/shop_on_sale',
+                href: '/catalog/shop_full_width?isDiscount=true',
             },
             {
                 id: 36,

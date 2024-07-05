@@ -1,14 +1,8 @@
 import { useUnit } from 'effector-react'
 import { useEffect, useState } from 'react'
-import {
-  setTypesOptions,
-  setTypes,
-  updateTypesOptionByType,
-} from '@/context/catalog'
 import { useLang } from './useLang'
 import { getCheckedArrayParam, getSearchParamsUrl } from '@/lib/utils/common'
 import { allowedTypes } from '@/constants/product'
-// import { $typesOptions, $types } from '@/context/catalog'
 
 export const useTypeFilter = (
   handleApplyFiltersWithTypes: (arg0: string[]) => void

@@ -8,7 +8,7 @@ import {
 import { useLang } from './useLang'
 import { getCheckedArrayParam, getSearchParamsUrl } from '@/lib/utils/common'
 import { allowedTypes } from '@/constants/product'
-import { $typesOptions, $types } from '@/context/catalog'
+import { $types, $typesOptions } from '@/context/catalog/state'
 
 export const useTypeFilter = (
   handleApplyFiltersWithTypes: (arg0: string[]) => void

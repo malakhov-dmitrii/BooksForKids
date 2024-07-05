@@ -21,7 +21,8 @@ const HomePageSection = ({goods}: IAmHomePageSectionProps) => {
                     {isMedia800 &&
                     <h5 className='capitalize'> {translations[lang].home.shop_the_latest}</h5>
                     }
-                    <ViewAllLink />
+                    <ViewAllLink 
+                    href='/catalog'/>
                 </div>
                 <ul className={styles.home_section_list}>
                     {goods.map((item) => (

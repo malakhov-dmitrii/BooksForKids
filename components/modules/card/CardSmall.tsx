@@ -19,14 +19,13 @@ import { addItemToCart, addProductsToCart } from '@/lib/utils/cart'
 import { useFavoritesAction } from '@/hooks/useFavoritesAction'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import {
-  $favorites,
-  $favoritesFromLS,
   setIsAddToFavorites,
 } from '@/context/favorites'
 import styles from '@/styles/cardSmall/index.module.css'
 import toast from 'react-hot-toast'
+import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
 
-const Card = ({ item }: IAmCardProps) => {
+const SmallCard = ({ item }: IAmCardProps) => {
   const { lang, translations } = useLang()
   const isMedia1160 = useMediaQuery(1160)
   const { currentCartByAuth, product, getCanAddToCart } = useCartAction()
@@ -47,8 +46,6 @@ const Card = ({ item }: IAmCardProps) => {
   const addToCart = (e: any) => {
     if (getCanAddToCart(item._id)) {
       addProductsToCart(item, 1)
-    } else {
-      toast.error('Not enough stock')
     }
   }
 
@@ -149,7 +146,7 @@ const Card = ({ item }: IAmCardProps) => {
             </div>
           )}
         {!isMedia1160 && (
-          <div className={styles.card_actions_container}>
+          // <div className={styles.card_actions_container}>
             <div className={styles.card_actions}>
               <CardActionBtn
                 text={translations[lang].card.add_to_cart}
@@ -171,11 +168,11 @@ const Card = ({ item }: IAmCardProps) => {
                 callback={handleAddProductToFavorites}
               />
             </div>
-          </div>
+          // </div>
         )}
       </li>
     </>
   )
 }
 
-export default Card
+export default SmallCard

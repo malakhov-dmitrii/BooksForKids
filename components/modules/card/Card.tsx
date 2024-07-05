@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
-import { useLang } from '@/hooks/useLang'
 import { IAmCardProps } from '@/types/modules'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import CardLabel from './CardLabel'
@@ -11,20 +10,20 @@ import {
   formatPrice,
   isItemInList,
 } from '@/lib/utils/common'
-import { setCurrentProduct } from '@/context/goods'
-import { showQuickViewModal } from '@/context/modals'
 import AddToCartBtn from '@/components/elements/addToCart/AddToCartBtn'
 import { useCartAction } from '@/hooks/useCartAction'
 import { addItemToCart, addProductsToCart } from '@/lib/utils/cart'
 import { useFavoritesAction } from '@/hooks/useFavoritesAction'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import {
-  $favorites,
-  $favoritesFromLS,
   setIsAddToFavorites,
 } from '@/context/favorites'
 import styles from '@/styles/card/index.module.css'
 import toast from 'react-hot-toast'
+import { setCurrentProduct } from '@/context/goods'
+import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
+import { showQuickViewModal } from '@/context/modals'
+import { useLang } from '@/hooks/useLang'
 
 const Card = ({ item }: IAmCardProps) => {
   const { lang, translations } = useLang()
@@ -33,7 +32,7 @@ const Card = ({ item }: IAmCardProps) => {
   const isProductInCart = isItemInList(currentCartByAuth, item._id)
   const { handleAddProductToFavorites, isProductInFavorites } =
     useFavoritesAction(item)
-  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
+  const currentFavoritesByAuth = useGoodsByAuth ($favorites, $favoritesFromLS)
   const currentFavoriteItems = currentFavoritesByAuth.filter(
     (item) => item.productId === product._id
   )
@@ -47,7 +46,7 @@ const Card = ({ item }: IAmCardProps) => {
   const addToCart = (e: any) => {
     if (getCanAddToCart(item._id)) {
       addProductsToCart(item, 1)
-    } 
+    }
   }
 
   const addAndGoToCartActionBtn = (e: any) => {
@@ -59,9 +58,7 @@ const Card = ({ item }: IAmCardProps) => {
   return (
     <>
       <div className={styles.list_item_container}>
-        <li
-          className={styles.list_item}
-        >
+        <li className={styles.list_item}>
           <div className={styles.label_container}>
             <CardLabel
               inStock={item.inStock}
@@ -74,9 +71,7 @@ const Card = ({ item }: IAmCardProps) => {
             href={`/catalog/${item.category}/${item._id}`}
             className={styles.card_top_link}
           >
-            <div
-              className={styles.card_top_container}
-            >
+            <div className={styles.card_top_container}>
               <Image
                 src={item.images[0]}
                 alt={item.name}
@@ -102,9 +97,8 @@ const Card = ({ item }: IAmCardProps) => {
               </div>
             </div>
           </Link>
-          {!isMedia1100 ?  (
-            isProductInCart ?
-            (
+          {!isMedia1100 ? (
+            isProductInCart ? (
               <div className={styles.card_to_cart_btn_container_added}>
                 <AddToCartBtn
                   text={
@@ -117,9 +111,7 @@ const Card = ({ item }: IAmCardProps) => {
                   btnDisabled={!getCanAddToCart(item._id)}
                 />
               </div>
-            )
-            :
-            (
+            ) : (
               <div className={styles.card_to_cart_btn_container}>
                 <AddToCartBtn
                   text={
@@ -161,6 +153,7 @@ const Card = ({ item }: IAmCardProps) => {
                 iconClass='card_action_btn_quick_view'
                 callback={handleShowQuickViewModal}
               />
+
               <CardActionBtn
                 text={translations[lang].card.add_to_favorites}
                 iconClass={`${
@@ -170,7 +163,7 @@ const Card = ({ item }: IAmCardProps) => {
                 }`}
                 callback={handleAddProductToFavorites}
               />
-              </div>
+            </div>
             // </div>
           )}
         </li>

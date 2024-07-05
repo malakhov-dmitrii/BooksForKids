@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useLang } from "@/hooks/useLang";
-import { $favorites, $favoritesFromLS } from "@/context/favorites";
 import { useGoodsByAuth } from "@/hooks/useGoodsByAuth";
 import { useUserLogout } from "@/hooks/useLogout";
 import styles from '@/styles/myAccount/index.module.css'
+import { $favorites, $favoritesFromLS } from "@/context/favorites/state";
 
 const MyAccountNavigationLinks = () => {
     const { lang, translations } = useLang();
