@@ -5,7 +5,7 @@ import { useLang } from "@/hooks/useLang";
 import { useUserLogout } from "@/hooks/useLogout";
 import styles from '@/styles/myAccount/index.module.css'
 import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick-theme.css";
 import MyAccountNavigationLinks from "../myAccountNavigationLinks/MyAccountNavigationLinks";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import MyAccountMobileSlider from "../myAccountMobileSlider/MyAccountMobileSlider";
