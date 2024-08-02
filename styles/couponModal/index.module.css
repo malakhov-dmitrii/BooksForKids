@@ -1,0 +1,68 @@
+.coupon_modal {
+    width: 616px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border-radius: 8px;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 250;
+    background: var(--color-White);
+    box-shadow: 0px 32px 32px 0px rgba(0, 0, 0, 0.20), 0px 0px 32px 0px rgba(0, 0, 0, 0.10);
+    display: flex;
+    padding: 10px 20px 30px 20px;
+    min-width: 0;
+}
+
+.coupon_modal_container {
+    width: 100%;
+    padding-right: 30px;
+}
+
+@media (max-width: 520px) {
+    .coupon_modal {
+        padding-right: 0;
+ }
+}
+  
+    @media (max-width: 890px) {
+        .coupon_modal {
+            width: 400px;
+    }
+}
+  
+    @media (max-width: 520px) {
+        .coupon_modal {
+            width: 310px;
+     }
+    }
+
+/* Close button */
+  
+.modal_close {
+      height: 10px;
+      width: 10px;
+      z-index: 1;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+}
+
+.modal_close::before {
+        background-color: var(--color-Black);
+        content: '';
+        height: 100%;
+        width: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        transition: background-color 0.2s ease-in-out;
+        -webkit-mask: url(../../public/img/icons/close.svg) no-repeat 50% 50%;
+        mask: url(../../public/img/icons/close.svg) no-repeat 50% 50%;
+      }
+  
+.modal_close:hover::before {
+        transition: background-color 0.2s ease-in-out;
+        background-color: var(--color-Dark-gray);
+      }

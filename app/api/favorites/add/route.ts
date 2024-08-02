@@ -46,6 +46,7 @@ export async function POST(req: Request) {
       vendorCode: productItem.vendorCode,
       category: reqBody.category,
       clientId: reqBody.clientId,
+      inStock: productItem.inStock,
     }
 
     const { insertedId } = await db

@@ -31,4 +31,21 @@ export const nameValidationRules = (
       message,
     },
   })
+
+  export const phoneValidationRules = (
+    message: string,
+    requireMessage?: string
+  ) => ({
+    ...(requireMessage && { required: requireMessage }),
+    pattern: {
+      value: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
+      message,
+    },
+  })
+
+
+  export const onNotifySuccess = <T>(message: string, data: T) => {
+    localStorage.setItem('notify', JSON.stringify(data))
+    toast.success(message)
+  }
   

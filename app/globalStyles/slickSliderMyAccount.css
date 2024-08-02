@@ -208,7 +208,14 @@
 
 .slick-prev
 {
-    left: -25px;
+    /* left: -25px; */
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    opacity: 1;
+    transform: translate3d(0, 36px, 0);
 }
 [dir='rtl'] .slick-prev
 {
@@ -221,7 +228,17 @@
 }
 [dir='rtl'] .slick-prev:before
 {
-    content: '→';
+    /* content: '→'; */
+    background-color: var(--color-Black);
+    content: '';
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    position: absolute;
+    -webkit-mask: url(../../public/img/icons/close.svg) no-repeat 50% 50%;
+    mask: url(../../public/img/icons/close.svg) no-repeat 50% 50%;
+    transition: background-color 0.2s ease-in-out;
 }
 
 .slick-next

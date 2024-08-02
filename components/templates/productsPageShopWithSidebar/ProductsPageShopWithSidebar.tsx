@@ -7,6 +7,10 @@ import styles from '@/styles/sidebarShop/index.module.css'
 import CardSmall from '@/components/modules/card/CardSmall'
 import SearchBarFilters from '@/components/elements/searchBarFilters/SearchBarFilters'
 import CatalogFilters from '@/components/modules/catalogFilters/CatalogFilters'
+import CatalogFiltersFullWidth from '@/components/modules/catalogFilters/CatalogFiltersFullWidth'
+import FilterBtn from '@/components/modules/catalogFilters/FilterBtn'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import React from 'react'
 // import { setCatalogCategoryOptions } from "@/context/catalog";
 
 const ProductsPageShopWithSidebar = ({
@@ -14,6 +18,12 @@ const ProductsPageShopWithSidebar = ({
   pageName,
 }: IAmProductsPage) => {
   const { lang, translations } = useLang()
+  const isMedia1300 = useMediaQuery(1300)
+  const isMedia800 = useMediaQuery(800)
+  const [open, setOpen] = React.useState(false)
+  const handleClick = () => {
+    setOpen(!open)
+  }
   const {
     products,
     paginationProps,
@@ -28,7 +38,24 @@ const ProductsPageShopWithSidebar = ({
 
   return (
     <div className={`container ${styles.sidebar_shop_container}`}>
-      <h1>{translations[lang].home.shop_the_latest}</h1>
+        {!isMedia800 ? 
+          <h1>{translations[lang].home.shop_the_latest}</h1>
+          : <h1>{translations[lang].home.shop}</h1>
+        }
+      {isMedia1300 &&
+        <div /*className={styles.sidebar_filter_block}*/>
+        <FilterBtn callback={handleClick} className={styles.sidebar_filter_btn}/>
+      {open && (
+        <CatalogFiltersFullWidth
+          handleApplyFiltersWithPrice={handleApplyFiltersWithPrice}
+          handleApplyFiltersWithTypes={handleApplyFiltersWithTypes}
+          handleApplyFiltersBySort={handleApplyFiltersBySort}
+          handleApplyFilterOnSale={handleApplyFilterOnSale}
+          handleApplyFilterInStock={handleApplyFilterInStock}
+        />
+      )}
+      </div>
+      }
       <div className={styles.sidebar_shop_content}>
         <div className={styles.sidebar_container}>
           <SearchBarFilters />

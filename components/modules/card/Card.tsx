@@ -22,8 +22,9 @@ import styles from '@/styles/card/index.module.css'
 import toast from 'react-hot-toast'
 import { setCurrentProduct } from '@/context/goods'
 import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
-import { showQuickViewModal } from '@/context/modals'
+import { openNotifyMeModal, showQuickViewModal } from '@/context/modals'
 import { useLang } from '@/hooks/useLang'
+import NotifyOfDeliveryBtn from '@/components/elements/notifyOfDelivery/NotifyOfDeliveryBtn'
 
 const Card = ({ item }: IAmCardProps) => {
   const { lang, translations } = useLang()
@@ -40,6 +41,12 @@ const Card = ({ item }: IAmCardProps) => {
   const handleShowQuickViewModal = (e: any) => {
     addOverflowHiddenToBody()
     showQuickViewModal()
+    setCurrentProduct(item)
+  }
+
+  const handleOpenNotifyMeModal = (e: any) => {
+    addOverflowHiddenToBody()
+    openNotifyMeModal()
     setCurrentProduct(item)
   }
 
@@ -113,6 +120,7 @@ const Card = ({ item }: IAmCardProps) => {
               </div>
             ) : (
               <div className={styles.card_to_cart_btn_container}>
+                {+item.inStock ?
                 <AddToCartBtn
                   text={
                     isProductInCart
@@ -123,6 +131,10 @@ const Card = ({ item }: IAmCardProps) => {
                   handleAddToCart={addToCart}
                   btnDisabled={!getCanAddToCart(item._id)}
                 />
+                : <NotifyOfDeliveryBtn 
+                    text={translations[lang].wishlist.notify_of_delivery} 
+                    handleNotifyMe={handleOpenNotifyMeModal} />
+                }
               </div>
             )
           ) : (

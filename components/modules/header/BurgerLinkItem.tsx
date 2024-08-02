@@ -1,6 +1,8 @@
+'use client'
 import Link from 'next/link'
 import React from 'react'
 import { IAmBurgerLinkItemProps } from '@/types/modules'
+import { handleCloseBurger } from '@/lib/utils/common'
 
 const BurgerLinkItem = ({
   item,
@@ -12,6 +14,7 @@ const BurgerLinkItem = ({
         <Link
           href={item.href}
           className='burger_link'
+          onClick={handleCloseBurger}
         >
           {item.text}
         </Link>

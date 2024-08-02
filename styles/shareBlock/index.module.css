@@ -1,0 +1,53 @@
+/* Socials */
+
+.socials {
+    position: relative;
+    width: 107px;
+    transition: color .2s ease-in-out;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    height: 32px;
+  }
+  
+  .social_media_icon:last-child {
+      margin-right: 21px;
+  }
+  
+  .social_media_icon::before {
+    background-color: var(--color-Dark-gray);
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 6px;
+  }
+  
+  .social_media_icon:hover::before {
+    background-color: var(--color-Accent);
+    transition: background-color .2s ease-in-out;
+  }
+  
+  .letter::before {
+    content: '';
+    width: 21px;
+    height: 21px;
+    -webkit-mask: url(../../public/img/icons/letter.svg) no-repeat 50% 50%;
+    mask: url(../../public/img/icons/letter.svg) no-repeat 50% 50%;
+  }
+  
+  .whatsapp::before {
+    content: '';
+    width: 21px;
+    height: 21px;
+    -webkit-mask: url(../../public/img/icons/whatsapp2.svg) no-repeat 50% 50%;
+    mask: url(../../public/img/icons/whatsapp2.svg) no-repeat 50% 50%;
+  }
+  
+  .telegram::before {
+    content: '';
+    width: 21px;
+    height: 21px;
+    -webkit-mask: url(../../public/img/icons/telegram.svg) no-repeat 50% 50%;
+    mask: url(../../public/img/icons/telegram.svg) no-repeat 50% 50%;
+  }

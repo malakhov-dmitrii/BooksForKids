@@ -8,6 +8,7 @@ import YourOrderList from '../checkoutPage/yourOrderList/YourOrderList';
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
 import { useTotalPriceWithDiscount } from '@/hooks/useTotalPriceWithDiscount';
 import { $cart, $cartFromLs } from '@/context/cart/state';
+import PaymentOptions from '../checkoutPage/paymentOptions/PaymentOptions';
 
 const OrderInfoBlock = ({
     isCorrectCouponCode,
@@ -64,7 +65,7 @@ const OrderInfoBlock = ({
                 </div>
                 {/* {isCheckoutPage && <></>} */}
                 <div className={styles.order_payment_methods_block}>
-                    <form>
+                    {/* <form>
                         <h5><input name='payment_methods' type='radio' value='card_payment' checked/>{translations[lang].checkout.card_payment}</h5>
                             <p className={`body_small`}>{translations[lang].checkout.card_payment_msg}</p>
                         <h5><input name='payment_methods' type='radio' value='paypal' />PayPal<span /></h5>
@@ -72,7 +73,8 @@ const OrderInfoBlock = ({
                         <h5><input name='payment_methods' type='radio' value='direct_bank' />{translations[lang].checkout.direct_payment}</h5>
                             <p className={`body_small hide`}>{translations[lang].checkout.direct_payment_msg}</p>
                         <button className='black_btn'><input type='submit' className={`uppercase body_large ${styles.order_place_input}`} value={translations[lang].checkout.place_order} /></button>
-                    </form>
+                    </form> */}
+                    <PaymentOptions />
                 </div>
             </div>
         </div>

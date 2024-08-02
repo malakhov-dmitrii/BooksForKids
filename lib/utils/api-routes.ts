@@ -5,70 +5,67 @@ import { shuffle } from './common'
 import { NextResponse } from 'next/server'
 
 export const getDbAndReqBody = async (
-    clientPromise: Promise<MongoClient>,
-    req: Request | null
+  clientPromise: Promise<MongoClient>,
+  req: Request | null
 ) => {
-    const db = (await clientPromise).db(process.env.NEXT_PUBLIC_DB_NAME)
+  const db = (await clientPromise).db(process.env.NEXT_PUBLIC_DB_NAME)
 
-    if(req) {
-        const reqBody = await req.json()
-        return { db, reqBody }
-    }
+  if (req) {
+    const reqBody = await req.json()
+    return { db, reqBody }
+  }
 
-    return { db }
+  return { db }
 }
 
 export const getGoodsForTheHomePage = async (db: Db) => {
-    const russianbooks = await db.collection('russianbooks').find().toArray()
-  
-    return shuffle([
-      ...russianbooks
-        .slice(0, 6),
-    ])
-  }
+  const russianbooks = await db.collection('russianbooks').find().toArray()
 
-  export const generateTokens = (name: string, email: string) => {
-    const accessToken = jwt.sign(
-      {
-        name,
-        email,
-      },
-      process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY as string,
-      {
-        expiresIn: '10m',
-      }
-    )
-  
-    const refreshToken = jwt.sign(
-      {
-        email,
-      },
-      process.env.NEXT_PUBLIC_REFRESH_TOKEN_KEY as string,
-      { expiresIn: '30d' }
-    )
-  
-    return { accessToken, refreshToken }
-  }
+  return shuffle([...russianbooks.slice(0, 6)])
+}
 
-  export const createUserAndGenerateTokens = async (
-    db: Db,
-    reqBody: { name: string; password: string; email: string }
-  ) => {
-    const salt = bcrypt.genSaltSync(10)
-    const hash = bcrypt.hashSync(reqBody.password, salt)
-  
-    await db.collection('users').insertOne({
-      name: reqBody.name,
-      password: hash,
-      email: reqBody.email,
-      image: '',
-      role: 'user',
-    })
-  
-    return generateTokens(reqBody.name, reqBody.email)
-  }
+export const generateTokens = (name: string, email: string) => {
+  const accessToken = jwt.sign(
+    {
+      name,
+      email,
+    },
+    process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY as string,
+    {
+      expiresIn: '10m',
+    }
+  )
 
-  export const findUserByEmail = async (db: Db, email: string) =>
+  const refreshToken = jwt.sign(
+    {
+      email,
+    },
+    process.env.NEXT_PUBLIC_REFRESH_TOKEN_KEY as string,
+    { expiresIn: '30d' }
+  )
+
+  return { accessToken, refreshToken }
+}
+
+export const createUserAndGenerateTokens = async (
+  db: Db,
+  reqBody: { name: string; password: string; email: string }
+) => {
+  const salt = bcrypt.genSaltSync(10)
+  const hash = bcrypt.hashSync(reqBody.password, salt)
+
+  await db.collection('users').insertOne({
+    name: reqBody.name,
+    password: hash,
+    email: reqBody.email,
+    image: '',
+    role: 'user',
+  })
+
+  return generateTokens(reqBody.name, reqBody.email)
+}
+
+export const findUserByEmail = async (db: Db, email: string) =>
   db.collection('users').findOne({ email })
 
 export const getAuthRouteData = async (
@@ -142,6 +139,18 @@ export const getDataFromDBByCollection = async (
   const items = await db
     .collection(collection)
     .find({ userId: user?._id })
+    .project({
+      inStock: 1,
+      _id: 1,
+      productId: 1,
+      image: 1,
+      name: 1,
+      authors: 1,
+      price: 1,
+      isDiscount: 1,
+      category: 1,
+    })
+
     .toArray()
 
   return NextResponse.json(items)

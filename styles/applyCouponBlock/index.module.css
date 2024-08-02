@@ -11,6 +11,12 @@
     width: 336px;
 }
 
+@media (max-width: 520px) {
+    .apply_coupon_placeholder {
+        width: 228px;
+    }
+  }
+
   @media (max-width: 1140px) {
     .apply_coupon_container {
         flex-direction: column;

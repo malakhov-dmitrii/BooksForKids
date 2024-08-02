@@ -92,6 +92,8 @@ export const addCartItemToLS = (
 }
 
 export const addProductsToCart = (product: IAmProduct, count: number) => {
+  console.log({ product, count })
+
   addItemToCart(product, count)
   return
 }
@@ -109,4 +111,4 @@ export const updateCartItemCountInLS = (cartItemId: string, count: number) => {
 }
 
 export const countWholeCartItemsAmount = (cart: IAmCartItem[]) =>
-  cart.reduce((defaultCount, item) => defaultCount + +item.count, 0)
+  cart.reduce((defaultCount, item) => defaultCount + +(item.count ?? 1), 0)

@@ -35,6 +35,7 @@ export const useFavoritesAction = (product: IAmProduct) => {
       productId: product._id,
       category: product.category,
       clientId,
+      inStock: product.inStock,
     })
     return
 

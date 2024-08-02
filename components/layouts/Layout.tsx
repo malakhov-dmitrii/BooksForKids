@@ -6,7 +6,10 @@ import SearchModal from '../modules/header/SearchModal';
 import Footer from '../modules/footer/Footer';
 import { useUnit } from 'effector-react';
 import QuickViewModal from '../modules/quickViewModal/QuickViewModal';
-import { $searchModal, $showQuickViewModal } from '@/context/modals/state';
+import { $couponModal, $notifyMeModal, $searchModal, $shareModal, $showQuickViewModal } from '@/context/modals/state';
+import NotifyMeModal from '../modules/notifyMeModal/NotifyMeModal';
+import ShareModal from '../modules/shareModal/ShareModal';
+import ApplyCouponBlockModal from '../modules/checkoutPage/applyCouponBlockModal/ApplyCouponBlockModal';
 // import { $openAuthPopup, openAuthPopup } from '@/context/auth';
 // import AuthPopup from '../templates/profilePage/ProfilePage';
 
@@ -14,8 +17,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     const isMedia800 = useMediaQuery(800)
     const isMedia520 = useMediaQuery(520)
     const searchModal = useUnit($searchModal)
+    const shareModal = useUnit($shareModal)
+    const couponModal = useUnit($couponModal)
     const showQuickViewModal = useUnit($showQuickViewModal)
-    // const openAddedToCartMobileModal = useUnit($addedToCartMobileModal)
+    const notifyMeModal = useUnit($notifyMeModal)
     // const openAuthPopup = useUnit($openAuthPopup)
     
     return (
@@ -25,9 +30,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     {children}
     {/* {openAuthPopup && <AuthPopup />} */}
     {searchModal && <SearchModal />}
+    {shareModal && <ShareModal />}
     {showQuickViewModal && <QuickViewModal />}
+    {notifyMeModal && <NotifyMeModal />}
+    {couponModal && <ApplyCouponBlockModal />}
     <Footer />
-    {/* {isMedia520 && openAddedToCartMobileModal && <QuickViewModal />} */}
     </> 
 )
 }

@@ -137,9 +137,10 @@
 }
 
 @media (max-width: 800px) {
-.home_section_text h1,
-.home_section_text h4 {
-  display: none;
+
+.home_section_text h1 {
+    font-size: 16px;
+    line-height: 1.2;
 }
 
 .home_section_text {
@@ -149,6 +150,15 @@
 
 .view_all_link {
     color: var(--color-Accent);
+}
+
+@media (max-width: 800px) {
+
+    .view_all_link h4 {
+        font-size: 12px;
+        line-height: 1.2;
+        font-weight: 400;
+    }
 }
 
 .home_section_list {

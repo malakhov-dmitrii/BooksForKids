@@ -12,12 +12,14 @@ import { useProductFiltersFullWidth } from '@/hooks/useProductFiltersFullWidth'
 import FilterBtn from '@/components/modules/catalogFilters/FilterBtn'
 import React from 'react'
 import CatalogFiltersFullWidth from '@/components/modules/catalogFilters/CatalogFiltersFullWidth'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 const ProductsPageShopFullWidth = ({
   searchParams,
   pageName,
 }: IAmProductsPage) => {
   const { lang, translations } = useLang()
+  const isMedia800 = useMediaQuery(800)
   const [open, setOpen] = React.useState(false)
   const handleClick = () => {
     setOpen(!open)
@@ -42,7 +44,10 @@ const ProductsPageShopFullWidth = ({
   return (
     <div className={`container ${styles.fullwidth_shop_container}`}>
       <div className={styles.fullwidth_filter_block}>
-        <h1>{translations[lang].home.shop_the_latest}</h1>
+        {!isMedia800 ? 
+          <h1>{translations[lang].home.shop_the_latest}</h1>
+          : <h1>{translations[lang].home.shop}</h1>
+        }
         <FilterBtn callback={handleClick} className='' />
       </div>
       {open && (

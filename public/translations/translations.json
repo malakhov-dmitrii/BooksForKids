@@ -29,6 +29,7 @@
             "account_details": "Account details",
             "details": "Details",
             "hello": "Hello",
+            "hello_undefined": "Hi there! Not your account?",
             "not": "not",
             "from_you_account": "From your account dashboard you can view your ",
             "recent_orders": "recent orders",
@@ -70,7 +71,8 @@
             "bedTimeStories": "Bed time stories"
         },
         "other": {
-            "shopping_cart": "Shopping bag",
+            "shopping_bag": "Shopping bag",
+            "shopping_cart": "Shopping cart",
             "nothing_found": "Nothing is found",
             "err_msg1": "This page not found;",
             "err_msg2": "back to home and start again",
@@ -170,6 +172,7 @@
             "btn_message2": "Shop Now",
             "btn_message3": "Order Book",
             "shop_the_latest": "Shop the Latest",
+            "shop": "Shop",
             "is_new": "New!",
             "is_bestseller": "Bestseller",
             "out_of_stock": "Sold out" 
@@ -186,6 +189,7 @@
             "more_info": "View more",
             "less_info": "View less",
             "description": "Description",
+            "share": "Share",
             "additional_info": "Additional information",
             "reviews": "Reviews",
             "item_added": "The item added to your Shopping bag.",
@@ -238,7 +242,8 @@
         "validation": {
           "invalid_value": "Invalid value",
           "requiredName": "Enter your name",
-          "invalid_phone": "Invalid phone",
+          "invalid_phone": "Enter your phone number in format (XXX) XXX-XXXX",
+          "required_phone": "Enter your phone number",
           "required_email": "Enter your email",
           "invalid_email": "Invalid email",
           "min_2": "Min 2 characters",
@@ -278,6 +283,7 @@
             "account_details": "Детали аккаунта",
             "details": "Настройки",
             "hello": "Привет",
+            "hello_undefined": "Добрый день! Не ваш аккаунт?",
             "not": "не",
             "from_you_account": "Здесь вы можете увидеть свои ",
             "recent_orders": "заказы",
@@ -319,6 +325,7 @@
             "bedTimeStories": "Сказки на ночь"
         },
         "other": {
+            "shopping_bag": "Корзина",
             "shopping_cart": "Корзина",
             "nothing_found": "Ничего не найдено",
             "wishlist": "Избранное",
@@ -420,6 +427,7 @@
             "btn_message2": "К покупкам",
             "btn_message3": "Заказать",
             "shop_the_latest": "Популярные",
+            "shop": "Популярные",
             "is_new": "Новинка",
             "is_bestseller": "Бестселлер",
             "out_of_stock": "Распродано" 
@@ -436,6 +444,7 @@
             "more_info": "Подробнее",
             "less_info": "Свернуть",
             "description": "Описание",
+            "share": "Поделиться",
             "additional_info": "Характеристики",
             "reviews": "Отзывы",
             "item_added": "Данный товар добавлен в Корзину.",
@@ -489,7 +498,8 @@
         "validation": {
           "invalid_value": "Недопустимое значение",
           "requiredName": "Введите имя",
-          "invalid_phone": "Нправильный телефон",
+          "invalid_phone": "Введите номер телефона в формате (XXX) XXX-XXXX",
+          "required_phone": "Введите номер телефона",
           "required_email": "Введите email",
           "invalid_email": "Неправильный Email",
           "min_2": "Минимум 2 символа",

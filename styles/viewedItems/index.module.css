@@ -1,0 +1,26 @@
+
+.viewed_top {
+    margin-bottom: 47px;
+    margin-top: 79px;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 520px) {
+    .viewed_top {
+        margin-bottom: 14px;
+        margin-top: 24px;
+    }
+  }
+
+.viewed_slider {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 520px) {
+    .viewed_top_heading {
+      font-size: 20px;
+      line-height: 1.2;
+    }
+  }

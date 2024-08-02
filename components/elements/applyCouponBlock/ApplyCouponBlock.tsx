@@ -1,4 +1,4 @@
-import styles from '@/styles/checkoutPage/index.module.css';
+import styles from '@/styles/applyCouponBlock/index.module.css';
 import { useLang } from '@/hooks/useLang';
 import { useState } from 'react';
 import ApplyCouponBtn from '../applyCouponBtn/ApplyCouponBtn';
@@ -23,12 +23,12 @@ const ApplyCouponBlock = ({
       }
 
     return (
-    <div className={`apply_coupon_container ${styles.className}`}>
-            <div className="apply_coupon_input_wrapper">
+    <div className={`${styles.apply_coupon_container}`}>
+            <div className={styles.apply_coupon_input_wrapper}>
                 <input 
                     type='text' 
                     placeholder={translations[lang].cart.coupon_code} 
-                    className='body_small capitalize apply_coupon_placeholder'
+                    className={`body_small capitalize ${styles.apply_coupon_placeholder}`}
                     onChange={handleChangeValue} 
                 />
             </div>

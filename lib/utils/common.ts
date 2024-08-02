@@ -1,7 +1,7 @@
 import { setIsAuth } from '@/context/auth'
 import { setShouldShowEmptyFavorites } from '@/context/favorites'
 // import { setShouldShowEmpty } from '@/context/cart'
-import { closeSearchModal } from '@/context/modals'
+import { closeBurger, closeCouponModal, closeSearchModal, closeShareModal } from '@/context/modals'
 import { loginCheck } from '@/context/user'
 import { IAmCartItem } from '@/types/cart'
 import { IAmProduct } from '@/types/common'
@@ -69,25 +69,6 @@ export const idGenerator = () => {
   )
 }
 
-// export const handleOpenAuthPopup = () => {
-//   addOverflowHiddenToBody()
-//   openAuthPopup()
-// }
-
-// export const handleCloseAuthPopup = () => {
-//   removeOverflowHiddenFromBody()
-//   closeAuthPopup()
-// }
-
-//   export const closeAuthPopupWhenSomeModalOpened = (
-//     showQuickViewModal: boolean
-//   ) => {
-//     if (showQuickViewModal) {
-//       closeAuthPopup()
-//       return
-//     }
-//   handleCloseAuthPopup()
-// }
 export const isUserAuth = () => {
   const auth = JSON.parse(localStorage.getItem('auth') as string)
   if (!auth?.accessToken) {
@@ -195,7 +176,7 @@ export const getCheckedArrayParam = (param: string): string[] => {
 
 export const getViewedItemsFromLS = () => {
   let viewedItems: IAmProduct[] = JSON.parse(
-    localStorage.getItem('watched') as string
+    localStorage.getItem('viewed') as string
   )
 
   if (!viewedItems || !Array.isArray(viewedItems)) {
@@ -205,7 +186,17 @@ export const getViewedItemsFromLS = () => {
   return viewedItems
 }
 
-// export const handleCloseShareModal = () => {
-//   removeOverflowHiddenFromBody()
-//   closeShareModal()
-// }
+export  const handleCloseBurger = () => {
+  removeOverflowHiddenFromBody()
+  closeBurger()
+}
+
+export const handleCloseShareModal = () => {
+  removeOverflowHiddenFromBody()
+  closeShareModal()
+}
+
+export const handleCloseCouponModal = () => {
+  removeOverflowHiddenFromBody()
+  closeCouponModal()
+}

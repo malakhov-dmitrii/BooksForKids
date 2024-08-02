@@ -10,13 +10,13 @@ export interface IAmItemsCountProps {
 }
 
 export interface IAmNotifyOfDeliveryBtnProps {
-    text: string
-    className?: string
-    btnDisabled?: boolean
-    handleNotifyMe: (param: any) => void
-  }
+  text: string
+  className?: string
+  btnDisabled?: boolean
+  handleNotifyMe: (param: any) => void
+}
 
-  export interface IAmViewAllLinkProps {
-    href: string
-  }
+export interface IAmViewAllLinkProps {
+  href: string
+}
   

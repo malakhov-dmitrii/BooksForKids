@@ -5,6 +5,12 @@
     flex-direction: column;
 }
 
+@media (max-width: 800px) {
+    .sidebar_shop_container {
+        margin-top: 24px;
+  }
+}
+
 .sidebar_shop_content {
     margin-top: 39px;
     display: flex;
@@ -23,7 +29,33 @@
 
 @media (max-width: 1300px) {
     .sidebar_shop_cards_list {
-        justify-content: start;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 16px;
+        width: 100%;
+        row-gap: 70px;
+        margin: 0;
+        padding: 0;
+        justify-content: space-between;
+        justify-items: center;
+  }
+
+    .sidebar_shop_content,
+    .sidebar_shop_right {
+        width: 100%;
+    }
+}
+
+@media (max-width: 920px) {
+    .sidebar_shop_cards_list {
+        row-gap: 30px;
+        column-gap: 10px;
+  }
+}
+
+  @media (max-width: 780px) {
+    .sidebar_shop_cards_list {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 16px;
   }
 }
 

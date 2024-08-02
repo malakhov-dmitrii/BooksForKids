@@ -147,8 +147,8 @@
   .header_burger {
    margin-left: 15px;
   }
-
-  .header_burger::before {
+  
+  .header_burger_open::before {
     background-color: var(--color-Black);
     content: '';
     height: 20px;
@@ -161,14 +161,27 @@
     transition: background-color 0.2s ease-in-out;
   }
 
-  .header_burger:hover::before {
+  .header_burger_close::before {
+    background-color: var(--color-Black);
+    content: '';
+    height: 20px;
+    width: 20px;
+    right: -6px;
+    position: absolute;
+    bottom: 28px;
+    -webkit-mask: url(../../public/img/icons/close.svg) no-repeat 50% 50%;
+    mask: url(../../public/img/icons/close.svg) no-repeat 50% 50%;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  /* .header_burger_open:hover::before {
     transition: background-color 0.2s ease-in-out;
     background-color: var(--color-Dark-gray);
   }
   
-  .header_burger:hover {
+  .header_burger_open:hover {
     color: var(--color-Dark-gray);
     transition: .2s ease-in-out color;
-  }
+  } */
 
 }

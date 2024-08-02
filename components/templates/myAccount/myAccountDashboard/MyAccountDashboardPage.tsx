@@ -4,6 +4,8 @@ import { useUnit } from 'effector-react'
 import { useLang } from "@/hooks/useLang";
 import { useUserLogout } from "@/hooks/useLogout";
 import styles from '@/styles/myAccount/index.module.css'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import MyAccountNavigationLinks from "../myAccountNavigationLinks/MyAccountNavigationLinks";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import MyAccountMobileSlider from "../myAccountMobileSlider/MyAccountMobileSlider";
@@ -20,13 +22,18 @@ const MyAccountDashboardPage = () => {
     return (
             <main>
                 <section className={styles.dashboard_page}>
-                    <div className={`container ${styles.dashboard_page_content}`}>
+                {user?.name && <div className={`container ${styles.dashboard_page_content}`}>
                         <h1>{translations[lang].burger_menu_account.my_account}</h1>
                         {/* <MyAccountNavigationLinks /> */}
                         <MyAccountMobileSlider />
                         <div className={styles.my_account_dashboard_content}>
                             <h5 className={styles.my_account_dashboard_content_h}>
-                                {`${translations[lang].my_account.hello} ${user.name}! (${translations[lang].my_account.not} ${user.name}? `}
+                                {user?.name ? 
+                                <span>{`${translations[lang].my_account.hello} ${user.name}! (${translations[lang].my_account.not} ${user.name}? `}
+                                </span>
+                                :
+                                <span>{`${translations[lang].my_account.hello_undefined} `}</span>
+                                }
                             <button
                                 className='accent'
                                 onClick={handleLogout}
@@ -45,6 +52,7 @@ const MyAccountDashboardPage = () => {
                             </h5>
                         </div>
                     </div>
+                }
                 </section>
             </main>
             );

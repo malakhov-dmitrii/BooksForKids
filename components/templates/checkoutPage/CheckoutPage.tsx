@@ -7,6 +7,8 @@ import ApplyCouponBlock from "@/components/elements/applyCouponBlock/ApplyCoupon
 import OrderInfoBlock from "@/components/modules/orderInfoBlock/OrderInfoBlock";
 import { MutableRefObject, useRef, useState } from "react";
 import { $isAuth } from "@/context/auth/state";
+import { addOverflowHiddenToBody } from "@/lib/utils/common";
+import { openCouponModal } from "@/context/modals";
 
 const CheckoutPage = ({
 
@@ -20,6 +22,10 @@ const CheckoutPage = ({
 
     const handleCreatingAccountChange = () => setUserWantToCreateAccount(!userWantToCreateAccount)
     const handleShipToDiffAddressChange = () => setshipToDifferentAddress(!shipToDifferentAddress)
+    const handleCouponModal = () => {
+        addOverflowHiddenToBody()
+        openCouponModal()
+      }
 
     const handleTabCheckbox = (e: React.KeyboardEvent<HTMLLabelElement>) => {
         if (e.key == ' ' || e.code == 'Space') {
@@ -49,7 +55,7 @@ const CheckoutPage = ({
                                 }
                                 <button 
                                     className={styles.checkout_left_link}
-                                    onClick={() => {}}>
+                                    onClick={handleCouponModal}>
                                         <span className={styles.checkout_left_links_gray}>{translations[lang].checkout.have_a_coupon} </span>
                                          {translations[lang].checkout.click_here_to_enter_code}
                                 </button>

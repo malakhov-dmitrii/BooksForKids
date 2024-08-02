@@ -22,6 +22,7 @@ export interface IAmAddProductToCartFx {
   count: number
   jwt: string
   clientId: string
+  inStock?: string
 }
 
 export interface IAmAddProductsFromLSToCartFx {

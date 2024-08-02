@@ -1,5 +1,17 @@
 'use client'
-import { closeAddedToCartMobileModal, closeBurger, closeQuickViewModal, closeSearchModal, modals, openAddedToCartMobileModal, openBurger, openSearchModal, showQuickViewModal } from '.'
+import { closeBurger, 
+  closeCouponModal, 
+  closeNotifyMeModal, 
+  closeQuickViewModal, 
+  closeSearchModal, 
+  closeShareModal, 
+  modals, 
+  openBurger, 
+  openCouponModal, 
+  openNotifyMeModal, 
+  openSearchModal, 
+  openShareModal, 
+  showQuickViewModal } from '.'
 
 export const $burgerIsOpen = modals
   .createStore(false)
@@ -16,12 +28,17 @@ export const $showQuickViewModal = modals
 .on(showQuickViewModal, () => true)
 .on(closeQuickViewModal, () => false)
 
-export const $addedToCartMobileModalIsOpen = modals
-.createStore(false)
-.on(openAddedToCartMobileModal, () => true)
-.on(closeAddedToCartMobileModal, () => false)
+export const $shareModal = modals
+  .createStore(false)
+  .on(openShareModal, () => true)
+  .on(closeShareModal, () => false)
 
-// export const $shareModal = modals
-//   .createStore(false)
-//   .on(openShareModal, () => true)
-//   .on(closeShareModal, () => false)
+export const $notifyMeModal = modals
+.createStore(false)
+.on(openNotifyMeModal, () => true)
+.on(closeNotifyMeModal, () => false)
+
+export const $couponModal = modals
+  .createStore(false)
+  .on(openCouponModal, () => true)
+  .on(closeCouponModal, () => false)

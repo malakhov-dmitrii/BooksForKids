@@ -29,7 +29,7 @@ const CartPage = () => {
         <main>
             {!shouldShowEmpty ? (<section className={styles.shopping_cart}>
                 <div className={`container ${styles.shopping_cart_container}`}>
-                    <h1>Shopping Cart</h1>
+                    <h1>{translations[lang].other.shopping_cart}</h1>
                     <div className={styles.shopping_cart_content}>
                         <div className={styles.shopping_cart_content_left}>
                             <ul className={styles.shopping_cart_list}>

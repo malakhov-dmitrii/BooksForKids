@@ -4,6 +4,7 @@ export interface IAmInput {
     name: string
     email: string
     password: string
+    phone?: string
 }
 
 export interface IAmSignUpFx {
@@ -22,4 +23,10 @@ export interface IAmNameErrorMessageProps {
     errors: FieldErrors<IAmInput & { [index: string]: string }>
     fieldName: string
     className?: string
+}
+
+export interface IAmNotifyMeFx {
+    phone: string
+    name: string
+    email: string
 }

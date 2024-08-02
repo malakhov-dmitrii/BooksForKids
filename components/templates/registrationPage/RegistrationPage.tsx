@@ -3,11 +3,11 @@ import { useLang } from "@/hooks/useLang";
 import Link from "next/link";
 import { IAmInput } from "@/types/authPopup";
 import { useAuthForm } from "@/hooks/useAuthForm";
-import { handleSignUp } from "@/context/auth";
 import NameInput from "@/components/modules/profilePage/NameInput";
 import EmailInput from "@/components/modules/profilePage/EmailInput";
 import PasswordInput from "@/components/modules/profilePage/PasswordInput";
 import AuthSocials from "@/components/modules/profilePage/AuthSocials";
+import { handleSignUp } from "@/context/auth";
 
 
 const RegistrationPage = () => {

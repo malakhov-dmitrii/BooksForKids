@@ -6,7 +6,7 @@ const ProductImagesItem = ({ image, imgSize }: IAmProductImagesItemProps) => {
 
   return (
     <li
-      className={styles.product_top_images_item}
+      className={`list-reset ${styles.product_top_images_item}`}
     >
       <Image
         src={image.src}

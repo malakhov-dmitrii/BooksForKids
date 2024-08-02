@@ -118,6 +118,12 @@
     }
 }
 
+@media (max-width: 570px) {
+    .checkout_left_link h5{
+        font-size: 12px;
+    }
+}
+
 .checkout_left_links_gray {
     color: var(--color-Dark-gray);
 }

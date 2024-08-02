@@ -18,7 +18,7 @@ export const useProductFilters = (
 ) => {
   const products = useUnit($products)
   const isValidOffset = checkOffsetParam(searchParams.offset)
-  const pagesCount = Math.ceil((products.count || 6) / 6)
+  const pagesCount = Math.ceil((products.count || 12) / 12)
   const [currentPage, setCurrentPage] = useState(
     isValidOffset ? +(searchParams.offset || 0) : 0
   )
@@ -31,7 +31,7 @@ export const useProductFilters = (
 
     if (!isValidOffset) {
       loadProductsByFilter({
-        limit: 6,
+        limit: 12,
         offset: 0,
         additionalParam: urlParams.toString(),
         isCatalog,
@@ -45,8 +45,8 @@ export const useProductFilters = (
     }
 
     loadProductsByFilter({
-      limit: 6 * +(searchParams.offset || 0) + 6,
-      offset: +(searchParams.offset || 0) * 6,
+      limit: 12 * +(searchParams.offset || 0) + 12,
+      offset: +(searchParams.offset || 0) * 12,
       additionalParam: urlParams.toString(),
       isCatalog,
       category,
@@ -61,8 +61,8 @@ export const useProductFilters = (
     urlParams.delete('offset')
 
     loadProductsByFilter({
-      limit: 6 * selected + 6,
-      offset: selected * 6,
+      limit: 12 * selected + 12,
+      offset: selected * 12,
       additionalParam: urlParams.toString(),
       isCatalog,
       category,
