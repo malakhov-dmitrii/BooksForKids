@@ -2,6 +2,7 @@ import { StoreWritable } from 'effector'
 
 export interface IAmProduct {
   _id: string
+  count?: number
   type: string
   category: string
   collection: string

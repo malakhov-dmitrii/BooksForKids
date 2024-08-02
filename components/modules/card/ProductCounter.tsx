@@ -1,8 +1,6 @@
-import { updateCartItemCount } from '@/context/cart'
-import { updateCartItemCountInLS } from '@/lib/utils/cart'
-import { isUserAuth } from '@/lib/utils/common'
+import { useUpdateCartItemCount } from '@/hooks/api/useCart'
 import { IAmProductCounterProps } from '@/types/goods'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 const ProductCounter = ({
   className,
@@ -13,59 +11,29 @@ const ProductCounter = ({
   cartItem,
   updateCountAsync,
 }: IAmProductCounterProps) => {
-  const [disableIncrease, setDisableIncrease] = useState(false)
-  const [disableDecrease, setDisableDecrease] = useState(false)
-  const currentTotalCount = +cartItem?.inStock || totalCount
-  const currentInitialCount = +cartItem?.count || initialCount || 1
-
-  useEffect(() => {
-    if (count === 1) {
-      setDisableDecrease(true)
-    } else {
-      setDisableDecrease(false)
-    }
-
-    if (count === currentTotalCount) {
-      setDisableIncrease(true)
-    } else {
-      setDisableIncrease(false)
-    }
-  }, [count, currentTotalCount])
+  const { mutate: updateCartItemCount } = useUpdateCartItemCount()
+  const currentTotalCount = +(cartItem?.inStock ?? 0) || totalCount
+  const currentInitialCount = +(cartItem?.count ?? 0) || initialCount || 1
+  const disableDecrease = count === 1
+  const disableIncrease = count === currentTotalCount
 
   useEffect(() => {
     setCount(currentInitialCount as number)
   }, [currentInitialCount])
 
-  const updateCountWithRequest = (count: number) => {
-    updateCartItemCountInLS(cartItem.clientId, count)
-    if (!isUserAuth()) {
-      return
-    }
-
-    const auth = JSON.parse(localStorage.getItem('auth') as string)
-
-    updateCartItemCount({
-      jwt: auth.accessToken,
-      id: cartItem._id,
-      count,
-    })
-  }
-
   const increase = async () => {
-    setDisableDecrease(false)
     setCount(count + 1)
 
     if (updateCountAsync) {
-      updateCountWithRequest(count + 1)
+      updateCartItemCount({ id: cartItem?._id, count: count + 1 })
     }
   }
 
   const decrease = async () => {
-    setDisableIncrease(false)
     setCount(count - 1)
 
     if (updateCountAsync) {
-      updateCountWithRequest(count - 1)
+      updateCartItemCount({ id: cartItem?._id, count: count - 1 })
     }
   }
 

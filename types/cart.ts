@@ -1,20 +1,20 @@
-import { IAmBaseEffectProps } from "./common"
+import { IAmBaseEffectProps } from './common'
 
 export interface IAmCartItem {
-    _id: string
-    clientId: string
-    userId: string
-    productId: string
-    image: string
-    name: string
-    authors: string
-    count: string | number
-    price: string
-    totalPrice: string
-    inStock: string
-    isDiscount: string
-    category: string
-  }
+  _id: string
+  clientId: string
+  userId: string
+  productId: string
+  image: string
+  name: string
+  authors: string
+  count: string | number
+  price: string
+  totalPrice: string
+  inStock: string
+  isDiscount: string
+  category: string
+}
 
 export interface IAmAddProductToCartFx {
   productId: string

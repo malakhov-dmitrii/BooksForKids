@@ -1,4 +1,4 @@
-import { IAmCartItem } from './cart'
+import { CartItem } from '@/hooks/api/useCart'
 import { IAmProduct } from './common'
 
 export interface IAmLoadOneProductFx {
@@ -10,7 +10,7 @@ export interface IAmProductCounterProps {
   className: string
   count: number
   setCount: (arg0: number) => void
-  cartItem: IAmCartItem
+  cartItem?: CartItem
   updateCountAsync: boolean
   initialCount?: number
   totalCount?: number
@@ -40,8 +40,3 @@ export interface IAmProducts {
 export interface IAmLoadViewedItemsFx {
   payload: { _id: string; category: string }[]
 }
-
-
-
-
-

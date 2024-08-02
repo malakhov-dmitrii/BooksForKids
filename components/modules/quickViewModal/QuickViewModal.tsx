@@ -10,35 +10,23 @@ import ProductCounter from '../card/ProductCounter'
 import SKU from '../card/SKU'
 import styles from '@/styles/quickViewModal/index.module.css'
 import ProductDescription from '@/components/elements/productDescription/ProductDescription'
-import { IAmCartItem } from '@/types/cart'
 import { useFavoritesAction } from '@/hooks/useFavoritesAction'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
+import { useAddToCart } from '@/hooks/api/useCart'
 
 const QuickViewModal = () => {
   const { lang, translations } = useLang()
-  const {
-    product,
-    handleAddToCart,
-    allCurrentCartItemCount,
-    setCount,
-    existingItem,
-    count,
-  } = useCartAction()
+  const { product, allCurrentCartItemCount, setCount, existingItem, count } =
+    useCartAction()
   const images = useProductImages(product)
   const { handleAddProductToFavorites, isProductInFavorites } =
     useFavoritesAction(product)
-  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
-  const currentFavoriteItems = currentFavoritesByAuth.filter(
-    (product) => product.productId === product._id
-  )
 
   const handleCloseModal = () => {
     removeOverflowHiddenFromBody()
     closeQuickViewModal()
   }
 
-  const addToCart = () => handleAddToCart(count)
+  const addToCart = useAddToCart()
 
   return (
     <div className={styles.modal}>
@@ -66,13 +54,13 @@ const QuickViewModal = () => {
                 totalCount={+product.inStock}
                 initialCount={+(existingItem?.count || 1)}
                 setCount={setCount}
-                cartItem={existingItem as IAmCartItem}
+                cartItem={existingItem}
                 updateCountAsync={false}
               />
               <AddToCartBtn
                 text={translations[lang].other.add_to_cart}
                 className={`white_btn ${styles.product_to_cart_btn}`}
-                handleAddToCart={addToCart}
+                handleAddToCart={() => addToCart.mutate({ ...product, count })}
                 btnDisabled={allCurrentCartItemCount === +product.inStock}
               />
             </div>
@@ -83,10 +71,10 @@ const QuickViewModal = () => {
                             : ${styles.modal_right_favorite_btn}`}
                 onClick={handleAddProductToFavorites}
               >
-                <span className={styles.modal_right_favorite_icon}></span>
+                <span className={styles.modal_right_favorite_icon} />
               </button>
               <div className={styles.line_container}>
-                <span className={styles.line}></span>
+                <span className={styles.line} />
               </div>
               <ul className={styles.socials}>
                 <li>

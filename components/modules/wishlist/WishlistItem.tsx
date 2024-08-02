@@ -11,29 +11,23 @@ import { useLang } from '@/hooks/useLang'
 import styles from '@/styles/myAccount/index.module.css'
 import DeleteItemBtn from '@/components/elements/deleteItemBtn/DeleteItemBtn'
 
-import { useFavoritesAction } from '@/hooks/useFavoritesAction'
 import { IAmFavoriteItem } from '@/types/favorites'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { addProductToCart } from '@/context/cart'
 import AddToCartBtn from '@/components/elements/addToCart/AddToCartBtn'
 import NotifyOfDeliveryBtn from '@/components/elements/notifyOfDelivery/NotifyOfDeliveryBtn'
-import { addCartItemToLS } from '@/lib/utils/cart'
-import { IAmProduct } from '@/types/common'
 import {
   deleteProductFromFavorites,
   setFavoritesFromLS,
   setShouldShowEmptyFavorites,
 } from '@/context/favorites'
 import { useProductDelete } from '@/hooks/useProductDelete'
-import { $cart, $cartFromLs } from '@/context/cart/state'
 import { openNotifyMeModal } from '@/context/modals'
-import { setCurrentProduct } from '@/context/goods'
+import { useAddToCart, useCart } from '@/hooks/api/useCart'
 
 const WishlistItem = ({ item }: { item: IAmFavoriteItem }) => {
   const { lang, translations } = useLang()
   const isMedia1070 = useMediaQuery(1070)
-  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs)
-  const isProductInCart = currentCartByAuth.find(
+  const { data: cart } = useCart()
+  const isProductInCart = cart?.find(
     (cartItem) => cartItem.productId === item.productId
   )
   const { handleDelete } = useProductDelete(
@@ -41,34 +35,7 @@ const WishlistItem = ({ item }: { item: IAmFavoriteItem }) => {
     deleteProductFromFavorites
   )
 
-  const addToCart = () => {
-    const cartItem = {
-      ...item,
-      _id: item.productId,
-      images: [item.image],
-    }
-
-    if (!isUserAuth()) {
-      addCartItemToLS(cartItem as unknown as IAmProduct, 1)
-      return
-    }
-
-    const auth = JSON.parse(localStorage.getItem('auth') as string)
-
-    const clientId = addCartItemToLS(
-      cartItem as unknown as IAmProduct,
-      1,
-      false
-    )
-
-    addProductToCart({
-      jwt: auth.accessToken,
-      productId: item.productId,
-      category: item.category,
-      count: 1,
-      clientId,
-    })
-  }
+  const addToCart = useAddToCart()
 
   const handleDeleteFavorite = () => {
     if (!isUserAuth()) {
@@ -93,7 +60,7 @@ const WishlistItem = ({ item }: { item: IAmFavoriteItem }) => {
     )
   }
 
-  const handleOpenNotifyMeModal = (e: any) => {
+  const handleOpenNotifyMeModal = () => {
     addOverflowHiddenToBody()
     openNotifyMeModal()
     // setCurrentProduct(item)
@@ -101,199 +68,213 @@ const WishlistItem = ({ item }: { item: IAmFavoriteItem }) => {
 
   return (
     <>
-    {!isMedia1070 && <div className={styles.wishlist_item_big}>
-      <div className={styles.wishlist_delete_btn_container}>
-        <DeleteItemBtn
-          btnDisabled={false}
-          className={`${styles.wishlist_item_delete} ${styles.wishlist_item_delete_big}`}
-          callback={handleDeleteFavorite}
-        />
-      </div>
-      <div
-        className={`${styles.wishlist_item_cell} ${styles.wishlist_item_cell_product_name}`}
-      >
-        <div className={styles.wishlist_item_img}>
-          <Image
-            src={item.image}
-            alt={item.image}
-            width={100}
-            height={100}
-            className={styles.wishlist_item_image}
-          />
-        </div>
-        <div className={styles.wishlist_item_title_container}>
-          <Link
-            href={`/catalog/${item.category}/${item.productId}`}
-            className={styles.wishlist_item_title}
-          >
-            <h5>
-              {item.name} | {item.authors}
-            </h5>
-          </Link>
-        </div>
-      </div>
-      <div className={styles.wishlist_item_cell}>
-        {item.isDiscount ? (
-          <h5>
-            <span
-              className={`line_through ${styles.wishlist_item_discount} ${styles.wishlist_item_price}`}
-            >
-              {formatPrice(+item.price)}
-            </span>
-            <br />
-            <span
-              className={styles.wishlist_item_price}
-            >{`${formatPrice(+item.price * (1 - +item.isDiscount / 100))}`}</span>
-          </h5>
-        ) : (
-          <h5 className={styles.wishlist_item_price}>
-            {formatPrice(+item.price)}
-          </h5>
-        )}
-      </div>
-      <div className={`capitalize dark_gray ${styles.wishlist_item_cell}`}>
-        {+item.inStock === 1 ? (
-          <h5>{translations[lang].wishlist.only_1}</h5>
-        ) : +item.inStock ? (
-          <h5>{translations[lang].wishlist.in_stock}</h5>
-        ) : (
-          <h5>{translations[lang].wishlist.out_of_stock}</h5>
-        )}
-      </div>
-      <div className={styles.wishlist_item_cell}>
-        {+item.inStock ? (
-          !!isProductInCart ? (
-            <div>
-              <button className={`black_btn disabled ${styles.wishlist_btn}`}>
-                {translations[lang].card.in_cart}
-              </button>
-              <Link
-                href='/cart'
-                className={`black_btn ${styles.wishlist_btn} ${styles.wishlist_btn_view_cart}`}
-              >
-                {translations[lang].other.view_cart}
-              </Link>
-            </div>
-          ) : (
-            <div>
-              <AddToCartBtn
-                text={translations[lang].wishlist.to_cart}
-                className={`black_btn ${styles.wishlist_btn}`}
-                handleAddToCart={addToCart}
-              />
-              <Link href='/cart'>
-                <AddToCartBtn
-                  text={translations[lang].wishlist.quick_buy}
-                  className={`black_btn ${styles.wishlist_btn} ${styles.wishlist_btn_quick_buy}`}
-                  handleAddToCart={addToCart}
-                />
-              </Link>
-            </div>
-          )
-        ) : (
-          <NotifyOfDeliveryBtn
-            text={translations[lang].wishlist.notify_of_delivery}
-            className={`black_btn ${styles.wishlist_btn}`}
-            handleNotifyMe={handleOpenNotifyMeModal}
-          />
-        )}
-      </div>
-      </div>}
-      {isMedia1070 && <div className={styles.wishlist_item_small}>
-        <DeleteItemBtn
-          btnDisabled={false}
-          className={`${styles.wishlist_item_delete} ${styles.wishlist_item_delete_small}`}
-          callback={handleDeleteFavorite}
-        />
-        <div className={styles.wishlist_item_small_first_row}>
-          <div className={styles.wishlist_item_img}>
-            <Image
-              src={item.image}
-              alt={item.image}
-              width={100}
-              height={100}
-              className={styles.wishlist_item_image}
+      {!isMedia1070 && (
+        <div className={styles.wishlist_item_big}>
+          <div className={styles.wishlist_delete_btn_container}>
+            <DeleteItemBtn
+              btnDisabled={false}
+              className={`${styles.wishlist_item_delete} ${styles.wishlist_item_delete_big}`}
+              callback={handleDeleteFavorite}
             />
           </div>
-          <div className={styles.wishlist_item_title_container_small}>
-            <Link
-              href={`/catalog/${item.category}/${item.productId}`}
-              className={styles.wishlist_item_title}
-            >
+          <div
+            className={`${styles.wishlist_item_cell} ${styles.wishlist_item_cell_product_name}`}
+          >
+            <div className={styles.wishlist_item_img}>
+              <Image
+                src={item.image}
+                alt={item.image}
+                width={100}
+                height={100}
+                className={styles.wishlist_item_image}
+              />
+            </div>
+            <div className={styles.wishlist_item_title_container}>
+              <Link
+                href={`/catalog/${item.category}/${item.productId}`}
+                className={styles.wishlist_item_title}
+              >
+                <h5>
+                  {item.name} | {item.authors}
+                </h5>
+              </Link>
+            </div>
+          </div>
+          <div className={styles.wishlist_item_cell}>
+            {item.isDiscount ? (
               <h5>
-                {item.name} | {item.authors}
+                <span
+                  className={`line_through ${styles.wishlist_item_discount} ${styles.wishlist_item_price}`}
+                >
+                  {formatPrice(+item.price)}
+                </span>
+                <br />
+                <span
+                  className={styles.wishlist_item_price}
+                >{`${formatPrice(+item.price * (1 - +item.isDiscount / 100))}`}</span>
               </h5>
-            </Link>
-            <div className={styles.wishlist_item_price_small}>
-        {item.isDiscount ? (
-          <h5>
-            <span
-              className={`line_through ${styles.wishlist_item_discount} ${styles.wishlist_item_price}`}
-            >
-              {formatPrice(+item.price)}
-            </span>
-            <br />
-            <span
-              className={styles.wishlist_item_price}
-            >{`${formatPrice(+item.price * (1 - +item.isDiscount / 100))}`}</span>
-          </h5>
-        ) : (
-          <h5 className={styles.wishlist_item_price}>
-            {formatPrice(+item.price)}
-          </h5>
-        )}
-      </div>
-      <div className={`capitalize dark_gray ${styles.wishlist_item_in_stock_small}`}>
-        {+item.inStock === 1 ? (
-          <h5>{translations[lang].wishlist.only_1}</h5>
-        ) : +item.inStock ? (
-          <h5>{translations[lang].wishlist.in_stock}</h5>
-        ) : (
-          <h5>{translations[lang].wishlist.out_of_stock}</h5>
-        )}
-      </div>
+            ) : (
+              <h5 className={styles.wishlist_item_price}>
+                {formatPrice(+item.price)}
+              </h5>
+            )}
+          </div>
+          <div className={`capitalize dark_gray ${styles.wishlist_item_cell}`}>
+            {+item.inStock === 1 ? (
+              <h5>{translations[lang].wishlist.only_1}</h5>
+            ) : +item.inStock ? (
+              <h5>{translations[lang].wishlist.in_stock}</h5>
+            ) : (
+              <h5>{translations[lang].wishlist.out_of_stock}</h5>
+            )}
+          </div>
+          <div className={styles.wishlist_item_cell}>
+            {+item.inStock ? (
+              !!isProductInCart ? (
+                <div>
+                  <button
+                    className={`black_btn disabled ${styles.wishlist_btn}`}
+                  >
+                    {translations[lang].card.in_cart}
+                  </button>
+                  <Link
+                    href='/cart'
+                    className={`black_btn ${styles.wishlist_btn} ${styles.wishlist_btn_view_cart}`}
+                  >
+                    {translations[lang].other.view_cart}
+                  </Link>
+                </div>
+              ) : (
+                <div>
+                  <AddToCartBtn
+                    text={translations[lang].wishlist.to_cart}
+                    className={`black_btn ${styles.wishlist_btn}`}
+                    handleAddToCart={() =>
+                      addToCart.mutate({ ...item, count: 1 })
+                    }
+                  />
+                  <Link href='/cart'>
+                    <AddToCartBtn
+                      text={translations[lang].wishlist.quick_buy}
+                      className={`black_btn ${styles.wishlist_btn} ${styles.wishlist_btn_quick_buy}`}
+                      handleAddToCart={() =>
+                        addToCart.mutate({ ...item, count: 1 })
+                      }
+                    />
+                  </Link>
+                </div>
+              )
+            ) : (
+              <NotifyOfDeliveryBtn
+                text={translations[lang].wishlist.notify_of_delivery}
+                className={`black_btn ${styles.wishlist_btn}`}
+                handleNotifyMe={handleOpenNotifyMeModal}
+              />
+            )}
           </div>
         </div>
-      
-      <div className={styles.wishlist_item_btns}>
-        {+item.inStock ? (
-          !!isProductInCart ? (
-            <div>
-              <button className={`black_btn disabled ${styles.wishlist_btn}`}>
-                {translations[lang].card.in_cart}
-              </button>
-              <Link
-                href='/cart'
-                className={`black_btn ${styles.wishlist_btn} ${styles.wishlist_btn_view_cart}`}
-              >
-                {translations[lang].other.view_cart}
-              </Link>
-            </div>
-          ) : (
-            <div>
-              <AddToCartBtn
-                text={translations[lang].wishlist.to_cart}
-                className={`black_btn ${styles.wishlist_btn}`}
-                handleAddToCart={addToCart}
-              />
-              <Link href='/cart'>
-                <AddToCartBtn
-                  text={translations[lang].wishlist.quick_buy}
-                  className={`black_btn ${styles.wishlist_btn} ${styles.wishlist_btn_quick_buy}`}
-                  handleAddToCart={addToCart}
-                />
-              </Link>
-            </div>
-          )
-        ) : (
-          <NotifyOfDeliveryBtn
-            text={translations[lang].wishlist.notify_of_delivery}
-            className={`black_btn ${styles.wishlist_btn}`}
-            handleNotifyMe={handleOpenNotifyMeModal}
+      )}
+      {isMedia1070 && (
+        <div className={styles.wishlist_item_small}>
+          <DeleteItemBtn
+            btnDisabled={false}
+            className={`${styles.wishlist_item_delete} ${styles.wishlist_item_delete_small}`}
+            callback={handleDeleteFavorite}
           />
-        )}
-      </div>
-      </div>}
+          <div className={styles.wishlist_item_small_first_row}>
+            <div className={styles.wishlist_item_img}>
+              <Image
+                src={item.image}
+                alt={item.image}
+                width={100}
+                height={100}
+                className={styles.wishlist_item_image}
+              />
+            </div>
+            <div className={styles.wishlist_item_title_container_small}>
+              <Link
+                href={`/catalog/${item.category}/${item.productId}`}
+                className={styles.wishlist_item_title}
+              >
+                <h5>
+                  {item.name} | {item.authors}
+                </h5>
+              </Link>
+              <div className={styles.wishlist_item_price_small}>
+                {item.isDiscount ? (
+                  <h5>
+                    <span
+                      className={`line_through ${styles.wishlist_item_discount} ${styles.wishlist_item_price}`}
+                    >
+                      {formatPrice(+item.price)}
+                    </span>
+                    <br />
+                    <span
+                      className={styles.wishlist_item_price}
+                    >{`${formatPrice(+item.price * (1 - +item.isDiscount / 100))}`}</span>
+                  </h5>
+                ) : (
+                  <h5 className={styles.wishlist_item_price}>
+                    {formatPrice(+item.price)}
+                  </h5>
+                )}
+              </div>
+              <div
+                className={`capitalize dark_gray ${styles.wishlist_item_in_stock_small}`}
+              >
+                {+item.inStock === 1 ? (
+                  <h5>{translations[lang].wishlist.only_1}</h5>
+                ) : +item.inStock ? (
+                  <h5>{translations[lang].wishlist.in_stock}</h5>
+                ) : (
+                  <h5>{translations[lang].wishlist.out_of_stock}</h5>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.wishlist_item_btns}>
+            {+item.inStock ? (
+              !!isProductInCart ? (
+                <div>
+                  <button
+                    className={`black_btn disabled ${styles.wishlist_btn}`}
+                  >
+                    {translations[lang].card.in_cart}
+                  </button>
+                  <Link
+                    href='/cart'
+                    className={`black_btn ${styles.wishlist_btn} ${styles.wishlist_btn_view_cart}`}
+                  >
+                    {translations[lang].other.view_cart}
+                  </Link>
+                </div>
+              ) : (
+                <div>
+                  <AddToCartBtn
+                    text={translations[lang].wishlist.to_cart}
+                    className={`black_btn ${styles.wishlist_btn}`}
+                    handleAddToCart={addToCart}
+                  />
+                  <Link href='/cart'>
+                    <AddToCartBtn
+                      text={translations[lang].wishlist.quick_buy}
+                      className={`black_btn ${styles.wishlist_btn} ${styles.wishlist_btn_quick_buy}`}
+                      handleAddToCart={addToCart}
+                    />
+                  </Link>
+                </div>
+              )
+            ) : (
+              <NotifyOfDeliveryBtn
+                text={translations[lang].wishlist.notify_of_delivery}
+                className={`black_btn ${styles.wishlist_btn}`}
+                handleNotifyMe={handleOpenNotifyMeModal}
+              />
+            )}
+          </div>
+        </div>
+      )}
     </>
   )
 }

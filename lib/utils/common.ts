@@ -1,9 +1,11 @@
 import { setIsAuth } from '@/context/auth'
-import { setShouldShowEmptyFavorites } from '@/context/favorites'
-// import { setShouldShowEmpty } from '@/context/cart'
-import { closeBurger, closeCouponModal, closeSearchModal, closeShareModal } from '@/context/modals'
+import {
+  closeBurger,
+  closeCouponModal,
+  closeSearchModal,
+  closeShareModal,
+} from '@/context/modals'
 import { loginCheck } from '@/context/user'
-import { IAmCartItem } from '@/types/cart'
 import { IAmProduct } from '@/types/common'
 import { IAmFavoriteItem } from '@/types/favorites'
 import { EventCallable } from 'effector'
@@ -47,8 +49,8 @@ export const shuffle = <T>(array: T[]) => {
   return array
 }
 
-export const formatPrice = (x: number) =>
-  x.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+export const formatPrice = (x?: number) =>
+  (x ?? 0).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
 
 export const idGenerator = () => {
   const S4 = () =>
@@ -90,8 +92,10 @@ export const isItemInListOfFavorites = (
   productId: string
 ) => array.some((item) => item.productId === productId)
 
-export const isItemInList = (array: IAmCartItem[], productId: string) =>
-  array.some((item) => item.productId === productId)
+export const isItemInList = (
+  array?: { _id: string; productId: string }[],
+  productId?: string
+) => array?.some((item) => item.productId === productId)
 
 export const deleteProductFromLS = <T>(
   id: string,
@@ -107,13 +111,16 @@ export const deleteProductFromLS = <T>(
     items = []
   }
 
-  const updatedItems = items.filter(
-    (item: { clientId: string }) => item.clientId !== id
-  )
+  const updatedItems = items.filter((item: { clientId: string }) => {
+    console.log('item.clientId', item.clientId, id, item.clientId !== id)
+    return item.clientId !== id
+  })
 
   localStorage.setItem(key, JSON.stringify(updatedItems))
   event(updatedItems)
   withToast && toast.success(message)
+
+  console.log('updatedItems', updatedItems)
 
   if (!updatedItems.length) {
     setShouldShowEmpty(true)
@@ -186,7 +193,7 @@ export const getViewedItemsFromLS = () => {
   return viewedItems
 }
 
-export  const handleCloseBurger = () => {
+export const handleCloseBurger = () => {
   removeOverflowHiddenFromBody()
   closeBurger()
 }
