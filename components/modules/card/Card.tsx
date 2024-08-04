@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
 import { IAmCardProps } from '@/types/modules'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import CardLabel from './CardLabel'
@@ -12,53 +11,42 @@ import {
 } from '@/lib/utils/common'
 import AddToCartBtn from '@/components/elements/addToCart/AddToCartBtn'
 import { useCartAction } from '@/hooks/useCartAction'
-import { addItemToCart, addProductsToCart } from '@/lib/utils/cart'
 import { useFavoritesAction } from '@/hooks/useFavoritesAction'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import {
-  setIsAddToFavorites,
-} from '@/context/favorites'
+import { setIsAddToFavorites } from '@/context/favorites'
 import styles from '@/styles/card/index.module.css'
-import toast from 'react-hot-toast'
 import { setCurrentProduct } from '@/context/goods'
-import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
 import { openNotifyMeModal, showQuickViewModal } from '@/context/modals'
 import { useLang } from '@/hooks/useLang'
 import NotifyOfDeliveryBtn from '@/components/elements/notifyOfDelivery/NotifyOfDeliveryBtn'
+import { useAddToCart, useCart } from '@/hooks/api/useCart'
 
 const Card = ({ item }: IAmCardProps) => {
   const { lang, translations } = useLang()
   const isMedia1100 = useMediaQuery(1100)
-  const { currentCartByAuth, product, getCanAddToCart } = useCartAction()
-  const isProductInCart = isItemInList(currentCartByAuth, item._id)
+  const { getCanAddToCart } = useCartAction()
+
+  const { data: cart } = useCart()
+  const isProductInCart = isItemInList(cart, item._id)
   const { handleAddProductToFavorites, isProductInFavorites } =
     useFavoritesAction(item)
-  const currentFavoritesByAuth = useGoodsByAuth ($favorites, $favoritesFromLS)
-  const currentFavoriteItems = currentFavoritesByAuth.filter(
-    (item) => item.productId === product._id
-  )
 
-  const handleShowQuickViewModal = (e: any) => {
+  const addToCard = useAddToCart()
+
+  const handleShowQuickViewModal = () => {
     addOverflowHiddenToBody()
     showQuickViewModal()
     setCurrentProduct(item)
   }
 
-  const handleOpenNotifyMeModal = (e: any) => {
+  const handleOpenNotifyMeModal = () => {
     addOverflowHiddenToBody()
     openNotifyMeModal()
     setCurrentProduct(item)
   }
 
-  const addToCart = (e: any) => {
-    if (getCanAddToCart(item._id)) {
-      addProductsToCart(item, 1)
-    }
-  }
-
-  const addAndGoToCartActionBtn = (e: any) => {
+  const addAndGoToCartActionBtn = () => {
     setIsAddToFavorites(false)
-    addProductsToCart(item, 1)
+    addToCard.mutate(item)
     document.location.href = '/cart'
   }
 
@@ -114,27 +102,29 @@ const Card = ({ item }: IAmCardProps) => {
                       : translations[lang].card.to_cart
                   }
                   className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : ''}`}
-                  handleAddToCart={addToCart}
+                  handleAddToCart={() => addToCard.mutate(item)}
                   btnDisabled={!getCanAddToCart(item._id)}
                 />
               </div>
             ) : (
               <div className={styles.card_to_cart_btn_container}>
-                {+item.inStock ?
-                <AddToCartBtn
-                  text={
-                    isProductInCart
-                      ? translations[lang].card.in_cart
-                      : translations[lang].card.to_cart
-                  }
-                  className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : ''}`}
-                  handleAddToCart={addToCart}
-                  btnDisabled={!getCanAddToCart(item._id)}
-                />
-                : <NotifyOfDeliveryBtn 
-                    text={translations[lang].wishlist.notify_of_delivery} 
-                    handleNotifyMe={handleOpenNotifyMeModal} />
-                }
+                {+item.inStock ? (
+                  <AddToCartBtn
+                    text={
+                      isProductInCart
+                        ? translations[lang].card.in_cart
+                        : translations[lang].card.to_cart
+                    }
+                    className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : ''}`}
+                    handleAddToCart={() => addToCard.mutate(item)}
+                    btnDisabled={!getCanAddToCart(item._id)}
+                  />
+                ) : (
+                  <NotifyOfDeliveryBtn
+                    text={translations[lang].wishlist.notify_of_delivery}
+                    handleNotifyMe={handleOpenNotifyMeModal}
+                  />
+                )}
               </div>
             )
           ) : (
@@ -146,7 +136,7 @@ const Card = ({ item }: IAmCardProps) => {
                     : translations[lang].card.to_cart
                 }
                 className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : ''}`}
-                handleAddToCart={addToCart}
+                handleAddToCart={() => addToCard.mutate(item)}
                 btnDisabled={!getCanAddToCart(item._id)}
               />
             </div>

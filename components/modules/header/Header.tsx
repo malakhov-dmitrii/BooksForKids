@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { useUnit } from 'effector-react'
 import Burger from './Burger'
 import LangBlock from './LangBlock'
-import line from '@/public/img/icons/Line2.png'
 import { $isAuth } from '@/context/auth/state'
 import { openBurger, openSearchModal } from '@/context/modals'
 import { useLang } from '@/hooks/useLang'
@@ -17,21 +16,13 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 import CartPopup from './CartPopup/CartPopup'
 import HeaderProfile from './HeaderProfile'
 import { useEffect } from 'react'
-import {
-  addProductsFromLSToCart,
-  setCartFromLS,
-  setShouldShowEmpty,
-} from '@/context/cart'
+import { setCartFromLS, setShouldShowEmpty } from '@/context/cart'
 import {
   addProductsFromLSToFavorites,
   setFavoritesFromLS,
   setShouldShowEmptyFavorites,
 } from '@/context/favorites'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import ShopPopup from './ShopPopup'
-import { $cart, $cartFromLs } from '@/context/cart/state'
-import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
-import { $user } from '@/context/user/state'
 import { $burgerIsOpen, $searchModal } from '@/context/modals/state'
 import { setLang } from '@/context/lang'
 
@@ -39,11 +30,7 @@ const Header = () => {
   const isAuth = useUnit($isAuth)
   const { lang, translations } = useLang()
   const isMedia800 = useMediaQuery(800)
-  const isMedia1280 = useMediaQuery(1280)
   const searchModal = useUnit($searchModal)
-  const user = useUnit($user)
-  const currentcartByAuth = useGoodsByAuth($cart, $cartFromLs)
-  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
   const burgerIsOpen = useUnit($burgerIsOpen)
 
   const handleOpenBurger = () => {
@@ -112,18 +99,18 @@ const Header = () => {
   useEffect(() => {
     if (isAuth) {
       const auth = JSON.parse(localStorage.getItem('auth') as string)
-      const cartFromLS = JSON.parse(localStorage.getItem('cart') as string)
+      // const cartFromLS = JSON.parse(localStorage.getItem('cart') as string)
       const favoritesFromLS = JSON.parse(
         localStorage.getItem('favorites') as string
       )
 
-      if (cartFromLS && Array.isArray(cartFromLS)) {
-        console.log('deghjfdshgfs')
-        addProductsFromLSToCart({
-          jwt: auth.accessToken,
-          cartItems: cartFromLS,
-        })
-      }
+      // if (cartFromLS && Array.isArray(cartFromLS)) {
+      //   console.log('deghjfdshgfs')
+      //   addProductsFromLSToCart({
+      //     jwt: auth.accessToken,
+      //     cartItems: cartFromLS,
+      //   })
+      // }
 
       if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
         addProductsFromLSToFavorites({
@@ -169,7 +156,7 @@ const Header = () => {
                   </Link>
                 </h5>
               </li>
-              <li></li>
+              <li />
             </ul>
             {!isMedia800 && <LangBlock />}
             <ul className='header_icons'>
@@ -193,9 +180,17 @@ const Header = () => {
                 )}
               </li>
               <li className='header_icon_item item_hidden_big'>
-                {burgerIsOpen ? <button className='header_burger header_burger_close' onClick={handleCloseBurger}/>
-                : <button className='header_burger header_burger_open' onClick={handleOpenBurger}/>
-                }
+                {burgerIsOpen ? (
+                  <button
+                    className='header_burger header_burger_close'
+                    onClick={handleCloseBurger}
+                  />
+                ) : (
+                  <button
+                    className='header_burger header_burger_open'
+                    onClick={handleOpenBurger}
+                  />
+                )}
               </li>
             </ul>
             <span className='item_hidden_big'>

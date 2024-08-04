@@ -13,10 +13,11 @@ const HomePageSection = ({ goods }: IAmHomePageSectionProps) => {
     <section className={styles.home_section}>
       <div className={`container ${styles.home_section_container}`}>
         <div className={styles.home_section_text}>
-          {!isMedia800 ? 
+          {!isMedia800 ? (
             <h1>{translations[lang].home.shop_the_latest}</h1>
-            : <h1>{translations[lang].home.shop}</h1>
-          }
+          ) : (
+            <h1>{translations[lang].home.shop}</h1>
+          )}
           <ViewAllLink href='/catalog' />
         </div>
         <ul className={styles.home_section_list}>

@@ -1,51 +1,37 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
 import { withClickOutside } from '@/components/hocs/withClickOutside'
 import { IAmWrappedComponentProps } from '@/types/hocs'
 import { useLang } from '@/hooks/useLang'
-import { useCartAction } from '@/hooks/useCartAction'
 import CartPopupItem from './CartPopupItem'
 import ghost from '@/public/img/pics/ghosts.png'
-import { formatPrice, showCountMessage } from '@/lib/utils/common'
+import { formatPrice } from '@/lib/utils/common'
 import { countWholeCartItemsAmount } from '@/lib/utils/cart'
 import ItemsCount from '@/components/elements/ItemsCount/ItemsCount'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import { useTotalPriceWithDiscount } from '@/hooks/useTotalPriceWithDiscount'
-import { $cart, $cartFromLs } from '@/context/cart/state'
+import { useCart } from '@/hooks/api/useCart'
 
 const CartPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
   ({ open, setOpen }, ref) => {
     const { lang, translations } = useLang()
-    const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs)
+    const { data: cartData } = useCart()
+
     const { newTotalWithDiscount } = useTotalPriceWithDiscount()
-    const [delayHandler, setDelayHandler] = useState(null)
     const handleShowPopup = () => setOpen(true)
     const handleHidePopup = () => setOpen(false)
-    const {
-      product,
-      handleAddToCart,
-      currentCartItems,
-      allCurrentCartItemCount,
-      setCount,
-      existingItem,
-      count,
-    } = useCartAction()
-    // const allCurrentCartItem = countWholeCartItemsAmount()
-
-    console.log(currentCartByAuth)
 
     return (
       <div className='cart_popup' ref={ref}>
         <Link
           className='header_link_item header_link--cart'
-          href= '/cart'
+          href='/cart'
           onMouseEnter={handleShowPopup}
         >
-          {!!currentCartByAuth.length && (
+          {!!cartData?.length && (
             <span className='not_empty'>
               <span className='not_empty_count'>
-                {countWholeCartItemsAmount(currentCartByAuth)}
+                {countWholeCartItemsAmount(cartData)}
               </span>
             </span>
           )}
@@ -58,17 +44,14 @@ const CartPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
                 {translations[lang].other.shopping_bag}
               </h5>
               <div className='body_small cart_popup_qty_top'>
-                <ItemsCount
-                  count={countWholeCartItemsAmount(currentCartByAuth)}
-                />
+                {cartData && (
+                  <ItemsCount count={countWholeCartItemsAmount(cartData)} />
+                )}
               </div>
               <ul className='cart_popup_list'>
-                {!!currentCartByAuth.length ? (
-                  currentCartByAuth.map((item) => (
-                    <li
-                      key={item._id || item.clientId}
-                      className='popup_cart_list_item'
-                    >
+                {!!cartData?.length ? (
+                  cartData.map((item) => (
+                    <li key={item._id} className='popup_cart_list_item'>
                       <CartPopupItem item={item} />
                     </li>
                   ))
@@ -89,15 +72,15 @@ const CartPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
                 <div className='cart_popup_footer_text_count'>
                   <h5>
                     {translations[lang].other.subtotal} (
-                    <ItemsCount
-                      count={countWholeCartItemsAmount(currentCartByAuth)}
-                    />
+                    {cartData && (
+                      <ItemsCount count={countWholeCartItemsAmount(cartData)} />
+                    )}
                     )
                   </h5>
                 </div>
                 <span>{formatPrice(newTotalWithDiscount)}</span>
               </div>
-              {!currentCartByAuth.length ? (
+              {!cartData?.length ? (
                 <Link
                   href='/catalog'
                   className='cart_popup_footer_link body_large black_btn'

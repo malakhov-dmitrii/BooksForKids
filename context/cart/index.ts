@@ -13,13 +13,36 @@ import api from '@/api/apiInstance'
 
 export const cart = createDomain()
 
+/**
+ * @deprecated
+ */
 export const loadCartItems = cart.createEvent<{ jwt: string }>()
+
+/**
+ * @deprecated
+ */
 export const setCartFromLS = cart.createEvent<IAmCartItem[]>()
+
+/**
+ * @deprecated
+ */
 export const addProductToCart = cart.createEvent<IAmAddProductToCartFx>()
+
+/**
+ * @deprecated
+ */
 export const addProductsFromLSToCart =
   cart.createEvent<IAmAddProductsFromLSToCartFx>()
+
+/**
+ * @deprecated
+ */
 export const updateCartItemCount = cart.createEvent<IAmUpdateCartItemCountFx>()
 export const setTotalPrice = cart.createEvent<number>()
+
+/**
+ * @deprecated
+ */
 export const deleteProductFromCart = cart.createEvent<IAmDeleteCartItemsFx>()
 export const setShouldShowEmpty = cart.createEvent<boolean>()
 

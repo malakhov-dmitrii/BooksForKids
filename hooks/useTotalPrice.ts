@@ -1,21 +1,12 @@
-import { useUnit } from "effector-react"
-import { useEffect } from "react"
-import { useGoodsByAuth } from "./useGoodsByAuth"
-import { $cart, $cartFromLs, $totalPrice } from "@/context/cart/state"
+import { useCart } from './api/useCart'
 
 export const useTotalPrice = () => {
-    const totalPrice = useUnit($totalPrice)
-    const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs);
+  const { data: cart } = useCart()
 
-    const getNewTotal = () =>
-    currentCartByAuth
-      .map((item) => +item.price * +item.count)
-      .reduce((defaultCount, item) => defaultCount + item, 0)
+  const newTotal =
+    cart
+      ?.map((item) => +item.price * +item.count)
+      .reduce((defaultCount, item) => defaultCount + item, 0) ?? 0
 
-    const newTotal = getNewTotal();
-
-    // useEffect(() => {
-    //   setTotalPrice(getNewTotal())
-    // }, [currentCartByAuth])
-   return { newTotal }
+  return { newTotal }
 }
