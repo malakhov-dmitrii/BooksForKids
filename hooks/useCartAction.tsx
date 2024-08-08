@@ -14,7 +14,7 @@ export const useCartAction = () => {
     (item: CartItem) => item.productId === product._id
   )
 
-  const [count, setCount] = useState(+(existingItem?.count ?? 1))
+  const [count, setCount] = useState(1)
 
   const getProductFromCart = (productId: string) =>
     cart?.find((item: CartItem) => item.productId === productId)
@@ -34,7 +34,10 @@ export const useCartAction = () => {
   return {
     product,
     currentCartItems,
-    setCount,
+    setCount: (value: number) => {
+      console.log(value)
+      setCount(value)
+    },
     count,
     existingItem,
     allCurrentCartItemCount,

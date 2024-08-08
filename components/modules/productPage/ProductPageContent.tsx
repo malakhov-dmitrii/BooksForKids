@@ -89,7 +89,6 @@ const ProductPageContent = () => {
                   className={`counter ${styles.product_top_right_counter}`}
                   count={count}
                   totalCount={+product.inStock}
-                  initialCount={+(existingItem?.count || 1)}
                   setCount={setCount}
                   cartItem={existingItem}
                   updateCountAsync={false}

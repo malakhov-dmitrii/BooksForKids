@@ -52,7 +52,6 @@ const QuickViewModal = () => {
                 className={`counter ${styles.modal_right_counter}`}
                 count={count}
                 totalCount={+product.inStock}
-                initialCount={+(existingItem?.count || 1)}
                 setCount={setCount}
                 cartItem={existingItem}
                 updateCountAsync={false}
