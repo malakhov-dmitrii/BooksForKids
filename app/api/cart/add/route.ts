@@ -43,8 +43,6 @@ export async function POST(req: Request) {
       // Update the count of the existing item
       const updatedCount = (existingCartItem.count ?? 1) + (reqBody.count ?? 1)
 
-      console.log({ existingCartItem, reqBody })
-
       const { modifiedCount } = await db.collection('cart').updateOne(
         { _id: existingCartItem._id },
         {
@@ -54,8 +52,6 @@ export async function POST(req: Request) {
           },
         }
       )
-
-      console.log({ modifiedCount })
 
       if (modifiedCount === 1) {
         return NextResponse.json({
