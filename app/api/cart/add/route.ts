@@ -98,3 +98,14 @@ export async function POST(req: Request) {
     throw new Error((error as Error).message)
   }
 }
+
+/**
+ * {
+ *  id: string
+ *  title: string
+ *  imageUrl: string
+ *  body: string - markdown
+ *  publishedAt: string
+ *  tags: string[]
+ * }
+ */

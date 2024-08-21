@@ -23,6 +23,7 @@ import {
 import ShopPopup from './ShopPopup'
 import { $burgerIsOpen, $searchModal } from '@/context/modals/state'
 import { setLang } from '@/context/lang'
+import { usePathname } from 'next/navigation'
 
 const Header = () => {
   const isAuth = useUnit($isAuth)
@@ -30,6 +31,16 @@ const Header = () => {
   const isMedia800 = useMediaQuery(800)
   const searchModal = useUnit($searchModal)
   const burgerIsOpen = useUnit($burgerIsOpen)
+  const pathname = usePathname()
+
+  const activeLink =
+    pathname.includes('catalog') || pathname === '/'
+      ? 'catalog'
+      : pathname.includes('blog')
+        ? 'blog'
+        : pathname.includes('about')
+          ? 'about'
+          : ''
 
   const handleOpenBurger = () => {
     addOverflowHiddenToBody()
@@ -62,58 +73,9 @@ const Header = () => {
       setShouldShowEmptyFavorites(true)
     }
 
-    // if (!cart || !cart?.length) {
-    //   setShouldShowEmpty(true)
-    // }
-
     if (auth?.accessToken) {
       return
     }
-
-    // if (cart) {
-    //   setCartFromLS(cart)
-    // }
-
-    // if (cart && Array.isArray(cart)) {
-    //   if (!cart.length) {
-    //     setShouldShowEmpty(true)
-    //   } else {
-    //     setCartFromLS(cart)
-    //   }
-    // }
-
-    //   if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
-    //     if (!favoritesFromLS.length) {
-    //       setShouldShowEmptyFavorites(true)
-    //     } else {
-    //       setFavoritesFromLS(favoritesFromLS)
-    //     }
-    //   }
-    // }, [])
-
-    // useEffect(() => {
-    //   if (isAuth) {
-    //     const auth = JSON.parse(localStorage.getItem('auth') as string)
-    // const cartFromLS = JSON.parse(localStorage.getItem('cart') as string)
-    // const favoritesFromLS = JSON.parse(
-    //   localStorage.getItem('favorites') as string
-    // )
-
-    // if (cartFromLS && Array.isArray(cartFromLS)) {
-    //   console.log('deghjfdshgfs')
-    //   addProductsFromLSToCart({
-    //     jwt: auth.accessToken,
-    //     cartItems: cartFromLS,
-    //   })
-    // }
-
-    // if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
-    //   addProductsFromLSToFavorites({
-    //     jwt: auth.accessToken,
-    //     favoriteItems: favoritesFromLS,
-    //   })
-    // }
-    // }
   }, [isAuth])
 
   return (
@@ -133,19 +95,25 @@ const Header = () => {
           <nav className='header_right'>
             <ul className='nav item_hidden'>
               <li>
-                <h5 className='nav_heading'>
+                <h5
+                  className={`nav_heading ${activeLink === 'catalog' ? 'nav_heading_active' : ''}`}
+                >
                   <ShopPopup />
                 </h5>
               </li>
               <li>
-                <h5 className='nav_heading'>
+                <h5
+                  className={`nav_heading ${activeLink === 'blog' ? 'nav_heading_active' : ''}`}
+                >
                   <Link className='link_nav' href='/blog'>
                     {translations[lang].header.blog_link}
                   </Link>
                 </h5>
               </li>
               <li>
-                <h5 className='nav_heading'>
+                <h5
+                  className={`nav_heading ${activeLink === 'about' ? 'nav_heading_active' : ''}`}
+                >
                   <Link className='link_nav' href='/about'>
                     {translations[lang].header.about_link}
                   </Link>

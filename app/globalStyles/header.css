@@ -1,47 +1,47 @@
 .header_container {
-    border-bottom: 1px solid var(--color-Gray);
+  border-bottom: 1px solid var(--color-Gray);
 }
 
 .header_content {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 64px;
-    height: 59px;
-    padding-bottom: 17px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 64px;
+  height: 59px;
+  padding-bottom: 17px;
 }
 
 .header_logo {
-    font-family: 'Allerta Stencil', sans-serif;
-    text-transform: uppercase;
-    max-width: 220px;
-    height: 40px;
-    font-size: 35px;
-    line-height: 40.5px;
-    color: var(--color-Black);
+  font-family: 'Allerta Stencil', sans-serif;
+  text-transform: uppercase;
+  max-width: 220px;
+  height: 40px;
+  font-size: 35px;
+  line-height: 40.5px;
+  color: var(--color-Black);
 }
 
 .header_logo_first_letter {
-    color: var(--color-Accent);
+  color: var(--color-Accent);
 }
 
 .header_right {
-    display: flex;
-    height: 59px;
+  display: flex;
+  height: 59px;
 }
 
 .header_right ul {
-    display: flex;
+  display: flex;
 }
 
 .nav {
-    width: 318px;
-    height: 59px;
-    padding-top: 8px;
-    display: flex;
-    justify-content: space-between;
-    /* border-right: 1px solid var(--color-Dark-gray); */
-    height: 100%;
+  width: 318px;
+  height: 59px;
+  padding-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  /* border-right: 1px solid var(--color-Dark-gray); */
+  height: 100%;
 }
 
 .nav li {
@@ -53,32 +53,32 @@
 }
 
 .nav_heading:hover,
-.nav_heading:active {
+.nav_heading:active,
+.nav_heading_active {
   border-bottom: 2px solid var(--color-Black);
-  transition: color .2s ease-in-out;
+  transition: color 0.2s ease-in-out;
 }
 
 .link_nav {
-    color: inherit;
+  color: inherit;
 }
 
 .header_icons {
-    display: flex;
-    align-items: center;
-    padding-bottom: 17px;
-    position: relative;
+  display: flex;
+  align-items: center;
+  padding-bottom: 17px;
+  position: relative;
 }
 
-
-.header_link_item  {
-    width: 20px;
-    height: 20px;
-    display: block;
-    position: relative;
+.header_link_item {
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: relative;
 }
 
-.header_icon_item{
-    margin-left: 40px;
+.header_icon_item {
+  margin-left: 40px;
 }
 
 .header_link_item::before {
@@ -93,10 +93,9 @@
 }
 
 .header_link_item:hover::before {
-    transition: background-color 0.2s ease-in-out;
-    background-color: var(--color-Dark-gray);
+  transition: background-color 0.2s ease-in-out;
+  background-color: var(--color-Dark-gray);
 }
-
 
 .header_link--search::before {
   -webkit-mask: url(../../public/img/icons/search.svg) no-repeat 50% 50%;
@@ -104,37 +103,36 @@
 }
 
 .header_link--cart::before {
-    -webkit-mask: url(../../public/img/icons/cart.svg) no-repeat 50% 50%;
-    mask: url(../../public/img/icons/cart.svg) no-repeat 50% 50%;
+  -webkit-mask: url(../../public/img/icons/cart.svg) no-repeat 50% 50%;
+  mask: url(../../public/img/icons/cart.svg) no-repeat 50% 50%;
 }
 
 .header_link--profile::before {
-    -webkit-mask: url(../../public/img/icons/profile.svg) no-repeat 50% 50%;
-    mask: url(../../public/img/icons/profile.svg) no-repeat 50% 50%;
-
+  -webkit-mask: url(../../public/img/icons/profile.svg) no-repeat 50% 50%;
+  mask: url(../../public/img/icons/profile.svg) no-repeat 50% 50%;
 }
 
 @media (max-width: 1300px) {
-    .header_container {
-      /* border: none; */
-      padding-right: 20px;
-    }
+  .header_container {
+    /* border: none; */
+    padding-right: 20px;
+  }
 }
 
 @media (max-width: 800px) {
   .header_container {
-     border: none
+    border: none;
   }
 }
 
 @media (max-width: 850px) {
   .nav {
     width: 260px;
- }
+  }
 }
 
 @media (max-width: 800px) {
-   .header_content {
+  .header_content {
     margin: 0;
     padding: 0;
     height: 48px;
@@ -145,9 +143,9 @@
   }
 
   .header_burger {
-   margin-left: 15px;
+    margin-left: 15px;
   }
-  
+
   .header_burger_open::before {
     background-color: var(--color-Black);
     content: '';
@@ -178,10 +176,9 @@
     transition: background-color 0.2s ease-in-out;
     background-color: var(--color-Dark-gray);
   }
-  
+
   .header_burger_open:hover {
     color: var(--color-Dark-gray);
     transition: .2s ease-in-out color;
   } */
-
 }
