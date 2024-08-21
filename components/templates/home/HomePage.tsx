@@ -14,11 +14,5 @@ const HomePage = () => {
     </main>
   )
 }
-<<<<<<< HEAD
- 
-export default HomePage;
-
-=======
 
 export default HomePage
->>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5

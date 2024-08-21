@@ -48,9 +48,8 @@ const getCart = async () => {
   const data = await response.json()
   return data as CartItem[]
 }
-const addToCart = async (data: IAmProduct | IAmProduct[]) => {
-  const dataArray = Array.isArray(data) ? data : [data]
-  const url = dataArray.length > 1 ? 'cart/add-many' : 'cart/add'
+const addToCart = async (data: AddToCartProps | AddToCartProps[]) => {
+  const url = Array.isArray(data) ? 'cart/add-many' : 'cart/add'
 
   const response = await ky.post(url, {
     json: data,
@@ -89,10 +88,27 @@ const useCart = () => {
   return query
 }
 
+type AddToCartProps = {
+  _id: string
+  category: string
+  count?: number
+  clientId?: string
+}
+
+/**
+ * {
+ *  _id: string
+ *  count: number
+ *  category: string
+ *  clientId: string
+ * }
+ */
+
 const useAddToCart = () => {
   const queryClient = useQueryClient()
   const mutation = useMutation({
-    mutationFn: (data: IAmProduct) => addToCart(data),
+    mutationFn: (data: AddToCartProps) =>
+      addToCart({ ...data, count: data.count || 1 }),
     onSuccess: () => toast.success('Item added to cart'),
     onError: (error) =>
       toast.error(`Error adding item to cart: ${error.message}`),

@@ -6,12 +6,8 @@ import styles from '@/styles/cartPage/index.module.css'
 import DeleteItemBtn from '@/components/elements/deleteItemBtn/DeleteItemBtn'
 import Link from 'next/link'
 import ProductCounter from '../card/ProductCounter'
-<<<<<<< HEAD
 import { useRemoveFromCart } from '@/hooks/api/useCart'
 import { CartItem } from '@/types/cart'
-=======
-import { CartItem, useRemoveFromCart } from '@/hooks/api/useCart'
->>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 
 const CartListItem = ({ item }: { item: CartItem }) => {
   const { count, setCount } = useCartItemAction(item)
@@ -72,8 +68,4 @@ const CartListItem = ({ item }: { item: CartItem }) => {
   )
 }
 
-<<<<<<< HEAD
 export default CartListItem
-=======
-export default CartListItem
->>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5

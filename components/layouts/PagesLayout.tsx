@@ -23,7 +23,6 @@ import {
 } from '@/context/modals/state'
 import '@/context/goods/init'
 import '@/context/auth/init'
-import '@/context/cart/init'
 import '@/context/favorites/init'
 import '@/context/user/init'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'

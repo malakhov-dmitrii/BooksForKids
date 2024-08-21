@@ -1,16 +1,6 @@
 import { JWTError } from '@/constants/jwt'
 import { refreshTokenFx } from '@/context/auth'
-import {
-  addProductToCartFx,
-  addProductsFromLSToCartFx,
-  deleteCartItemFx,
-  getCartItemsFx,
-} from '@/context/cart'
-import {
-  IAmAddProductToCartFx,
-  IAmAddProductsFromLSToCartFx,
-  IAmDeleteCartItemsFx,
-} from '@/types/cart'
+import { IAmAddProductToCartFx } from '@/types/cart'
 
 import {
   addProductToFavoriteFx,
@@ -41,25 +31,6 @@ export const handleJWTError = async (
       const { repeatRequestMethodName, payload } = repeatRequestAfterRefreshData
 
       switch (repeatRequestMethodName) {
-        case 'getCartItemsFx':
-          return getCartItemsFx({
-            jwt: newTokens.accessToken,
-          })
-        case 'addProductToCartFx':
-          return addProductToCartFx({
-            ...(payload as IAmAddProductToCartFx),
-            jwt: newTokens.accessToken,
-          })
-        case 'addProductsFromLSToCartFx':
-          return addProductsFromLSToCartFx({
-            ...(payload as IAmAddProductsFromLSToCartFx),
-            jwt: newTokens.accessToken,
-          })
-        case 'deleteCartItemFx':
-          return deleteCartItemFx({
-            ...(payload as IAmDeleteCartItemsFx),
-            jwt: newTokens.accessToken,
-          })
         case 'addProductToFavoriteFx':
           return addProductToFavoriteFx({
             ...(payload as Omit<IAmAddProductToCartFx, 'count'>),

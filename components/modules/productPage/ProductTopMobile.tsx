@@ -40,8 +40,4 @@ const ProductTopMobile = () => {
   )
 }
 
-<<<<<<< HEAD
 export default ProductTopMobile
-=======
-export default ProductTopMobile
->>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5

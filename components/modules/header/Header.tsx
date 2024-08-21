@@ -16,14 +16,8 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 import CartPopup from './CartPopup/CartPopup'
 import HeaderProfile from './HeaderProfile'
 import { useEffect } from 'react'
-import { setCartFromLS, setShouldShowEmpty } from '@/context/cart'
 import {
-<<<<<<< HEAD
-//   addProductsFromLSToFavorites,
-=======
-  addProductsFromLSToFavorites,
->>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
-  setFavoritesFromLS,
+  //   addProductsFromLSToFavorites,
   setShouldShowEmptyFavorites,
 } from '@/context/favorites'
 import ShopPopup from './ShopPopup'
@@ -54,10 +48,7 @@ const Header = () => {
   useEffect(() => {
     const auth = JSON.parse(localStorage.getItem('auth') as string)
     const lang = JSON.parse(localStorage.getItem('lang') as string)
-    const cart = JSON.parse(localStorage.getItem('cart') as string)
-    const favorites = JSON.parse(
-      localStorage.getItem('favorites') as string
-    )
+    const favorites = JSON.parse(localStorage.getItem('favorites') as string)
 
     if (lang) {
       if (lang === 'ru' || lang === 'en') {
@@ -71,17 +62,17 @@ const Header = () => {
       setShouldShowEmptyFavorites(true)
     }
 
-    if (!cart || !cart?.length) {
-      setShouldShowEmpty(true)
-    }
+    // if (!cart || !cart?.length) {
+    //   setShouldShowEmpty(true)
+    // }
 
     if (auth?.accessToken) {
       return
     }
 
-    if (cart) {
-      setCartFromLS(cart)
-    }
+    // if (cart) {
+    //   setCartFromLS(cart)
+    // }
 
     // if (cart && Array.isArray(cart)) {
     //   if (!cart.length) {
@@ -91,47 +82,37 @@ const Header = () => {
     //   }
     // }
 
-  //   if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
-  //     if (!favoritesFromLS.length) {
-  //       setShouldShowEmptyFavorites(true)
-  //     } else {
-  //       setFavoritesFromLS(favoritesFromLS)
-  //     }
-  //   }
-  // }, [])
+    //   if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
+    //     if (!favoritesFromLS.length) {
+    //       setShouldShowEmptyFavorites(true)
+    //     } else {
+    //       setFavoritesFromLS(favoritesFromLS)
+    //     }
+    //   }
+    // }, [])
 
-<<<<<<< HEAD
-  // useEffect(() => {
-  //   if (isAuth) {
-  //     const auth = JSON.parse(localStorage.getItem('auth') as string)
-      // const cartFromLS = JSON.parse(localStorage.getItem('cart') as string)
-      // const favoritesFromLS = JSON.parse(
-      //   localStorage.getItem('favorites') as string
-      // )
-=======
-  useEffect(() => {
-    if (isAuth) {
-      const auth = JSON.parse(localStorage.getItem('auth') as string)
-      // const cartFromLS = JSON.parse(localStorage.getItem('cart') as string)
-      const favoritesFromLS = JSON.parse(
-        localStorage.getItem('favorites') as string
-      )
->>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
+    // useEffect(() => {
+    //   if (isAuth) {
+    //     const auth = JSON.parse(localStorage.getItem('auth') as string)
+    // const cartFromLS = JSON.parse(localStorage.getItem('cart') as string)
+    // const favoritesFromLS = JSON.parse(
+    //   localStorage.getItem('favorites') as string
+    // )
 
-      // if (cartFromLS && Array.isArray(cartFromLS)) {
-      //   console.log('deghjfdshgfs')
-      //   addProductsFromLSToCart({
-      //     jwt: auth.accessToken,
-      //     cartItems: cartFromLS,
-      //   })
-      // }
+    // if (cartFromLS && Array.isArray(cartFromLS)) {
+    //   console.log('deghjfdshgfs')
+    //   addProductsFromLSToCart({
+    //     jwt: auth.accessToken,
+    //     cartItems: cartFromLS,
+    //   })
+    // }
 
-      // if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
-      //   addProductsFromLSToFavorites({
-      //     jwt: auth.accessToken,
-      //     favoriteItems: favoritesFromLS,
-      //   })
-      // }
+    // if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
+    //   addProductsFromLSToFavorites({
+    //     jwt: auth.accessToken,
+    //     favoriteItems: favoritesFromLS,
+    //   })
+    // }
     // }
   }, [isAuth])
 

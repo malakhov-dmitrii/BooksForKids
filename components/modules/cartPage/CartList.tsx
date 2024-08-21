@@ -1,4 +1,3 @@
-import {} from '@/context/cart'
 import styles from '@/styles/cartPage/index.module.css'
 import CartListItem from './CartListItem'
 import { useCart } from '@/hooks/api/useCart'
@@ -18,4 +17,3 @@ const CartList = () => {
 }
 
 export default CartList
-
