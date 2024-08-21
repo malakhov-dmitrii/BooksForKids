@@ -12,19 +12,27 @@ import styles from '@/styles/quickViewModal/index.module.css'
 import ProductDescription from '@/components/elements/productDescription/ProductDescription'
 import { useFavoritesAction } from '@/hooks/useFavoritesAction'
 import { useAddToCart } from '@/hooks/api/useCart'
+<<<<<<< HEAD
 import { useAddToFavorites, useFavorites } from '@/hooks/api/useFavorites'
 import { IAmCardProps } from '@/types/modules'
+=======
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 
 const QuickViewModal = () => {
   const { lang, translations } = useLang()
   const { product, allCurrentCartItemCount, setCount, existingItem, count } =
     useCartAction()
   const images = useProductImages(product)
+<<<<<<< HEAD
   // const { handleAddProductToFavorites, isProductInFavorites } =
   //   useFavoritesAction(product)
 
   const { data: favorites } = useFavorites()
   const isProductInFavorites = isItemInListOfFavorites(favorites, product._id)
+=======
+  const { handleAddProductToFavorites, isProductInFavorites } =
+    useFavoritesAction(product)
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 
   const handleCloseModal = () => {
     removeOverflowHiddenFromBody()
@@ -32,7 +40,10 @@ const QuickViewModal = () => {
   }
 
   const addToCart = useAddToCart()
+<<<<<<< HEAD
   const addToFavorites = useAddToFavorites()
+=======
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 
   return (
     <div className={styles.modal}>

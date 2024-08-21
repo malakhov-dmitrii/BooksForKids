@@ -18,7 +18,11 @@ import HeaderProfile from './HeaderProfile'
 import { useEffect } from 'react'
 import { setCartFromLS, setShouldShowEmpty } from '@/context/cart'
 import {
+<<<<<<< HEAD
 //   addProductsFromLSToFavorites,
+=======
+  addProductsFromLSToFavorites,
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
   setFavoritesFromLS,
   setShouldShowEmptyFavorites,
 } from '@/context/favorites'
@@ -96,6 +100,7 @@ const Header = () => {
   //   }
   // }, [])
 
+<<<<<<< HEAD
   // useEffect(() => {
   //   if (isAuth) {
   //     const auth = JSON.parse(localStorage.getItem('auth') as string)
@@ -103,6 +108,15 @@ const Header = () => {
       // const favoritesFromLS = JSON.parse(
       //   localStorage.getItem('favorites') as string
       // )
+=======
+  useEffect(() => {
+    if (isAuth) {
+      const auth = JSON.parse(localStorage.getItem('auth') as string)
+      // const cartFromLS = JSON.parse(localStorage.getItem('cart') as string)
+      const favoritesFromLS = JSON.parse(
+        localStorage.getItem('favorites') as string
+      )
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 
       // if (cartFromLS && Array.isArray(cartFromLS)) {
       //   console.log('deghjfdshgfs')

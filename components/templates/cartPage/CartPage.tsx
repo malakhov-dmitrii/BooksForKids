@@ -1,5 +1,9 @@
 'use client'
 import CalcShippingBlock from '@/components/modules/cartPage/calcShippingBlock/CalcShippingBlock'
+<<<<<<< HEAD
+=======
+import CartList from '@/components/modules/cartPage/CartList'
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 import UpdateTotalsBtn from '@/components/modules/cartPage/updateTotalsBtn/UpdateTotalsBtn'
 import ApplyCouponBlock from '@/components/elements/applyCouponBlock/ApplyCouponBlock'
 import { useLang } from '@/hooks/useLang'
@@ -11,21 +15,34 @@ import EmptyPageContent from '@/components/modules/emptyPageContent/EmptyPageCon
 import { useUnit } from 'effector-react'
 import { useTotalPriceWithDiscount } from '@/hooks/useTotalPriceWithDiscount'
 import { useState } from 'react'
+<<<<<<< HEAD
 // import { $shouldShowEmpty } from '@/context/cart/state'
 import { useCart } from '@/hooks/api/useCart'
 import CartList from '@/components/modules/cartPage/CartList'
+=======
+import { $shouldShowEmpty } from '@/context/cart/state'
+import { useCart } from '@/hooks/api/useCart'
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 
 const CartPage = () => {
   const { data: cart } = useCart()
   const { lang, translations } = useLang()
   const { newTotal } = useTotalPrice()
   const { newTotalWithDiscount } = useTotalPriceWithDiscount()
+<<<<<<< HEAD
   // const shouldShowEmpty = useUnit($shouldShowEmpty)
+=======
+  const shouldShowEmpty = useUnit($shouldShowEmpty)
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
   const [isCorrectCouponCode, setIsCorrectCouponCode] = useState(false)
 
   return (
     <main>
+<<<<<<< HEAD
       {cart?.length ? (
+=======
+      {!shouldShowEmpty ? (
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
         <section className={styles.shopping_cart}>
           <div className={`container ${styles.shopping_cart_container}`}>
             <h1>{translations[lang].other.shopping_cart}</h1>
@@ -120,4 +137,8 @@ const CartPage = () => {
   )
 }
 
+<<<<<<< HEAD
 export default CartPage
+=======
+export default CartPage
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5

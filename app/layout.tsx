@@ -1,5 +1,5 @@
-import type { Metadata, Viewport } from "next";
-import PagesLayout from "@/components/layouts/PagesLayout";
+import type { Metadata, Viewport } from 'next'
+import PagesLayout from '@/components/layouts/PagesLayout'
 
 import './globalStyles/reset.css'
 import './globalStyles/globals.css'
@@ -27,7 +27,7 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return <PagesLayout>{children}</PagesLayout>
 }
