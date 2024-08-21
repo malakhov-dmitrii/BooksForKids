@@ -8,7 +8,7 @@ const CartList = () => {
 
   return (
     <>
-      {cart.map((item) => (
+      {cart?.map((item) => (
         <li key={item._id || item.clientId} className={styles.cart_list_item}>
           <CartListItem item={item} />
         </li>
@@ -18,3 +18,4 @@ const CartList = () => {
 }
 
 export default CartList
+

@@ -62,3 +62,19 @@ export interface IAmProceedToCheckoutBtnProps {
   btnDisabled?: boolean
   handleProceedToCheckout: (param: any) => void
 }
+
+export interface CartItem {
+  _id: string
+  count: number
+  characteristics?: {
+    authors: string[]
+  }
+  productId: string
+  image: string
+  name: string
+  price: number
+  inStock: string
+  isDiscount: string
+  category: string
+  clientId?: string
+}

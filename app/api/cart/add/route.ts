@@ -53,6 +53,8 @@ export async function POST(req: Request) {
         }
       )
 
+      console.log({ modifiedCount })
+
       if (modifiedCount === 1) {
         return NextResponse.json({
           status: 200,

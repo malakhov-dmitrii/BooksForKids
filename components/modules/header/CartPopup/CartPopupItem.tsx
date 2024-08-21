@@ -5,7 +5,10 @@ import { useLang } from '@/hooks/useLang'
 import Link from 'next/link'
 import { formatPrice } from '@/lib/utils/common'
 import ProductCounter from '../../card/ProductCounter'
-import { CartItem, useRemoveFromCart } from '@/hooks/api/useCart'
+
+import { useRemoveFromCart } from '@/hooks/api/useCart'
+import { CartItem } from '@/types/cart'
+
 
 const CartPopupItem = ({ item }: { item: CartItem }) => {
   const { lang, translations } = useLang()
@@ -59,4 +62,6 @@ const CartPopupItem = ({ item }: { item: CartItem }) => {
   )
 }
 
+
 export default CartPopupItem
+

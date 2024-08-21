@@ -18,8 +18,7 @@ const LoginPage = ({
   payload?: { accessToken: string; refreshToken: string }
 }) => {
   const { lang, translations } = useLang()
-  const { register, errors, handleSubmit /*, handleSignupWithOAuth */ } =
-    useAuthForm(handleSignIn)
+  const { register, errors, handleSubmit } = useAuthForm(handleSignIn)
 
   useEffect(() => {
     if (payload) onAuthSuccess('Success', payload)

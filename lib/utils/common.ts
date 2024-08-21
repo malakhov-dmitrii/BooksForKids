@@ -7,7 +7,7 @@ import {
 } from '@/context/modals'
 import { loginCheck } from '@/context/user'
 import { IAmProduct } from '@/types/common'
-import { IAmFavoriteItem } from '@/types/favorites'
+// import { IAmFavoriteItem } from '@/types/favorites'
 import { EventCallable } from 'effector'
 import toast from 'react-hot-toast'
 
@@ -88,9 +88,9 @@ export const triggerLoginCheck = () => {
 }
 
 export const isItemInListOfFavorites = (
-  array: IAmFavoriteItem[],
-  productId: string
-) => array.some((item) => item.productId === productId)
+  array?: { _id: string; productId: string }[],
+  productId?: string
+) => array?.some((item) => item.productId === productId)
 
 export const isItemInList = (
   array?: { _id: string; productId: string }[],

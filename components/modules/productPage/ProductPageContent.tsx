@@ -2,12 +2,20 @@
 import React, { useEffect, useState } from 'react'
 import { useLang } from '@/hooks/useLang'
 import { useCartAction } from '@/hooks/useCartAction'
+<<<<<<< HEAD
+import { formatPrice, isItemInListOfFavorites } from '@/lib/utils/common'
+=======
 import { formatPrice } from '@/lib/utils/common'
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 import AddToCartBtn from '@/components/elements/addToCart/AddToCartBtn'
 import ProductCounter from '../card/ProductCounter'
 import SKU from '../card/SKU'
 import styles from '@/styles/product/index.module.css'
+<<<<<<< HEAD
+// import { useFavoritesAction } from '@/hooks/useFavoritesAction'
+=======
 import { useFavoritesAction } from '@/hooks/useFavoritesAction'
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 import ProductImagesSlider from './ProductImagesSlider'
 import { useUnit } from 'effector-react'
 import AddInfoList from './AddInfoList'
@@ -24,6 +32,11 @@ import { useViewedItems } from '@/hooks/useViewedItems'
 import ViewedItems from '../viewedItems/ViewedItems'
 import ShareBlock from '../shareBlock/ShareBlock'
 import { useAddToCart } from '@/hooks/api/useCart'
+<<<<<<< HEAD
+import { useAddToFavorites, useFavorites } from '@/hooks/api/useFavorites'
+import { IAmCardProps } from '@/types/modules'
+=======
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 
 const ProductPageContent = () => {
   const product = useUnit($currentProduct)
@@ -36,8 +49,15 @@ const ProductPageContent = () => {
   const { allCurrentCartItemCount, setCount, existingItem, count } =
     useCartAction()
   //   const images = useProductImages(product)
+<<<<<<< HEAD
+  // const { handleAddProductToFavorites, isProductInFavorites } =
+  //   useFavoritesAction(product)
+  const { data: favorites } = useFavorites()
+  const isProductInFavorites = isItemInListOfFavorites(favorites, product._id)
+=======
   const { handleAddProductToFavorites, isProductInFavorites } =
     useFavoritesAction(product)
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 
   const isMedia520 = useMediaQuery(520)
   const isMedia700 = useMediaQuery(700)
@@ -49,6 +69,10 @@ const ProductPageContent = () => {
   }, [product._id, product.category, markAsViewed])
 
   const addToCart = useAddToCart()
+<<<<<<< HEAD
+  const addToFavorites = useAddToFavorites()
+=======
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 
   return (
     <>
@@ -108,14 +132,6 @@ const ProductPageContent = () => {
             </div>
             <div className={styles.product_top_right_icon_desktop}>
               <div className={styles.product_top_right_icon_container}>
-                {/* <button
-                            className={`${isProductInFavorites}
-                            ? ${styles.product_top_right_favorite_btn_checked}
-                            : ${styles.product_top_right_favorite_btn}`}
-                            onClick={handleAddProductToFavorites}
-                            >
-                                <span className={styles.product_top_right_favorite_icon}></span>
-                            </button> */}
                 <div className={styles.product_add_to_favorites_container}>
                   <CardActionBtn
                     text={translations[lang].card.add_to_favorites}
@@ -124,7 +140,7 @@ const ProductPageContent = () => {
                         ? 'card_action_btn_add_to_favorites_checked'
                         : 'card_action_btn_add_to_favorites'
                     }`}
-                    callback={handleAddProductToFavorites}
+                    callback={() => addToFavorites.mutate(product)}
                   />
                 </div>
                 <div className={styles.line_container}>

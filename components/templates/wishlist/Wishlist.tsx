@@ -3,24 +3,26 @@ import { useLang } from '@/hooks/useLang'
 import styles from '@/styles/myAccount/index.module.css'
 import EmptyPageContent from '@/components/modules/emptyPageContent/EmptyPageContent'
 import { useUnit } from 'effector-react'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
+// import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import WishlistList from '@/components/modules/wishlist/WishlistList'
-import {
-  $favorites,
-  $favoritesFromLS,
-  $shouldShowEmptyFavorites,
-} from '@/context/favorites/state'
+// import {
+//   // $favorites,
+//   // $favoritesFromLS,
+//   $shouldShowEmptyFavorites,
+// } from '@/context/favorites/state'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useFavorites } from '@/hooks/api/useFavorites'
 
 const Wishlist = () => {
-  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
+  // const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
   const { lang, translations } = useLang()
   const isMedia1070 = useMediaQuery(1070)
-  const shouldShowEmptyFavorites = useUnit($shouldShowEmptyFavorites)
+  const { data: favorites } = useFavorites()
+  // const shouldShowEmptyFavorites = useUnit($shouldShowEmptyFavorites)
 
   return (
     <main>
-      {(!shouldShowEmptyFavorites && !isMedia1070) ?
+      {(!!favorites?.length && !isMedia1070) ?
        ( <section className={styles.wishlist_section}>
           <div className={`container ${styles.wishlist_container}`}>
             <h1 className='capitalize'>
@@ -56,7 +58,7 @@ const Wishlist = () => {
             </div>
           </div>
         </section>) : 
-        (!shouldShowEmptyFavorites && isMedia1070) ? 
+        (favorites?.length && isMedia1070) ? 
         ( <div className={`container ${styles.wishlist_container}`}>
           <h1 className='capitalize'>
             {translations[lang].wishlist.wishlist}

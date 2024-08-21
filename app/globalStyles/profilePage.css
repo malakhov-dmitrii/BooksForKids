@@ -55,11 +55,13 @@
     align-items: center;
     justify-content: space-between;
     border-radius: 8px;
+    margin-bottom: 87px;
   }
 
   @media (max-width: 800px) {
     .body_btn_container {
       height: 32px;
+      margin-bottom: 80px;
     }
   }
 
@@ -124,16 +126,6 @@
     position: relative;
 }
 
-  form {
-    margin-top: 126px;
-  }
-
-  @media (max-width: 800px) {
-    form {
-      margin-top: 87px;
-    }
-  }
-
   .form_block_input {
     height: 39px;
     border-bottom: 1px solid var(--color-Light-gray);
@@ -187,27 +179,37 @@
     }
   }
 
-  .auth_link span h5{
+  .auth_link h5{
     margin-top: 13px !important;
     text-align: center;
   }
 
-  .auth_link span h5:hover {
+  .auth_link span h5,
+  .auth_link h5 {
+    margin-top: 13px !important;
+    text-align: center;
+  }
+
+  .auth_link span h5:hover,
+  .auth_link h5:hover {
     color: var(--color-Dark-gray);
   }
 
-  .auth_link span h5:active {
+  .auth_link span h5:active,
+  .auth_link h5:active {
     color: var(--color-Accent)
   }
 
   @media (max-width: 800px) {
-    .auth_link span h5 {
+    .auth_link span h5,
+    .auth_link h5 {
       margin-top: 16px !important;
     }
   }
 
   @media (max-width: 800px) {
-    .auth_link span h5 {
+    .auth_link span h5,
+    .auth_link h5 {
       font-size: 12px;
     }
   }

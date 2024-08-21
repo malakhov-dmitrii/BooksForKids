@@ -8,11 +8,6 @@ import {
   signUpFx,
 } from '.'
 
-// export const $openAuthPopup = auth
-//   .createStore<boolean>(false)
-//   .on(openAuthPopup, () => true)
-//   .on(closeAuthPopup, () => false)
-
 export const $isAuth = auth
   .createStore(false)
   .on(setIsAuth, (_, isAuth) => isAuth)

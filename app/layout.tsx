@@ -16,9 +16,9 @@ import './globalStyles/headerProfile.css'
 import './globalStyles/shopPopup.css'
 
 export const metadata: Metadata = {
-  title: 'Books4Kids',
-  description: 'Books4Kids store of books for kids in Russian',
-}
+  title: "Books4Kids",
+  description: "Books4Kids - online store of Russian books for kids",
+};
 
 export const viewport: Viewport = {
   themeColor: 'white',

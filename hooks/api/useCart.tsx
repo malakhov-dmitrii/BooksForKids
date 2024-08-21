@@ -2,6 +2,7 @@ import { IAmProduct } from '@/types/common'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import _ky from 'ky'
+import { CartItem } from '@/types/cart'
 
 export const ky = _ky.create({
   prefixUrl: '/api',
@@ -129,19 +130,3 @@ const useUpdateCartItemCount = () => {
 
 // ---- Exporting hooks ----
 export { useCart, useAddToCart, useRemoveFromCart, useUpdateCartItemCount }
-
-// ---- Types ----
-export interface CartItem {
-  _id: string
-  count: number
-  characteristics?: {
-    authors: string[]
-  }
-  productId: string
-  image: string
-  name: string
-  price: number
-  inStock: string
-  isDiscount: string
-  category: string
-}

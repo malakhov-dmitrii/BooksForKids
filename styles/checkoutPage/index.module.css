@@ -151,6 +151,7 @@
 .checkout_content_bottom {
     display: flex;
     justify-content: space-between;
+    margin-top: 48px;
 }
 
 @media (max-width: 1220px) {
@@ -240,11 +241,117 @@ input:checked + .order_checkbox_mark {
     }
 }
 
+.checkout_content_right h2,
+.checkout_content_left h2 {
+    font-size: 26px;
+    line-height: 1.2;
+    font-weight: 400;
+}
+
+@media (max-width: 1220px) {
+    .checkout_content_right h2,
+    .checkout_content_left h2 {
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 800px) {
+    .checkout_content_right h2,
+    .checkout_content_left h2 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 800px) {
+    .checkout_content_left h2 {
+        margin-top: 0px;
+    }
+}
+
+/* Billing Details Block */
+
+.checkout_billing_details_form_inner {
+    width: 100%;
+}
+
+.checkout_billing_details_form_inner_name_block {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 1220px) {
+    .checkout_billing_details_form_inner_name_block {
+        flex-direction: column
+    }
+}
+
+.checkout_billing_details_form_input_name_block {
+    width: 270px;
+}
+
+@media (max-width: 1220px) {
+    .checkout_billing_details_form_input_name_block {
+        width: 100%;
+    }
+}
+
+.checkout_billing_details_form_label {
+    position: relative;
+}
+
+@media (max-width: 800px) {
+    .checkout_billing_details_form_label h5 {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+}
+
+.checkout_billing_details_form_input {
+    border-bottom: 1px solid var(--color-Light-gray);
+    height: 39px;
+    margin-top: 34px;
+    width: 100%;
+}
+
+@media (max-width: 1220px) {
+    .checkout_billing_details_form_input {
+        margin-top: 23px;
+    }
+}
+
+@media (max-width: 800px) {
+    .checkout_billing_details_form_input {
+        height: 25px;
+    }
+}
+
+/* textarea */
+
+.checkout_billing_details_textarea {
+    width: 100%;
+    resize: none;
+    border: none;
+    border-bottom: 1px solid var(--color-Light-gray);
+}
+
+@media (max-width: 800px) {
+    .checkout_billing_details_textarea {
+        font-size: 12px;
+        line-height: 1.2;
+        /* height: 20px; */
+    }
+}
+
 .checkout_order_notes_container {
     margin-top: 37px;
-    border-bottom: 1px solid var(--color-Gray);
     width: 100%;
     height: 39px;
+}
+
+@media (max-width: 800px) {
+    .checkout_order_notes_container {
+        height: 25px;
+    }
 }
 
 @media (max-width: 570px) {
@@ -263,20 +370,26 @@ input:checked + .order_checkbox_mark {
     }
 }
 
-.checkout_content_right h2 {
-    font-size: 26px;
-    line-height: 1.2;
-    font-weight: 400;
+.with_value {
+    border: none;
+    border-bottom: 1px solid var(--color-Light-gray);
 }
 
-@media (max-width: 1220px) {
-    .checkout_content_right h2 {
-        margin-top: 40px;
-    }
+textarea:focus, input:focus
+{
+  outline: none;
 }
 
-@media (max-width: 570px) {
-    .checkout_content_right h2 {
-        font-size: 16px;
-    }
+textarea:focus {
+    border-bottom: 1px solid var(--color-Light-gray);
+}
+
+/* end textarea */
+
+.checkpot_input_error_alert {
+    color: var(--color-Errors);
+    position: absolute;
+    left: 10px;
+    bottom: -23px;
+    font-size: 12px;
 }

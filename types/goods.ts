@@ -1,4 +1,4 @@
-import { CartItem } from '@/hooks/api/useCart'
+import { CartItem } from './cart'
 import { IAmProduct } from './common'
 
 export interface IAmLoadOneProductFx {

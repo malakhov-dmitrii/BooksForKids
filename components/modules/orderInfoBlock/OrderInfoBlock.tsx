@@ -21,6 +21,57 @@ const OrderInfoBlock = ({ isCorrectCouponCode }: IAmOrderInfoBlock) => {
         <div className={styles.order_block_headings}>
           <h5 className='uppercase'>{translations[lang].checkout.product}</h5>
           <h5 className='uppercase'>{translations[lang].cart.total}</h5>
+<<<<<<< HEAD
+        </div>
+        <ul className={styles.checkout_list}>
+          <YourOrderList />
+        </ul>
+        <div className={styles.order_block_subtotal}>
+          <h5 className='uppercase'>
+            {translations[lang].other.subtotal}
+            {isCorrectCouponCode ? (
+              <span className='lowercase'>
+                {' '}
+                {translations[lang].checkout.with_coupon}
+              </span>
+            ) : (
+              ''
+            )}
+          </h5>
+          {/* Subtotal and Total */}
+          <h5 className='dark_gray'>
+            {isCorrectCouponCode ? (
+              <span>
+                <span className='line_through'>{formatPrice(newTotal)}</span>
+                <span> $ {formatPrice(+priceWithCouponCode)}</span>
+              </span>
+            ) : (
+              formatPrice(newTotal)
+            )}
+          </h5>
+        </div>
+        <div className={styles.order_block_shipping}>
+          {/* cost of shipping */}
+          <h5 className='uppercase'>{translations[lang].cart.shipping}</h5>
+          <h5 className='dark_gray'>
+            {translations[lang].checkout.free_shipping}
+          </h5>
+        </div>
+        <div className={styles.order_block_total}>
+          <p className='uppercase body_large'>
+            {translations[lang].cart.total}
+          </p>
+          <p className='body_large'>
+            {isCorrectCouponCode
+              ? formatPrice(+priceWithCouponCode)
+              : formatPrice(newTotalWithDiscount)}
+          </p>
+        </div>
+        {/* {isCheckoutPage && <></>} */}
+        <div className={styles.order_payment_methods_block}>
+          <PaymentOptions />
+        </div>
+=======
         </div>
         <ul className={styles.checkout_list}>
           <YourOrderList />
@@ -79,9 +130,14 @@ const OrderInfoBlock = ({ isCorrectCouponCode }: IAmOrderInfoBlock) => {
                     </form> */}
           <PaymentOptions />
         </div>
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
       </div>
     </div>
   )
 }
 
+<<<<<<< HEAD
 export default OrderInfoBlock
+=======
+export default OrderInfoBlock
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5

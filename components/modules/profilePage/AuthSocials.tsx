@@ -10,7 +10,7 @@ const AuthPopupSocials = ({
   return (
     <div className='body_socials'>
       <button className='socials_btn' onClick={handleSignupWithOAuth}>
-        <span>{/* <FontAwesomeIcon icon={faGoogle} /> */}G</span>
+        <span>G</span>
         <h5>{translations[lang].auth_popup.auth_google}</h5>
       </button>
     </div>

@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { useUnit } from 'effector-react'
-import { EarthoOneProvider } from '@eartho/one-client-react'
 import { Next13ProgressBar } from 'next13-progressbar'
 import {
   closeNotifyMeModal,
@@ -61,10 +60,6 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      {/* {isClient ? (
-          <EarthoOneProvider
-          clientId={`${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`} domain='http://localhost:3000/'
-          > */}
       <html lang='en>'>
         <body>
           <Next13ProgressBar
@@ -106,14 +101,6 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
           <Toaster position='top-center' reverseOrder={false} />
         </body>
       </html>
-      {/* </EarthoOneProvider>
-      ) : (
-          <html lang='en'>
-          <body>
-            <></>
-          </body>
-        </html>
-      )} */}
     </>
   )
 }

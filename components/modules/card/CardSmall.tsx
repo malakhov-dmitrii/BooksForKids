@@ -9,20 +9,42 @@ import {
   addOverflowHiddenToBody,
   formatPrice,
   isItemInList,
+  isItemInListOfFavorites,
 } from '@/lib/utils/common'
 import { setCurrentProduct } from '@/context/goods'
 import { showQuickViewModal } from '@/context/modals'
 import AddToCartBtn from '@/components/elements/addToCart/AddToCartBtn'
 import { useCartAction } from '@/hooks/useCartAction'
+<<<<<<< HEAD
+// import { useFavoritesAction } from '@/hooks/useFavoritesAction'
+import { setIsAddToFavorites } from '@/context/favorites'
+import styles from '@/styles/cardSmall/index.module.css'
+import { useAddToCart, useCart } from '@/hooks/api/useCart'
+import { useAddToFavorites, useFavorites } from '@/hooks/api/useFavorites'
+=======
 import { useFavoritesAction } from '@/hooks/useFavoritesAction'
 import { setIsAddToFavorites } from '@/context/favorites'
 import styles from '@/styles/cardSmall/index.module.css'
 import { useAddToCart, useCart } from '@/hooks/api/useCart'
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 
 const SmallCard = ({ item }: IAmCardProps) => {
   const { lang, translations } = useLang()
   const isMedia1160 = useMediaQuery(1160)
   const { getCanAddToCart } = useCartAction()
+<<<<<<< HEAD
+
+  const { data: cart } = useCart()
+  const isProductInCart = isItemInList(cart, item._id)
+
+  const { data: favorites } = useFavorites()
+  const isProductInFavorites = isItemInListOfFavorites(favorites, item._id)
+  // const { handleAddProductToFavorites, isProductInFavorites } =
+  //   useFavoritesAction(item)
+
+  const addToCart = useAddToCart()
+  const addToFavorites = useAddToFavorites()
+=======
 
   const { data: cart } = useCart()
   const isProductInCart = isItemInList(cart, item._id)
@@ -30,6 +52,7 @@ const SmallCard = ({ item }: IAmCardProps) => {
     useFavoritesAction(item)
 
   const addToCard = useAddToCart()
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
 
   const handleShowQuickViewModal = () => {
     addOverflowHiddenToBody()
@@ -39,7 +62,11 @@ const SmallCard = ({ item }: IAmCardProps) => {
 
   const addAndGoToCartActionBtn = () => {
     setIsAddToFavorites(false)
+<<<<<<< HEAD
+    addToCart.mutate(item)
+=======
     addToCard.mutate(item)
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
     document.location.href = '/cart'
   }
 
@@ -94,7 +121,11 @@ const SmallCard = ({ item }: IAmCardProps) => {
                     : translations[lang].card.to_cart
                 }
                 className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : ''}`}
+<<<<<<< HEAD
+                handleAddToCart={() => addToCart.mutate(item)}
+=======
                 handleAddToCart={() => addToCard.mutate(item)}
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
                 btnDisabled={!getCanAddToCart(item._id)}
               />
             </div>
@@ -107,7 +138,11 @@ const SmallCard = ({ item }: IAmCardProps) => {
                     : translations[lang].card.to_cart
                 }
                 className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : ''}`}
+<<<<<<< HEAD
+                handleAddToCart={() => addToCart.mutate(item)}
+=======
                 handleAddToCart={() => addToCard.mutate(item)}
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
                 btnDisabled={!getCanAddToCart(item._id)}
               />
             </div>
@@ -121,7 +156,11 @@ const SmallCard = ({ item }: IAmCardProps) => {
                   : translations[lang].card.to_cart
               }
               className={`${styles.card_cart_btn} ${isProductInCart ? styles.card_cart_btn_added : ''}`}
+<<<<<<< HEAD
+              handleAddToCart={() => addToCart.mutate(item)}
+=======
               handleAddToCart={() => addToCard.mutate(item)}
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
               btnDisabled={!getCanAddToCart(item._id)}
             />
           </div>
@@ -146,7 +185,11 @@ const SmallCard = ({ item }: IAmCardProps) => {
                   ? 'card_action_btn_add_to_favorites_checked'
                   : 'card_action_btn_add_to_favorites'
               }`}
+<<<<<<< HEAD
+              callback={() => addToFavorites.mutate(item)}
+=======
               callback={handleAddProductToFavorites}
+>>>>>>> 3fa0bfdc0e80713bfc7d5c130f2b42781be631e5
             />
           </div>
           // </div>

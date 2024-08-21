@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from 'react-slick'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
+// import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import { useUserLogout } from '@/hooks/useLogout'
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
@@ -9,14 +9,16 @@ import { useLang } from '@/hooks/useLang'
 import MyAccountNavigationLinks from '../myAccountNavigationLinks/MyAccountNavigationLinks'
 import styles from '@/styles/myAccount/index.module.css'
 import Link from 'next/link'
-import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
+// import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useFavorites } from '@/hooks/api/useFavorites'
 
 const MyAccountMobileSlider = () => {
   const { lang, translations } = useLang()
   const handleLogout = useUserLogout()
   const isMedia350 = useMediaQuery(350)
-  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
+  const { data: favorites } = useFavorites()
+  // const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
   const settings = {
     dots: false,
     infinite: false,
@@ -74,10 +76,10 @@ const MyAccountMobileSlider = () => {
       <h3>
         <Link href='/wishlist' className={styles.my_account_links}>
           {translations[lang].my_account.wishlist}
-          {!!currentFavoritesByAuth.length && (
+          {!!favorites?.length && (
             <span className={styles.my_account_not_empty_count}>
               {' '}
-              ({currentFavoritesByAuth.length})
+              ({favorites.length})
             </span>
           )}
         </Link>

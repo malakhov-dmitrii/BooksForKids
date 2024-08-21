@@ -2,7 +2,8 @@ import { useUnit } from 'effector-react'
 import { useMemo, useState } from 'react'
 
 import { $currentProduct } from '@/context/goods/state'
-import { CartItem, useCart } from './api/useCart'
+import { useCart } from './api/useCart'
+import { CartItem } from '@/types/cart'
 
 export const useCartAction = () => {
   const product = useUnit($currentProduct)
@@ -14,7 +15,7 @@ export const useCartAction = () => {
     (item: CartItem) => item.productId === product._id
   )
 
-  const [count, setCount] = useState(1)
+  const [count, setCount] = useState(+(existingItem?.count ?? 1))
 
   const getProductFromCart = (productId: string) =>
     cart?.find((item: CartItem) => item.productId === productId)

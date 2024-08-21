@@ -3,7 +3,7 @@ import { useCart } from './api/useCart'
 export const useTotalPriceWithDiscount = () => {
   const { data: cart } = useCart()
 
-  const getNewTotalWithDiscount = () =>
+  const getNewTotalWithDiscount = () => {
     cart
       ?.map((item) =>
         +item.isDiscount
@@ -11,7 +11,8 @@ export const useTotalPriceWithDiscount = () => {
           : +item.price * +item.count
       )
       .reduce((defaultCount, item) => defaultCount + item, 0) ?? 0
-
+  }
+  
   const newTotalWithDiscount = getNewTotalWithDiscount()
 
   return { newTotalWithDiscount }

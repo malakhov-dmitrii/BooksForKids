@@ -22,8 +22,7 @@ const RegistrationPage = ({
   }
 }) => {
   const { lang, translations } = useLang()
-  const { register, errors, handleSubmit /*, handleSignupWithOAuth*/ } =
-    useAuthForm(handleSignUp)
+  const { register, errors, handleSubmit } = useAuthForm(handleSignUp)
 
   const submitForm = (data: IAmInput) =>
     handleSignUp({
@@ -71,7 +70,6 @@ const RegistrationPage = ({
               </Link>
             </div>
           </form>
-          {/* <AuthSocials handleSignupWithOAuth={handleSignupWithOAuth} */}
           <AuthSocials
             handleSignupWithOAuth={() => {
               window.location.href = authUrl

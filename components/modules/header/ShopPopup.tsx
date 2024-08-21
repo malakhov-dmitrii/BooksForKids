@@ -6,16 +6,18 @@ import { withClickOutside } from '@/components/hocs/withClickOutside'
 import { IAmWrappedComponentProps } from '@/types/hocs'
 import { useLang } from '@/hooks/useLang'
 import ShopPopupLinkItem from './ShopPopupLinkItem'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
+// import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import { $isAuth } from '@/context/auth/state'
-import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
+import { useFavorites } from '@/hooks/api/useFavorites'
+// import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
 
 const ShopPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
   ({ open, setOpen }, ref) => {
     const { lang, translations } = useLang()
     const handleShowPopup = () => setOpen(true)
     const handleHidePopup = () => setOpen(false)
-    const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
+    const { data: favorites } = useFavorites()
+    // const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
     const isAuth = useUnit($isAuth)
     const isMedia1300 = useMediaQuery(1300)
 
@@ -84,7 +86,7 @@ const ShopPopup = forwardRef<HTMLDivElement, IAmWrappedComponentProps>(
       {
         id: 41,
         text: `${translations[lang].my_account.wishlist} ${
-          !!currentFavoritesByAuth.length ? currentFavoritesByAuth.length : ''
+          !!favorites?.length ? favorites.length : ''
         }`,
         href: '/wishlist',
       },

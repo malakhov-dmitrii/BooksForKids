@@ -17,6 +17,12 @@ const images = [
   '/img/russianbooks/vladis_1_readMyself.png', 
 ]
 
+// const weight = [
+//   '125',
+//   '80',
+//   '225',
+// ]
+
 const features = [
   'panorama',
   'non-panorama',
