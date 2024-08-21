@@ -1,23 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
 import { useLang } from '@/hooks/useLang'
-import { useProductImages } from '@/hooks/useProductImages'
 import { useCartAction } from '@/hooks/useCartAction'
-import {
-  addOverflowHiddenToBody,
-  formatPrice,
-  getViewedItemsFromLS,
-  removeOverflowHiddenFromBody,
-} from '@/lib/utils/common'
+import { formatPrice, isItemInListOfFavorites } from '@/lib/utils/common'
 import AddToCartBtn from '@/components/elements/addToCart/AddToCartBtn'
 import ProductCounter from '../card/ProductCounter'
 import SKU from '../card/SKU'
 import styles from '@/styles/product/index.module.css'
-import { IAmCartItem } from '@/types/cart'
-import { useFavoritesAction } from '@/hooks/useFavoritesAction'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { IAmFavoriteItem } from '@/types/favorites'
+// import { useFavoritesAction } from '@/hooks/useFavoritesAction'
 import ProductImagesSlider from './ProductImagesSlider'
 import { useUnit } from 'effector-react'
 import AddInfoList from './AddInfoList'
@@ -30,10 +20,12 @@ import ProductTopMobile from './ProductTopMobile'
 import CardLabel from '../card/CardLabel'
 import SimilarItems from './SimilarItems'
 import { $currentProduct } from '@/context/goods/state'
-import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
 import { useViewedItems } from '@/hooks/useViewedItems'
 import ViewedItems from '../viewedItems/ViewedItems'
 import ShareBlock from '../shareBlock/ShareBlock'
+import { useAddToCart } from '@/hooks/api/useCart'
+import { useAddToFavorites, useFavorites } from '@/hooks/api/useFavorites'
+import { IAmCardProps } from '@/types/modules'
 
 const ProductPageContent = () => {
   const product = useUnit($currentProduct)
@@ -43,21 +35,13 @@ const ProductPageContent = () => {
   >('description')
 
   const { lang, translations } = useLang()
-  const {
-    handleAddToCart,
-    allCurrentCartItemCount,
-    setCount,
-    currentCartItems,
-    existingItem,
-    count,
-  } = useCartAction()
+  const { allCurrentCartItemCount, setCount, existingItem, count } =
+    useCartAction()
   //   const images = useProductImages(product)
-  const { handleAddProductToFavorites, isProductInFavorites } =
-    useFavoritesAction(product)
-  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
-  const currentFavoriteItems = currentFavoritesByAuth.filter(
-    (product) => product.productId === product._id
-  )
+  // const { handleAddProductToFavorites, isProductInFavorites } =
+  //   useFavoritesAction(product)
+  const { data: favorites } = useFavorites()
+  const isProductInFavorites = isItemInListOfFavorites(favorites, product._id)
 
   const isMedia520 = useMediaQuery(520)
   const isMedia700 = useMediaQuery(700)
@@ -68,15 +52,14 @@ const ProductPageContent = () => {
     markAsViewed({ category: product.category, _id: product._id })
   }, [product._id, product.category, markAsViewed])
 
-  const addToCart = () => handleAddToCart(count)
-
-  console.log(product.type)
+  const addToCart = useAddToCart()
+  const addToFavorites = useAddToFavorites()
 
   return (
     <>
-    <div className={styles.product_item_container_content}>
-      {existingItem ? <ItemAdded /> : ''}
-    </div>
+      <div className={styles.product_item_container_content}>
+        {existingItem ? <ItemAdded /> : ''}
+      </div>
       {!isMedia700 && (
         <div className={styles.product_top}>
           <div className={styles.product_top_left}>
@@ -93,11 +76,13 @@ const ProductPageContent = () => {
           <div className={styles.product_top_right}>
             <div className={styles.product_top_right_top}>
               <h2 className={styles.product_top_right_title}>{product.name}</h2>
-              {!!product.price ? 
+              {!!product.price ? (
                 <h4 className={styles.product_top_right_price}>
                   {formatPrice(+product.price)}
                 </h4>
-                : ''}
+              ) : (
+                ''
+              )}
               <h5 className={styles.product_top_right_raiting}>
                 Raiting 1 customer review
               </h5>
@@ -109,29 +94,25 @@ const ProductPageContent = () => {
                   className={`counter ${styles.product_top_right_counter}`}
                   count={count}
                   totalCount={+product.inStock}
-                  initialCount={+(existingItem?.count || 1)}
                   setCount={setCount}
-                  cartItem={existingItem as IAmCartItem}
+                  cartItem={existingItem}
                   updateCountAsync={false}
                 />
                 <AddToCartBtn
                   text={translations[lang].other.add_to_cart}
                   className={`white_btn ${styles.product_to_cart_btn}`}
-                  handleAddToCart={addToCart}
+                  handleAddToCart={() =>
+                    addToCart.mutate({
+                      ...(product || existingItem),
+                      count,
+                    })
+                  }
                   btnDisabled={allCurrentCartItemCount === +product.inStock}
                 />
               </div>
             </div>
             <div className={styles.product_top_right_icon_desktop}>
               <div className={styles.product_top_right_icon_container}>
-                {/* <button
-                            className={`${isProductInFavorites}
-                            ? ${styles.product_top_right_favorite_btn_checked}
-                            : ${styles.product_top_right_favorite_btn}`}
-                            onClick={handleAddProductToFavorites}
-                            >
-                                <span className={styles.product_top_right_favorite_icon}></span>
-                            </button> */}
                 <div className={styles.product_add_to_favorites_container}>
                   <CardActionBtn
                     text={translations[lang].card.add_to_favorites}
@@ -140,11 +121,11 @@ const ProductPageContent = () => {
                         ? 'card_action_btn_add_to_favorites_checked'
                         : 'card_action_btn_add_to_favorites'
                     }`}
-                    callback={handleAddProductToFavorites}
+                    callback={() => addToFavorites.mutate(product)}
                   />
                 </div>
                 <div className={styles.line_container}>
-                  <span className={styles.line}></span>
+                  <span className={styles.line} />
                 </div>
                 <ShareBlock />
               </div>

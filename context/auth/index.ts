@@ -11,38 +11,8 @@ export const handleSignUp = auth.createEvent<IAmSignUpFx>()
 export const handleSignIn = auth.createEvent<IAmSignUpFx>()
 export const setIsAuth = auth.createEvent<boolean>()
 
-// // export const oauthFx = createEffect(
-// //     async ({ name, password, email }: IAmSignUpFx) => {
-// //         try {
-// //         const { data } = await api.post('/api/users/oauth', {
-// //             name,
-// //             password,
-// //             email,
-// //         })
-
-// //         await api.post('/api/users/email', {
-// //             password,
-// //             email,
-// //         })
-
-// //         onAuthSuccess('Authorization complited!', data)
-// //         return data.user
-// //     } catch (error) {
-// //         toast.error((error as Error).message)
-// //     }
-// // }
-// // )
-
 export const signUpFx = createEffect(
-    async ({ name, password, email/*, isOAuth*/}: IAmSignUpFx) => {
-        // if (isOAuth) {
-        //     await oauthFx({
-        //         email,
-        //         password,
-        //         name,
-        //     })
-        //     return
-        // }
+    async ({ name, password, email }: IAmSignUpFx) => {
 
         const { data } = await api.post('/api/users/signup', {
             name,
@@ -61,14 +31,7 @@ export const signUpFx = createEffect(
     }
 )
 
-export const signInFx = createEffect(async ({ email, password/*, isOAuth */}: IAmSignUpFx) => {
-    // if (isOAuth) {
-    //     await oauthFx({
-    //         email,
-    //         password,
-    //     })
-    //     return
-    // }
+export const signInFx = createEffect(async ({ email, password }: IAmSignUpFx) => {
 
     const { data } = await api.post('/api/users/login', { email, password })
 

@@ -5,12 +5,10 @@ import { getAuthRouteData, parseJwt } from '@/lib/utils/api-routes'
 
 export async function POST(req: Request) {
   try {
-    const { db, validatedTokenResult, reqBody, token } = await getAuthRouteData(
-      clientPromise,
-      req
-    )
+    const { db, reqBody, token, userId, validatedTokenResult } =
+      await getAuthRouteData(clientPromise, req)
 
-    if (validatedTokenResult.status !== 200) {
+    if (validatedTokenResult.status !== 200 && !userId) {
       return NextResponse.json(validatedTokenResult)
     }
 
@@ -21,12 +19,12 @@ export async function POST(req: Request) {
       })
     }
 
-    const user = await db
-      .collection('users')
-      .findOne({ email: parseJwt(token as string).email })
+    const user = token
+      ? await db.collection('users').findOne({ email: parseJwt(token).email })
+      : null
     const productItem = await db
       .collection(reqBody.category)
-      .findOne({ _id: new ObjectId(reqBody.productId) })
+      .findOne({ _id: new ObjectId(reqBody._id) })
 
     if (!productItem) {
       return NextResponse.json({
@@ -37,13 +35,16 @@ export async function POST(req: Request) {
 
     // Check if the product already exists in the cart
     const existingCartItem = await db.collection('cart').findOne({
-      userId: user?._id,
+      userId: user?._id ?? userId,
       productId: productItem._id,
     })
 
     if (existingCartItem) {
       // Update the count of the existing item
-      const updatedCount = existingCartItem.count + reqBody.count
+      const updatedCount = (existingCartItem.count ?? 1) + (reqBody.count ?? 1)
+
+      console.log({ existingCartItem, reqBody })
+
       const { modifiedCount } = await db.collection('cart').updateOne(
         { _id: existingCartItem._id },
         {
@@ -53,6 +54,8 @@ export async function POST(req: Request) {
           },
         }
       )
+
+      console.log({ modifiedCount })
 
       if (modifiedCount === 1) {
         return NextResponse.json({
@@ -73,14 +76,14 @@ export async function POST(req: Request) {
     } else {
       // Create a new cart item
       const newCartItem = {
-        userId: user?._id,
+        userId: user?._id ?? userId,
         productId: productItem._id,
         image: productItem.images[0],
         name: productItem.name,
         authors: productItem.authors,
-        count: reqBody.count,
+        count: reqBody.count ?? 1,
         price: productItem.price,
-        totalPrice: productItem.price * reqBody.count,
+        totalPrice: productItem.price * (reqBody.count ?? 1),
         inStock: productItem.inStock,
         isDiscount: productItem.isDiscount,
         clientId: reqBody.clientId,

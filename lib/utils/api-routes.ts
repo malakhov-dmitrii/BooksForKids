@@ -3,6 +3,7 @@ import jwt, { VerifyErrors } from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import { shuffle } from './common'
 import { NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
 
 export const getDbAndReqBody = async (
   clientPromise: Promise<MongoClient>,
@@ -68,6 +69,19 @@ export const createUserAndGenerateTokens = async (
 export const findUserByEmail = async (db: Db, email: string) =>
   db.collection('users').findOne({ email })
 
+export const getUserIdCookie = () => {
+  const userIdCookie = cookies().get('userId')
+
+  if (!userIdCookie) {
+    const uuid = crypto.randomUUID()
+    cookies().set('userId', uuid)
+
+    return uuid
+  }
+
+  return userIdCookie?.value
+}
+
 export const getAuthRouteData = async (
   clientPromise: Promise<MongoClient>,
   req: Request,
@@ -77,10 +91,18 @@ export const getAuthRouteData = async (
     clientPromise,
     withReqBody ? req : null
   )
+  const userId = getUserIdCookie()
   const token = req.headers.get('authorization')?.split(' ')[1]
   const validatedTokenResult = await isValidAccessToken(token)
 
-  return { db, reqBody, validatedTokenResult, token }
+  return {
+    db,
+    reqBody,
+    validatedTokenResult,
+    token,
+    // userId is null if token is present - needed to add product to cart/favorites without auth
+    userId: token ? null : userId,
+  }
 }
 
 export const isValidAccessToken = async (token: string | undefined) => {
@@ -125,20 +147,20 @@ export const getDataFromDBByCollection = async (
   req: Request,
   collection: string
 ) => {
-  const { db, validatedTokenResult, token } = await getAuthRouteData(
+  const { db, validatedTokenResult, token, userId } = await getAuthRouteData(
     clientPromise,
     req,
     false
   )
 
-  if (validatedTokenResult.status !== 200) {
+  if (validatedTokenResult.status !== 200 && !userId) {
     return NextResponse.json(validatedTokenResult)
   }
 
-  const user = await findUserByEmail(db, parseJwt(token as string).email)
+  const user = token ? await findUserByEmail(db, parseJwt(token).email) : null
   const items = await db
     .collection(collection)
-    .find({ userId: user?._id })
+    .find({ userId: user?._id ?? userId })
     .project({
       inStock: 1,
       _id: 1,
@@ -149,8 +171,8 @@ export const getDataFromDBByCollection = async (
       price: 1,
       isDiscount: 1,
       category: 1,
+      count: 1,
     })
-
     .toArray()
 
   return NextResponse.json(items)
@@ -161,12 +183,10 @@ export const replaceProductsInCollection = async (
   req: Request,
   collection: string
 ) => {
-  const { db, validatedTokenResult, reqBody, token } = await getAuthRouteData(
-    clientPromise,
-    req
-  )
+  const { db, validatedTokenResult, reqBody, token, userId } =
+    await getAuthRouteData(clientPromise, req)
 
-  if (validatedTokenResult.status !== 200) {
+  if (validatedTokenResult.status !== 200 && !userId) {
     return NextResponse.json(validatedTokenResult)
   }
 
@@ -177,17 +197,17 @@ export const replaceProductsInCollection = async (
     })
   }
 
-  const user = await db
-    .collection('users')
-    .findOne({ email: parseJwt(token as string).email })
+  const user = token
+    ? await db.collection('users').findOne({ email: parseJwt(token).email })
+    : null
 
   const items = (reqBody.items as { productId: string }[]).map((item) => ({
-    userId: user?._id,
+    userId: user?._id ?? userId,
     ...item,
     productId: new ObjectId(item.productId),
   }))
 
-  await db.collection(collection).deleteMany({ userId: user?._id })
+  await db.collection(collection).deleteMany({ userId: user?._id ?? userId })
 
   if (!items.length) {
     return NextResponse.json({
@@ -210,13 +230,13 @@ export const deleteProduct = async (
   id: string,
   collection: string
 ) => {
-  const { db, validatedTokenResult } = await getAuthRouteData(
+  const { db, validatedTokenResult, userId } = await getAuthRouteData(
     clientPromise,
     req,
     false
   )
 
-  if (validatedTokenResult.status !== 200) {
+  if (validatedTokenResult.status !== 200 && !userId) {
     return NextResponse.json(validatedTokenResult)
   }
 

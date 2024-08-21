@@ -21,3 +21,18 @@ export interface IAmAddProductsFromLSToFavoriteFx {
 }
 
 export type IAmDeleteFavoriteItemsFx = IAmBaseEffectProps
+
+export interface FavoriteItem {
+  _id: string
+  characteristics?: {
+    authors: string[]
+  }
+  productId: string
+  image: string
+  name: string
+  price: number
+  inStock: string
+  isDiscount: string
+  category: string
+  clientId?: string
+}

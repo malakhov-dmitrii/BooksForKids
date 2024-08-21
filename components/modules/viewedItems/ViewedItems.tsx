@@ -25,7 +25,7 @@ const ViewedItems = ({ viewedItems }: { viewedItems: IAmProducts }) => {
         </div>
         }
       <div className={styles.viewed_inner}>
-        <Slider {...baseSettingsViewedSimilarSlider} className='viewed_slider'>
+        <Slider {...baseSettingsViewedSimilarSlider}>
           {(viewedItems.items || []).map((item) => (
             <div
               key={item._id}

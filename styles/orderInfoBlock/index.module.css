@@ -115,6 +115,7 @@
 .checkout_options_form {
     display: flex;
     flex-direction: column;
+    margin-top: 61px;
 }
 
 .checkout_payment_option {
@@ -181,18 +182,12 @@
 .checkout_submit_btn {
     width: 100%;
     height: 53px;
+    margin-top: 26px;
 }
 
 @media (max-width: 570px) {
     .checkout_submit_btn {
         height: 32px;
-  }
-}
-
-@media (max-width: 570px) {
-    .order_place_input {
-        font-size: 12px;
-        font-weight: 400;
   }
 }
 

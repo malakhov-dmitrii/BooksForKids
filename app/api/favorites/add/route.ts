@@ -5,12 +5,12 @@ import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
   try {
-    const { db, validatedTokenResult, reqBody, token } = await getAuthRouteData(
+    const { db, validatedTokenResult, reqBody, token, userId } = await getAuthRouteData(
       clientPromise,
       req
     )
 
-    if (validatedTokenResult.status !== 200) {
+    if (validatedTokenResult.status !== 200 && !userId) {
       return NextResponse.json(validatedTokenResult)
     }
 
@@ -21,13 +21,13 @@ export async function POST(req: Request) {
       })
     }
 
-    const user = await db
-      .collection('users')
-      .findOne({ email: parseJwt(token as string).email })
+    const user = token
+      ? await db.collection('users').findOne({ email: parseJwt(token).email })
+      : null
 
     const productItem = await db
       .collection(reqBody.category)
-      .findOne({ _id: new ObjectId(reqBody.productId) })
+      .findOne({ _id: new ObjectId(reqBody._id) })
 
     if (!productItem) {
       return NextResponse.json({
@@ -36,27 +36,35 @@ export async function POST(req: Request) {
       })
     }
 
-    const newFavoriteItem = {
-      userId: user?._id,
+    const existingFavoriteItem = await db.collection('favorites').findOne({
+      userId: user?._id ?? userId,
       productId: productItem._id,
-      image: productItem.images[0],
-      name: productItem.name,
-      authors: productItem.authors,
-      price: productItem.price,
-      vendorCode: productItem.vendorCode,
-      category: reqBody.category,
-      clientId: reqBody.clientId,
-      inStock: productItem.inStock,
-    }
-
-    const { insertedId } = await db
-      .collection('favorites')
-      .insertOne(newFavoriteItem)
-
-    return NextResponse.json({
-      status: 201,
-      newFavoriteItem: { _id: insertedId, ...newFavoriteItem },
     })
+
+    if (!existingFavoriteItem) {
+
+      const newFavoriteItem = {
+        userId: user?._id,
+        productId: productItem._id,
+        image: productItem.images[0],
+        name: productItem.name,
+        authors: productItem.authors,
+        price: productItem.price,
+        vendorCode: productItem.vendorCode,
+        category: reqBody.category,
+        clientId: reqBody.clientId,
+        inStock: productItem.inStock,
+      }
+
+      const { insertedId } = await db
+        .collection('favorites')
+        .insertOne(newFavoriteItem)
+
+      return NextResponse.json({
+        status: 201,
+        newFavoriteItem: { _id: insertedId, ...newFavoriteItem },
+      })
+    }
   } catch (error) {
     throw new Error((error as Error).message)
   }

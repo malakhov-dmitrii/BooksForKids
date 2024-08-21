@@ -5,11 +5,10 @@ import { $auth } from './state'
 sample({
     clock: handleSignUp,
     source: $auth,
-    fn: (_, { name, email, password, /*isOAuth*/ }) => ({
+    fn: (_, { name, email, password }) => ({
       name,
       password,
       email,
-    //   isOAuth,
     }),
     target: signUpFx,
   })
@@ -17,10 +16,9 @@ sample({
   sample({
     clock: handleSignIn,
     source: $auth,
-    fn: (_, { email, password, /*isOAuth, */name }) => ({
+    fn: (_, { email, password, name }) => ({
       email,
       password,
-    //   isOAuth,
       name,
     }),
     target: signInFx,

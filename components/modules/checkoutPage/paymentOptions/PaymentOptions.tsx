@@ -1,3 +1,5 @@
+import { $cart, $cartFromLs } from '@/context/cart/state';
+// import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
 import { useLang } from '@/hooks/useLang';
 import styles from '@/styles/orderInfoBlock/index.module.css';
 import { useState } from 'react';
@@ -7,6 +9,18 @@ const PaymentOptions = () => {
     const [activeTab, setActiveTab] = useState<
     'checkout_payment1' | 'checkout_payment2' | 'checkout_payment3'
   >('checkout_payment1')
+    // const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs)
+
+    const handlePlaceOrder = async () => {
+      // if (
+      //   // TO DO : check if all the needed data filled up
+      // ) {
+      //   const orderBlock = document.querySelector('.order-block') as HTMLLIElement
+      //   scrollToBlock(orderBlock)
+      //   toast.error('Enter the address')
+      //   return
+      }
+
 
     return (
         <form className={styles.checkout_options_form}>
@@ -56,11 +70,14 @@ const PaymentOptions = () => {
           </label>
         </button>
         <div className={`${styles.checkout_submit_btn_wrapper}`}>
-            <button className={`black_btn ${styles.checkout_submit_btn}`}>
-            <input 
-            type='submit' 
-            className={`uppercase body_large ${styles.order_place_input}`} 
-            value={translations[lang].checkout.place_order} />
+            <button 
+            className={`black_btn uppercase body_large ${styles.checkout_submit_btn}`}
+            // disabled={
+            //   !currentCartByAuth.length
+            // }
+            onClick={handlePlaceOrder}
+            >
+              {translations[lang].checkout.place_order}
         </button>
         </div>
       </form>

@@ -17,7 +17,7 @@ import './globalStyles/shopPopup.css'
 
 export const metadata: Metadata = {
   title: "Books4Kids",
-  description: "Books4Kids store of books for kids in Russian",
+  description: "Books4Kids - online store of Russian books for kids",
 };
 
 export const viewport: Viewport = {

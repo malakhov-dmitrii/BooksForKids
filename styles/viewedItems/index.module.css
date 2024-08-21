@@ -13,11 +13,6 @@
     }
   }
 
-.viewed_slider {
-    display: flex;
-    flex-direction: row;
-}
-
 @media (max-width: 520px) {
     .viewed_top_heading {
       font-size: 20px;

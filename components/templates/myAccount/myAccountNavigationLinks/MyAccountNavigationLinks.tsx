@@ -1,14 +1,16 @@
 import Link from "next/link";
 import { useLang } from "@/hooks/useLang";
-import { useGoodsByAuth } from "@/hooks/useGoodsByAuth";
+// import { useGoodsByAuth } from "@/hooks/useGoodsByAuth";
 import { useUserLogout } from "@/hooks/useLogout";
 import styles from '@/styles/myAccount/index.module.css'
-import { $favorites, $favoritesFromLS } from "@/context/favorites/state";
+import { useFavorites } from "@/hooks/api/useFavorites";
+// import { $favorites, $favoritesFromLS } from "@/context/favorites/state";
 
 const MyAccountNavigationLinks = () => {
     const { lang, translations } = useLang();
     const handleLogout = useUserLogout();
-    const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
+    const { data: favorites } = useFavorites()
+    // const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
 
     return (
         <div className={styles.my_account_links_container}>
@@ -25,8 +27,8 @@ const MyAccountNavigationLinks = () => {
         <h3>
             <Link href='/wishlist' className={styles.my_account_links}>
                 {translations[lang].my_account.wishlist}
-                {!!currentFavoritesByAuth.length && 
-                    <span className={styles.my_account_not_empty_count}> ({currentFavoritesByAuth.length})</span>
+                {!!favorites?.length && 
+                    <span className={styles.my_account_not_empty_count}> ({favorites.length})</span>
                 }
             </Link>
         </h3>

@@ -12,13 +12,15 @@ import styles from '@/styles/cartPage/index.module.css'
 import Link from 'next/link';
 import EmptyPageContent from '@/components/modules/emptyPageContent/EmptyPageContent';
 import { useUnit } from 'effector-react';
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
+// import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
 import { $cart, $cartFromLs, $shouldShowEmpty } from '@/context/cart/state';
+import { useCart } from '@/hooks/api/useCart';
 
 const CartPage = () => {
-    const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs);
+    // const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs);
     const { lang, translations } = useLang()
     const { newTotal } = useTotalPrice();
+    const { data: cart } = useCart();
     const shouldShowEmpty = useUnit($shouldShowEmpty)
 
     function setIsCorrectCouponCode(arg0: boolean): void {
@@ -78,7 +80,7 @@ console.log(newTotal);
                                         </p>
                                         <p className={`body_large ${styles.cart_shipping_bottom_total_price}`}>{formatPrice(newTotal)}</p>
                                     </div>
-                                    <Link href={`/checkout`} className={`uppercase body_large black_btn ${styles.cart_shipping_checkout_link} ${!currentCartByAuth.length ? styles.disabled : ''
+                                    <Link href={`/checkout`} className={`uppercase body_large black_btn ${styles.cart_shipping_checkout_link} ${!cart?.length ? styles.disabled : ''
                                     }`}
                                     >
                                         {translations[lang].cart.proceed_to_checkout}

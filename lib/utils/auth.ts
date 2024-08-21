@@ -32,17 +32,27 @@ export const nameValidationRules = (
     },
   })
 
+  // export const phoneValidationRules = (
+  //   message: string,
+  //   requireMessage?: string
+  // ) => ({
+  //   ...(requireMessage && { required: requireMessage }),
+  //   pattern: {
+  //     value: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
+  //     message,
+  //   },
+  // })
+
   export const phoneValidationRules = (
     message: string,
     requireMessage?: string
   ) => ({
     ...(requireMessage && { required: requireMessage }),
     pattern: {
-      value: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
+      value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
       message,
     },
   })
-
 
   export const onNotifySuccess = <T>(message: string, data: T) => {
     localStorage.setItem('notify', JSON.stringify(data))

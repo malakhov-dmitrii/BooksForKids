@@ -92,7 +92,9 @@
             "qty": "QTY",
             "add_to_cart": "Add to cart",
             "cookie_text": "Books4Kids processes <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> for the correct operation of the site and personalization of services, incl. using metric programs and analytics systems. You can prevent the processing of <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> in your browser settings.",
-            "accept": "Accept"
+            "accept": "Accept",
+            "if_you_forgot_password": "If you've forgotten your password, enter your e-mail address and we'll send you an e-mail",
+            "reset_pasword": "Reset password"
         },
         "cart": {
             "update_cart": "Update cart",
@@ -217,7 +219,7 @@
             "registration": "Register",
             "registration_text": "Create",
             "registration_description": "Create an account",
-            "registration_question": "Do you have an account?",
+            "registration_question": "Already have an account?",
             "login_question": "Don't have an account?",
             "name": "Name",
             "password": "Password",
@@ -250,7 +252,8 @@
           "max_15": "Max 2 characters",
           "required_password": "Enter your password",
           "min_4": "Min 4 characters",
-          "max_20": "Max 20 characters"
+          "max_20": "Max 20 characters",
+          "max_255": "Max 255 characters"
         }
     },
     "ru": {
@@ -347,7 +350,9 @@
             "qty": "шт.",
             "add_to_cart": "Добавить в корзину",
             "cookie_text": "Books4Kids обрабатывает <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> для корректной работы сайта и персонализации сервисов, в т.ч. с использованием метрических программ и систем аналитик. Вы можете запретить обработку <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> в настройках браузера.",
-            "accept": "Принять"
+            "accept": "Принять",
+            "if_you_forgot_password": "Если Вы забыли пароль, укажите Ваш e-mail, и мы пришлем Вам ссылку для восстановления доступа",
+            "reset_pasword": "Восстановить пароль"
         },
         "cart": {
             "update_cart": "Обновить",
@@ -506,7 +511,8 @@
           "max_15": "Не более 15 символов",
           "required_password": "Введите пароль",
           "min_4": "Минимум 4 символа",
-          "max_20": "Не более 20 символов"
+          "max_20": "Не более 20 символов",
+          "max_255": "Не более 255 символов"
         }
     }
 }

@@ -5,34 +5,22 @@ import Link from "next/link";
 import styles from '@/styles/checkoutPage/index.module.css';
 import ApplyCouponBlock from "@/components/elements/applyCouponBlock/ApplyCouponBlock";
 import OrderInfoBlock from "@/components/modules/orderInfoBlock/OrderInfoBlock";
-import { MutableRefObject, useRef, useState } from "react";
+import { useState } from "react";
 import { $isAuth } from "@/context/auth/state";
 import { addOverflowHiddenToBody } from "@/lib/utils/common";
 import { openCouponModal } from "@/context/modals";
+import BillingDetails from "@/components/modules/checkoutPage/billingDetails/BillingDetails";
 
 const CheckoutPage = ({
 
 }) => {
     const isAuth = useUnit($isAuth)
     const { lang, translations } = useLang();
-    const [userWantToCreateAccount, setUserWantToCreateAccount] = useState(false)
-    const [shipToDifferentAddress, setshipToDifferentAddress] = useState(false)
-    const checkboxRef = useRef() as MutableRefObject<HTMLInputElement>
     const [isCorrectCouponCode, setIsCorrectCouponCode] = useState(false)
 
-    const handleCreatingAccountChange = () => setUserWantToCreateAccount(!userWantToCreateAccount)
-    const handleShipToDiffAddressChange = () => setshipToDifferentAddress(!shipToDifferentAddress)
     const handleCouponModal = () => {
         addOverflowHiddenToBody()
         openCouponModal()
-      }
-
-    const handleTabCheckbox = (e: React.KeyboardEvent<HTMLLabelElement>) => {
-        if (e.key == ' ' || e.code == 'Space') {
-          e.preventDefault()
-          setUserWantToCreateAccount(!checkboxRef.current.checked)
-          checkboxRef.current.checked = !checkboxRef.current.checked
-        }
       }
 
     return ( 
@@ -69,47 +57,8 @@ const CheckoutPage = ({
                         </div>
                         <div className={styles.checkout_content_bottom}>
                             <div className={styles.checkout_content_left}>
-                                {/* FORM */}
-                                {!isAuth ? (
-                                    <label className={`input_checkbox_wrapper ${styles.order_create_account_checkbox}`}>
-                                        <input type="checkbox" 
-                                        className={`input_checkbox ${styles.order_checkbox}`} 
-                                        tabIndex={-1}
-                                        onChange={handleCreatingAccountChange}
-                                        checked={userWantToCreateAccount}
-                                        ref={checkboxRef}
-                                        />
-                                        <span className={styles.order_checkbox_mark} />
-                                        <span
-                                            className={styles.order_checkbox_frame}
-                                            tabIndex={0}
-                                            onKeyDown={handleTabCheckbox}
-                                            />
-                                        <span className={styles.order_checkbox_text}>
-                                            {translations[lang].checkout.create_an_account}
-                                        </span>
-                                    </label>
-                                        ) : ""
-                                }
-                                <label className={`input_checkbox_wrapper ${styles.order_ship_to_different_checkbox}`}>
-                                    <input type="checkbox" 
-                                        className={`input_checkbox ${styles.order_checkbox}`} 
-                                        tabIndex={-1}
-                                        onChange={handleShipToDiffAddressChange}
-                                        checked={shipToDifferentAddress}
-                                    />
-                                    <span className={styles.order_checkbox_mark} />
-                                    <span
-                                        className={styles.order_checkbox_frame}
-                                        tabIndex={0}
-                                    />
-                                    <span className={styles.order_checkbox_text}>
-                                        {translations[lang].checkout.ship_to_different}
-                                    </span>
-                                </label>
-                                <div className={styles.checkout_order_notes_container}>
-                                    <h5>{translations[lang].checkout.order_notes}</h5>
-                                </div>
+                                <h2 className='capitalize'>{translations[lang].checkout.billing_details}</h2>
+                                <BillingDetails />                   
                             </div>
                             <div className={styles.checkout_content_right}>
                                 <h2 className='capitalize'>{translations[lang].checkout.your_order}</h2>
